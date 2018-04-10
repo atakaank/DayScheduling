@@ -34,9 +34,14 @@ namespace DayScheduling.BLL
             return Activities; 
         }
 
-        public int DeleteActivity(int ID)
+        public string DeleteActivity(int ID)
         {
-            return DALAct.Delete(ID); //sayfadan gelcek.
+            int res = DALAct.Delete(ID);
+            if (res == 1)
+            {
+                return "Activity is deleted.";
+            }
+            return "Activity Not Found.";
         }
     }
 }

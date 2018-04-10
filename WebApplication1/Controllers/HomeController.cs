@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteActivity()
         {
             BLLActivity bll = new BLLActivity();
-            bll.DeleteActivity(1010);
+            bll.DeleteActivity(1009);
             return RedirectToAction("DayByDay");
         }
 

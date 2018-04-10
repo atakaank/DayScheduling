@@ -221,13 +221,12 @@
                             <input name="lastname" type="text" class="flat" placeholder="Last Name" id="signupLastName" />
                             <input name="gender" type="text" class="flat" placeholder="Gender" id="signupGender" />
                             @Html.TextBox("datetxt")
-                            <input name="email" type="text" class="flat" placeholder="Email" id="signupEmail" />
                             <input name="phone" type="text" class="flat" placeholder="Phone" id="signupPhone" />
                             <input name="adress" type="text" class="flat" placeholder="Address" id="signupAdress" />
                             <input name="job" type="text" class="flat" placeholder="Job" id="signupJob" />
                         </div>
                         <div class="error-message"></div>
-                        <button class="cta-button signup large">Sign Up</button>
+                        <button id="signUpbtn" class="cta-button signup large">Sign Up</button>
                         <div class="clear"></div>
                         <div class="options">
                             <span>Already have an account? &nbsp;<a href="javascript:void(0);" class="to-login text-link">Login</a></span>
@@ -317,7 +316,20 @@
         $(function () {
             $("#datetxt").datepicker();
         });
+        
+        $('#signUpbtn').click(function () {
+            debugger;
+            var email = $('#signupUsername').val();
+            var pass = $('#signupPassword').val();
+            var first = $('#signupFirstName').val();
+            var lastname = $('#signupLastName').val();
+            var gender = $('#signupGender').val();
+            var dob = $('#datetxt').val();
+            var phone = $('#signupPhone').val();
+            var address = $('#signupAdress').val();
+            var job = $('#signupJob').val();
 
+        });
 
             /* <![CDATA[ */
             var google_conversion_id = 1035570068;

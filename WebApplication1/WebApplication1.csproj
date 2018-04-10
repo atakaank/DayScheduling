@@ -342,7 +342,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\DayByDay.cshtml" />
-    <Content Include="Views\Shared\_LayoutPDI.cshtml" />
     <Content Include="Views\Shared\_LayoutPlanDayByDay.cshtml" />
     <Content Include="Views\Home\LoginPage.cshtml" />
     <Content Include="Views\Home\myPlans.cshtml" />
