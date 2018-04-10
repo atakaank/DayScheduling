@@ -56,6 +56,13 @@
     <Compile Include="DALAccount.cs" />
     <Compile Include="DALActivity.cs" />
     <Compile Include="DALPlace.cs" />
+    <Compile Include="DALPlaceOwner.cs" />
+    <Compile Include="DALPlaceType.cs" />
+    <Compile Include="DALPlan.cs" />
+    <Compile Include="DALPlanCriteriasID.cs" />
+    <Compile Include="DALQuestion.cs" />
+    <Compile Include="DALSurvey.cs" />
+    <Compile Include="DALUser.cs" />
     <Compile Include="DaySchedulingModelDataModels.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="PlaceOwner.cs" />
