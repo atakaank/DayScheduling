@@ -39,10 +39,20 @@ namespace DayScheduling.Data
                 new SqlParameter("@dateOfBirth", DOB), new SqlParameter("@email", email), new SqlParameter("@phone", Phone), new SqlParameter("@userAddress", Address), new SqlParameter("@job", Job));
             return res += Models.Database.ExecuteSqlCommand(queryAccount, new SqlParameter("@createdDate",DateTime.Now), new SqlParameter("@accountType",AccountType), new SqlParameter("@accountPassword",Password));
         }
-        //public int add(string surveyname)
-        //{
-        //    string q = @"insert into Survey(SurveyID,SurveyName) Values((SELECT TOP 1 SurveyID FROM Survey ORDER BY SurveyID DESC)+1,@surveyName)";
-        //    Models.Database.ExecuteSqlCommand(q, new SqlParameter("@surveyName", surveyname));
-        //}
+        public int Update(int AccountID, int UserID, DateTime CreatedDay, string AccountType, string AccountPassword)
+        {
+            string query = @"UPDATE Account SET UserID = @userID,CreatedDay= @createdDay,AccountType=@accountType,AccountPassword=@accountPassword
+                           WHERE AccountId=@accountID";
+            return Models.Database.ExecuteSqlCommand(query, new SqlParameter("@accountID", AccountID), new SqlParameter("@userID", UserID), new SqlParameter("@createdDay", CreatedDay),
+                    new SqlParameter("@accountType", AccountType), new SqlParameter("@accountPassword", AccountPassword));
+        }
+
+
+        public int Delete(int AccountID)
+        {
+            var query = @"DELETE FROM Account WHERE AccountID = @accountID";
+            var res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@accountID", AccountID));//bulamadığında 0 dönüyor. bulduğunda 1 dönüyor.
+            return (res);
+        }
     }
 }

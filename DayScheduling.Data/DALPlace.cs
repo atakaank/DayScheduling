@@ -43,5 +43,29 @@ namespace DayScheduling.Data
             //Models.Database.ExecuteSqlCommand(result.ToString());
             //return result.ToString();
         }
+        public int Add(string PlaceName, int PlaceTypeID, string PlaceAddress, string Phone, int PlaceRate, int PlacePrice, string PlaceDescription) //Veritabanına gitcek kullanıcı tarafından girilecek parametreler
+        {
+            string query = @"INSERT INTO Place(PlaceName,PlaceTypeID,PlaceAddress,Phone,PlaceRate,PlacePrice,PlaceDescription)
+                        Values((SELECT TOP 1 PlaceID FROM Place ORDER BY PlaceID DESC)+1,@placeName,@placeTypeID,@placeAddress,@phone,@placeRate,@placePrice,@placeDescription)"; //normal sqlserverdaki gibi sql
+            int res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@placeName", PlaceName), new SqlParameter("@placeTypeID", PlaceTypeID), new SqlParameter("@placeAddress", PlaceAddress),
+                        new SqlParameter("@phone", Phone), new SqlParameter("@placeRate", PlaceRate), new SqlParameter("@placePrice", PlacePrice), new SqlParameter("@placeDescription", PlaceDescription)); // querye bize gelmiş olan parametreleri ekliyoruz.
+            return res;
+        }
+
+        public int Update(int PlaceID, string PlaceName, int PlaceTypeID, string PlaceAddress, string Phone, int PlaceRate, int PlacePrice, string PlaceDescription)
+        {
+            string query = @"UPDATE Place SET PlaceName = @placeName,PlaceTypeID = @placeTypeID,PlaceAddress=@placeAddress,Phone=@phone
+                            PlaceRate= @placerate, PlacePrice= @placeprice, PlaceDescription= @placeDescription WHERE PlaceID=@PlaceID";
+            return Models.Database.ExecuteSqlCommand(query, new SqlParameter("@placeID", PlaceID), new SqlParameter("@placeName", PlaceName), new SqlParameter("@placeTypeID", PlaceTypeID),
+                    new SqlParameter("@placeAddress", PlaceAddress), new SqlParameter("@phone", Phone), new SqlParameter("@placeRate", PlaceRate), new SqlParameter("@placeDescription", PlaceDescription));
+        }
+
+
+        public int Delete(int PlaceID)
+        {
+            var query = @"DELETE FROM Place WHERE PlaceID = @placeID";
+            var res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@placeID", PlaceID));//bulamadığında 0 dönüyor. bulduğunda 1 dönüyor.
+            return (res);
+        }
     }
 }
