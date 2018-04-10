@@ -31,10 +31,10 @@ namespace DayScheduling.Data
         public int Add(string UserSurname,string UserName,string Gender,DateTime DOB,string email,string Phone,string Address,string Job,string Password,string AccountType)
         {
             int res = 0;
-            string queryUser = @"INSERT INTO Users(UserID,UserSurname,UserName,Gender,DateOfBirth,Email,Phone,UserAddress,Job)
+            string queryUser = @"INSERT INTO Users(UserID,UserSurname,UserName,UserLifeStyle,Gender,DateOfBirth,Email,Phone,UserAddress,Job)
                             VALUES((SELECT TOP 1 UserID FROM Users ORDER BY UserID DESC)+1,@userSurname,@userName,'A',@gender,@dateOfBirth,@email,@phone,@userAddress,@job)";
             string queryAccount = @"INSERT INTO Account(AccountID,UserID,CreatedDate,AccountType,AccountPassword)
-                            VALUES ((SELECT TOP 1 AccountID FROM Account ORDER BY AccountID DESC),(SELECT TOP 1 UserID FROM Users ORDER BY UserID DESC)+1),@createdDate,@accountType,@accountPassword";
+                            VALUES ((SELECT TOP 1 AccountID FROM Account ORDER BY AccountID DESC)+1,(SELECT TOP 1 UserID FROM Users ORDER BY UserID DESC),@createdDate,@accountType,@accountPassword)";
             res = Models.Database.ExecuteSqlCommand(queryUser, new SqlParameter("@userSurname",UserSurname), new SqlParameter("@userName", UserName), new SqlParameter("@gender", Gender),
                 new SqlParameter("@dateOfBirth", DOB), new SqlParameter("@email", email), new SqlParameter("@phone", Phone), new SqlParameter("@userAddress", Address), new SqlParameter("@job", Job));
             return res += Models.Database.ExecuteSqlCommand(queryAccount, new SqlParameter("@createdDate",DateTime.Now), new SqlParameter("@accountType",AccountType), new SqlParameter("@accountPassword",Password));

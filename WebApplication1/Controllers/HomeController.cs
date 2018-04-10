@@ -56,6 +56,19 @@ namespace WebApplication1.Controllers
             
             return Json(resFail,JsonRequestBehavior.AllowGet);   
         }
+
+        [HttpPost]
+        public ActionResult isSignUpSuccess(string UserSurname, string UserName, string Gender, DateTime DOB, string Email, string Phone, string Address, string Job, string Password, string AccountType)
+        {
+            var resSuccess = new {Success = "True", Message="ACCOUNT IS ADDED.", TargetUrl = Url.Action("DayByDay","Home")};//userpage
+            var resFail = new { Success = "False", Message = "EMAIL IS ALREADY TAKEN.", TargetUrl =""};
+            if(bllAcc.AddAccountUser(UserSurname,UserName,Gender,DOB,Email,Phone,Address,Job,Password,AccountType)==2)
+            {
+                return Json(resSuccess, JsonRequestBehavior.AllowGet);
+            }
+            return Json(resFail, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult myPlans()
         {
             return View();
