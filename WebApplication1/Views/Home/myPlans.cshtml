@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="canonical" href="https://www.inspirock.com/myPlans">
     <meta name="robots" content="noindex,follow" />
-    <title>My Plans • Inspirock</title>
+    <title>My Plans • Day Scheduling</title>
     <meta name="_csrf_parameter" content="_csrf" />
     <meta name="_csrf_header" content="X-CSRF-TOKEN" />
     <meta name="_csrf" content="0668d5df-0ce5-40bf-9ccb-eca835c947d8" />
-    <link rel="apple-touch-icon" sizes="57x57" href="../../../res/images/assets/apple-touch-icon-57x57.png">
+    @*<link rel="apple-touch-icon" sizes="57x57" href="../../../res/images/assets/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="../../../res/images/assets/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="../../../res/images/assets/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../../res/images/assets/apple-touch-icon-76x76.png">
@@ -19,7 +19,8 @@
     <link rel="icon" type="image/png" href="../../../res/images/assets/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/png" href="../../../res/images/assets/favicon-16x16.png" sizes="16x16">
     <link rel="shortcut icon" href="~/res/images/assets/favicon.ico">
-    <link rel="manifest" href="~/res/images/assets/manifest.json">
+    <link rel="manifest" href="~/res/images/assets/manifest.json">*@
+    <link rel="Shortcut Icon" href="~/img/logo.ico" type="image/x-icon">
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="msapplication-config" content="/res/images/assets/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
@@ -96,12 +97,14 @@
             <div class="header-fixer" style="">
                 <div class="header-contents clearfix">
                     <div class="header-logo">
-                        <a href="/" title="Inspirock Trip Planner">
-                            <svg class="icon-logo"><use xlink:href="#icon-logo" /></svg>
-                            <span class="tm"> &reg;</span>
-                        </a>
-                        <span class="tagline">Inspiration to see the planet</span>
-                    </div>
+                        <a href="/" title="Day Scheduling Day Planner">
+                            <img src="~/img/logo.png" border=5 width=45 height=40>
+                            <span class="tagline">
+                                <font face="Berlin Sans FB" size="4" color="white">
+                                    For planning your day!
+                                </font>
+</a>
+                       </div>
                     <nav class="page-nav left">
                     </nav>
                     <nav class="page-nav right">
@@ -111,7 +114,7 @@
                             </li>
                             <li id="myPlans" data-dropdown-url="/myPlansDropdown" data-has-plans="true">
                                 <a rel="nofollow" href="javascript:void(0);">
-                                    <span>My plans (2)</span>
+                                    <span>My plans</span>
                                 </a>
                             </li>
                             <li id="userOptions" class="hidden">
@@ -144,9 +147,7 @@
                                     <span><span class="selected-currency">TL</span> <span class="dropdown"></span></span>
                                 </a>
                             </li>
-                            <li id="help-container">
-                                <a href="javascript:void(0)" class="help-tips notranslate">?</a>
-                            </li>
+                            
                         </ul>
                     </nav>
                 </div>
@@ -164,83 +165,24 @@
         <footer class="page-footer">
             <div class="footer-content">
                 <div class="row">
-                    <div class="col-3 header-logo">
-                        <a href="https://www.inspirock.com">
-                            <svg class="icon-logo">
-                                <use xlink:href="#icon-logo" />
-                            </svg>
-                            <span class="tm"> &reg;</span>
-                        </a>
-                        <div class="tagline">Inspiration to see the planet</div>
+                    <a href="/Home/MainPage" title="Day Scheduling Day Planner">
+                        <div style="text-align:center">
+                            <img src="~/img/logo.png" border=5 width=370 height=200>
+                        </div>
+                    </a>
                     </div>
                     <div class="col-6 menu-items">
-                        <div class="row header clearfix">
-                            <div class="col-4">Browse</div>
-                            <div class="col-4">Company</div>
-                            <div class="col-4">Help</div>
+                        
                         </div>
                         <div class="line"></div>
                         <div class="row clearfix">
                             <ul class="col-4">
-                                <li>
-                                    <a href="/recent-plans">Plans by other users</a>
-                                </li>
-                                <li>
-                                    <a href="/destinations">Destinations</a>
-                                </li>
-                                <li>
-                                    <a href="/credits/myPlansCreditPage" rel="nofollow">Credits</a>
-                                </li>
-                            </ul>
-                            <ul class="col-4">
-                                <li>
-                                    <a href="/about-inspirock">About us</a>
-                                </li>
-                                <li>
-                                    <a href="/for-partners">Partner with us</a>
-                                </li>
-                            </ul>
-                            <ul class="col-4">
-                                <li>
-                                    <a href="/faq">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="/feedback">Contact us</a>
-                                </li>
-                                <li>
-                                    <a href="/privacy-policy">Privacy policy</a>
-                                </li>
-                                <li>
-                                    <a href="/cookie-policy">Cookie policy</a>
-                                </li>
-                                <li>
-                                    <a href="/copyright-policy">Copyright policy</a>
-                                </li>
-                                <li>
-                                    <a href="/terms-of-use">Terms of use</a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>
                     <div class="col-3 social-media">
-                        <ul class="icons">
-                            <li>
-                                <a rel="nofollow noopener" href="https://www.facebook.com/Inspirock" class="fa fa-facebook" target="_blank"></a>
-                            </li>
-                            <li>
-                                <a rel="nofollow noopener" href="https://twitter.com/InspirockTravel" class="fa fa-twitter" target="_blank"></a>
-                            </li>
-                            <li>
-                                <a rel="nofollow noopener" href="https://www.instagram.com/inspirock/" class="fa fa-instagram" target="_blank"></a>
-                            </li>
-                            <li>
-                                <a rel="nofollow noopener" href="https://www.youtube.com/inspirock/" class="fa fa-youtube-play" target="_blank"></a>
-                            </li>
-                        </ul>
-                        <ul class="blog">
-                            <li>
-                                <a href="http://blog.inspirock.com/" target="_blank" rel="noopener">Visit our blog &raquo;</a>
-                            </li>
+                       
                         </ul>
                     </div>
                 </div>
@@ -249,22 +191,7 @@
                         <div class="line"></div>
                     </div>
                     <ul class="footer-copyright clearfix">
-                        <li>
-                            &copy; 2018&nbsp;
-                            <a href="https://www.inspirock.com">Inspirock<span class="tm"> &reg;</span></a>
-                            - All rights reserved
-                        </li>
-                        <li>
-                            <a href="http://aka.ms/MicrosoftTranslatorAttribution" rel="nofollow noopener" target="_blank">
-                                <span class="sheet ms-translate"></span>
-                                <span class="translate-txt">Translations by Microsoft&reg; Translator</span>
-                            </a>
-                        </li>
-                        <li>
-                            <span class="geo-attrib clearfix">
-                                This product includes GeoLite2 data created by MaxMind, available from
-                                <a href="http://www.maxmind.com" rel="nofollow noopener" target="_blank">http://www.maxmind.com</a>
-                            </span>
+                  
                         </li>
                     </ul>
                 </div>

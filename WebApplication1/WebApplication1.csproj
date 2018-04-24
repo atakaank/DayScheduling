@@ -200,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -236,6 +235,7 @@
     <Content Include="css\resultpage.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
     <Content Include="img\logo.ico" />
     <Content Include="img\logo.png" />
     <Content Include="img\preform-inspirock-steps-1.png" />
@@ -245,7 +245,8 @@
     <Content Include="js\home.js" />
     <Content Include="js\icons.js" />
     <Content Include="logo.png" />
-    <Content Include="photos\Izmir-resimleri-11.jpg" />
+    <None Include="photos\izmir" />
+    <Content Include="img\efes.jpg" />
     <Content Include="res\images\assets\apple-touch-icon-57x57.png" />
     <Content Include="res\images\assets\apple-touch-icon-60x60.png" />
     <Content Include="res\images\assets\apple-touch-icon-72x72.png" />
@@ -255,6 +256,7 @@
     <Content Include="res\images\assets\favicon-32x32.png" />
     <Content Include="res\images\assets\favicon-96x96.png" />
     <Content Include="res\images\assets\favicon.ico" />
+    <Content Include="res\images\assets\izmir.jpg" />
     <Content Include="res\images\assets\sheet-13.png" />
     <Content Include="s.inspirock.com\3.2.1\res-ext\jquery\css\images\ui-icons_444444_256x240.png" />
     <Content Include="s.inspirock.com\3.2.1\res-ext\jquery\css\images\ui-icons_555555_256x240.png" />
@@ -262,6 +264,8 @@
     <Content Include="s.inspirock.com\3.2.1\res-ext\jquery\css\images\ui-icons_777777_256x240.png" />
     <Content Include="s.inspirock.com\3.2.1\res-ext\jquery\css\images\ui-icons_cc0000_256x240.png" />
     <Content Include="s.inspirock.com\3.2.1\res-ext\jquery\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="s.inspirock.com\3.2.1\res\images\assets\alaçatı.png" />
+    <Content Include="s.inspirock.com\3.2.1\res\images\assets\efes.png" />
     <Content Include="s.inspirock.com\3.2.1\res\images\preform-inspirock-steps-1.png" />
     <Content Include="s.inspirock.com\3.2.1\res\images\assets\sheet-13.png" />
     <Content Include="s.inspirock.com\3.2.1\res\images\travel-agent.png" />
@@ -276,14 +280,14 @@
     <Content Include="photos\saat-kulesi-clock-tower-352339852.jpg" />
     <Content Include="photos\ancient-city-of-ephesus--527100546.jpg" />
     <Content Include="photos\sirince-koyu-869957610.jpg" />
-    <Content Include="res2\images\defaults\neighborhoods.jpg" />
-    <Content Include="res2\images\defaults\sightseeing.jpg" />
+    <Content Include="s.inspirock.com\res2\images\defaults\neighborhoods.jpg" />
+    <Content Include="s.inspirock.com\res2\images\defaults\sightseeing.jpg" />
     <Content Include="photos\istanbul.jpg" />
     <Content Include="photos\turkey-goreme.jpg" />
-    <Content Include="res2\images\misc\ajax-loader.gif" />
-    <Content Include="res2\images\misc\bulb.gif" />
-    <Content Include="res2\images\misc\sea-horizon.jpg" />
-    <Content Include="res2\images\misc\spin.gif" />
+    <Content Include="s.inspirock.com\res2\images\misc\ajax-loader.gif" />
+    <Content Include="s.inspirock.com\res2\images\misc\bulb.gif" />
+    <Content Include="s.inspirock.com\res2\images\misc\sea-horizon.jpg" />
+    <Content Include="s.inspirock.com\res2\images\misc\spin.gif" />
     <Content Include="photos\transport\car.jpg" />
     <Content Include="photos\transport\flight.jpg" />
     <Content Include="photos\transport\train.jpg" />
@@ -349,6 +353,8 @@
     <Content Include="Views\Home\viewPlan.cshtml" />
     <Content Include="Views\Home\Places.cshtml" />
     <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\UserPage.cshtml" />
+    <Content Include="Views\Home\PlaceDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />

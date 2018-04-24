@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="canonical" href="https://www.inspirock.com/">
     <meta name="robots" content="index,follow" />
-    <title>Trip Planner: Plan & manage your vacation itinerary on Inspirock • Inspirock</title>
+    <title>Day Planner: Plan & manage your plan itinerary on • Day Scheduling</title>
     <meta name="description" content="Use our free trip planner to get a personalized day-by-day itinerary for your vacation. Inspirock is the new way to plan your holiday." />
     <meta name="_csrf_parameter" content="_csrf" />
     <meta name="_csrf_header" content="X-CSRF-TOKEN" />
@@ -28,7 +28,6 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://plus.google.com/+Inspirock" rel="publisher" />
     <meta name="og:image" content="https://s.inspirock.com/images/home/v42-hero-white.jpg" />
-    <meta name="twitter:image" content="https://s.inspirock.com/images/home/v42-hero-white.jpg" />
     <link rel="preload" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="//netdna.bootstrapcdn.com" crossorigin>
     <link rel="dns-prefetch" href="//netdna.bootstrapcdn.com">
@@ -102,116 +101,133 @@
     <script src="~/js/icons.js" type="text/javascript" async></script>
 
     <div id="pageWrapper" class="page-wrapper ">
+
         <header class="page-header  transparent" id="pageHeader">
-            <div class="header-fixer" style="">
-                <div class="header-contents clearfix">
-                    <div class="header-logo">
-                        <a href="/" title="For planning your day!">
-                            <a href="/Home/MainPage" title="Day Scheduling Day Planner">
-                                <img src="~/img/logo.png" border=5 width=45 height=40>
-                            </a>
-                            <span class="tagline">For planning your day!</span>
+            <header class="page-header  transparent" id="pageHeader">
+                <div style="text-align:center">
+                    <img src="~/s.inspirock.com/3.2.1/res/images/assets/alaçatı.png" border="0" width="1900" height="900" />
                     </div>
-                    <nav class="page-nav left">
-                    </nav>
-                    <nav class="page-nav right">
-                        <ul>
+                    <header class="page-header  transparent" id="pageHeader">
 
-                            </li>
-                            <li id="userOptions" class="hidden">
-                                <a rel="nofollow" href="javascript:void(0);">
-                                    <span class="name">Profile</span>
-                                </a>
-                                <div class="hidden">
-                                    <div id="userDropdown">
-                                        <ul>
-                                            <li class="logout-button">Log out</li>
-                                        </ul>
+                        <div class="header-fixer" style="">
+                            <div class="header-contents clearfix">
+                                <div class="header-logo">
+                                    <a href="/" title= "For planning your day!">
+                                        <a href="/Home/Index" title="Day Scheduling Day Planner">
+                                           <img src="~/img/logo.png" border=5 width=45 height=40>
+                                        </a>
+                                        <span class="tagline"> <font face="Berlin Sans FB" size="4" color="white">
+                                                           For planning your day!</font>
+</span>
+                                </div>
+                                <nav class="page-nav left">
+                                </nav>
+                                <nav class="page-nav right">
+                                    <ul>
+                                        </li>
+                                        <li id="userOptions" class="hidden">
+                                            <a rel="nofollow" href="javascript:void(0);">
+                                                <span class="name">Profile</span>
+                                            </a>
+                                            <div class="hidden">
+                                                <div id="userDropdown">
+                                                    <ul>
+                                                        <li class="logout-button">Log out</li>
+                                                    </ul>
+                                                </div>
+                                                <form id="logoutForm" action="/logout" method="POST">
+                                                    <div>
+                                                        <input type="hidden" name="_csrf" value="86b5e51d-b227-460e-9ba5-6d70269d0011" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </li>
+                                        <li id="userLogin" class="">
+                                            <a rel="nofollow" class="login-button" href="/Home/LoginPage">
+                                                <span>Log in</span>
+                                            </a>
+                                        </li>
+                                        <li class="vertical-line"></li>
+                                        <li id="language" data-browser-lang-code="en"
+                                            data-browser-lang-name="english" data-dropdown-url="/languageOptions"><span class="language-text">english</span><span class="dropdown"></span></li>
+                                        <li id="currency" data-dropdown-url="/currencyOptions">
+                                            <a rel="nofollow" href="javascript:void(0);">
+                                                <span><span class="selected-currency">TL</span> <span class="dropdown"></span></span>
+                                            </a>
+                                        </li>
+                                       
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="page-content home-content clear" id="pageContent">
+                        <div class="data-holder" style="" data-max-plan-length="60">
+                            <div class="hero-image-wrap returning-user" style="">
+                                <div class="hero-image active" style=" background-image url('../../photos/Izmir-resimleri-11.jpg')">
+                            </div>
+                        </div>
+                        <div class="stickers-tbl">
+                            <div class="sticker-cell">
+                                <div class="stickers">
+                                    <div class="sticker active">
                                     </div>
-                                    <form id="logoutForm" action="/logout" method="POST">
-                                        <div>
-                                            <input type="hidden" name="_csrf" value="86b5e51d-b227-460e-9ba5-6d70269d0011" />
-                                        </div>
-                                    </form>
+                                    <div class="sticker">
+                                    </div>
                                 </div>
-                            </li>
-                            <li id="userLogin" class="">
-                                <a rel="nofollow" class="login-button" href=@Url.Action("LoginPage","Home")>
-                                    <span>Log in</span>
-                                </a>
-                            </li>
-                            <li class="vertical-line"></li>
-                            <li id="language" data-browser-lang-code="en"
-                                data-browser-lang-name="english" data-dropdown-url="/languageOptions"><span class="language-text">english</span><span class="dropdown"></span></li>
-                            <li id="currency" data-dropdown-url="/currencyOptions">
-                                <a rel="nofollow" href="javascript:void(0);">
-                                    <span><span class="selected-currency">TL</span> <span class="dropdown"></span></span>
-                                </a>
-                            </li>
-                            <li id="help-container">
-                                <a href="javascript:void(0)" class="help-tips notranslate">?</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-            </div>
-        </header>
-        <div class="page-content home-content clear" id="pageContent">
-            <div class="data-holder" style="" data-max-plan-length="60">
-                <div class="hero-image-wrap returning-user" style="">
-                    <div class="hero-image active" style=" background-image url('../../photos/Izmir-resimleri-11.jpg')">
-                </div>
-            </div>
-            <div class="stickers-tbl">
-                <div class="sticker-cell">
-                    <div class="stickers">
-                        <div class="sticker active">
-
+                            </div>
                         </div>
-                        <div class="sticker">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero returning-user">
-                <div class="hero-content">
-                    <div class="hero-title">
-                        <h1 class="title">DAY SCHEDULING - Don't forget to make your plan!</h1>
-
-                    </div>
-                </div>
-                <div class="home-form-col">
-                    <div id="home-shade" style="display: none;"></div>
-                    <div class="home-form" data-coverage="Europe, Americas, Asia, South Pacific, & Africa">
-                        <div class="clearfix home-form-group">
-                            <ul class="hidden popular-destinations">
-                                <li data-id="71100785" data-label="Hawaii"></li>
-                                <li data-id="27112955" data-label="Paris"></li>
-                                <li data-id="311534597" data-label="Rio de Janeiro"></li>
-                                <li data-id="31597x" data-label="Scandinavia"></li>
-                                <li data-id="411170139" data-label="Thailand"></li>
-                            </ul>
-                            <form id="home-planning-form" data-max-plan-length="60" data-coverage="Europe, Americas, Asia, South Pacific, &amp; Africa" class="planning-form " action="/generatePlan" method="POST" autocomplete="off">
-                                <div class="steps">
+                        <div class="hero returning-user">
+                            <div class="hero-content">
+                                <div class="hero-title">
+                                    <div style="text-align:center">
+                                        <p>
+                                            <h1 class="title">
+                                        <p>
+                                            <p>
+                                            <font face="Orator Std" size="30" color="black">
+                                               <b>DAY SCHEDULING</b>
+                                            </font>
+                                            <p>
+                                            <p>
+                                            <font face="Notepad" size="15" color="grey">
+                                                <b>MAKE YOUR DAILY PLAN!</b>
+                                            </font>
+                                            <p>
+                                        </p>
+                                        </h1>
+                                        </p>
+                                    </div>
                                 </div>
-
+                                </div>
+                            <div class="home-form-col">
+                                <div id="home-shade" style="display: none;"></div>
+                                <div class="home-form" data-coverage="Europe, Americas, Asia, South Pacific, & Africa">
+                                    <div class="clearfix home-form-group">
+                                        <ul class="hidden popular-destinations">
+                                            <li data-id="71100785" data-label="Hawaii"></li>
+                                            <li data-id="27112955" data-label="Paris"></li>
+                                            <li data-id="311534597" data-label="Rio de Janeiro"></li>
+                                            <li data-id="31597x" data-label="Scandinavia"></li>
+                                            <li data-id="411170139" data-label="Thailand"></li>
+                                        </ul>
+                                        <form id="home-planning-form" data-max-plan-length="60" data-coverage="Europe, Americas, Asia, South Pacific, &amp; Africa" class="planning-form " action="/generatePlan" method="POST" autocomplete="off">
+                                            <div class="steps">
+                                            </div>
+                                    </div>
+                                    <div class="dates clearfix">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="dates clearfix">
-                        </div>
+                        <button type="button" class="plan-button cta-button large">See your plan</button>
                     </div>
-
+                    <input type="hidden" name="requiredAttractionId" value="" />
+                    <div>
+                        <input type="hidden" name="_csrf" value="86b5e51d-b227-460e-9ba5-6d70269d0011" />
+                    </div>
+                    </form>
                 </div>
-            </div>
-            <button id ="btnbtn" type="button" class="plan-button cta-button large">See your plan</button>
-        </div>
-        <input type="hidden" name="requiredAttractionId" value="" />
-        <div>
-            <input type="hidden" name="_csrf" value="86b5e51d-b227-460e-9ba5-6d70269d0011" />
-        </div>
-        </form>
-    </div>
     </div>
     </div>
     </div>
