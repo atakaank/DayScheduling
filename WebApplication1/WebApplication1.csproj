@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GoogleMaps.LocationServices, Version=0.1.6329.16944, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleMaps.LocationServices.1.2.0.1\lib\net40\GoogleMaps.LocationServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="JsAction, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\JsAction.0.5\lib\net40\JsAction.dll</HintPath>
       <Private>True</Private>
@@ -187,7 +191,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BLL\PlaceBLLWithSP.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
+    <Compile Include="DSAuthorize.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,25 +235,53 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\animate.min.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
     <Content Include="css\commoncss.css" />
+    <Content Include="css\demo.css" />
     <Content Include="css\errorpage.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\img\bx_loader.gif" />
+    <Content Include="css\img\controls.png" />
+    <Content Include="css\isotope.css" />
+    <Content Include="css\jquery.bxslider.css" />
+    <Content Include="css\jquery.datetimepicker.min.css" />
     <Content Include="css\loginorregistration.css" />
     <Content Include="css\myplans.css" />
+    <Content Include="css\newplan.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="css\overwrite.css" />
     <Content Include="css\resultpage.css" />
+    <Content Include="css\set1.css" />
+    <Content Include="css\set2.css" />
+    <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="GoogleMaps.LocationServices.readme.txt" />
     <Content Include="img\logo.ico" />
     <Content Include="img\logo.png" />
     <Content Include="img\preform-inspirock-steps-1.png" />
     <Content Include="img\sheet-13.png" />
     <Content Include="img\travel-agent.png" />
     <Content Include="js\common.js" />
+    <Content Include="js\feedback.js" />
     <Content Include="js\home.js" />
     <Content Include="js\icons.js" />
+    <Content Include="js\jquery.datetimepicker.full.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\login.js" />
+    <Content Include="js\newplan.js" />
     <Content Include="logo.png" />
     <None Include="photos\izmir" />
     <Content Include="img\efes.jpg" />
+    <Content Include="photos\newplan-bkg.jpg" />
+    <Content Include="photos\no-image.jpg" />
+    <Content Include="photos\polaroids.png" />
     <Content Include="res\images\assets\apple-touch-icon-57x57.png" />
     <Content Include="res\images\assets\apple-touch-icon-60x60.png" />
     <Content Include="res\images\assets\apple-touch-icon-72x72.png" />
@@ -285,7 +320,7 @@
     <Content Include="photos\istanbul.jpg" />
     <Content Include="photos\turkey-goreme.jpg" />
     <Content Include="s.inspirock.com\res2\images\misc\ajax-loader.gif" />
-    <Content Include="s.inspirock.com\res2\images\misc\bulb.gif" />
+    <Content Include="res\images\assets\bulb.gif" />
     <Content Include="s.inspirock.com\res2\images\misc\sea-horizon.jpg" />
     <Content Include="s.inspirock.com\res2\images\misc\spin.gif" />
     <Content Include="photos\transport\car.jpg" />
@@ -296,7 +331,6 @@
     <Content Include="fonts\Lato-300.woff2" />
     <Content Include="fonts\Lato-300.woff" />
     <Content Include="fonts\Lato-300.ttf" />
-    <Content Include="css\credits.css.tmp" />
     <Content Include="js\credits.js.tmp" />
     <Content Include="res\images\assets\manifest.json" />
     <Content Include="fonts\Lato-700.woff2" />
@@ -321,16 +355,18 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.13.js" />
     <Content Include="Scripts\jquery-ui-1.8.13.min.js" />
     <Content Include="Scripts\jquery-ui.unobtrusive.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validation.net.webforms.js" />
+    <Content Include="Scripts\jquery.validation.net.webforms.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -345,16 +381,18 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\DayByDay.cshtml" />
+    <Content Include="Views\Plan\DayByDay.cshtml" />
     <Content Include="Views\Shared\_LayoutPlanDayByDay.cshtml" />
-    <Content Include="Views\Home\LoginPage.cshtml" />
+    <Content Include="Views\Account\LoginPage.cshtml" />
     <Content Include="Views\Home\myPlans.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\viewPlan.cshtml" />
     <Content Include="Views\Home\Places.cshtml" />
-    <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Home\PlaceDetail.cshtml" />
+    <Content Include="Views\Plan\PlanCriterias.cshtml" />
+    <Content Include="Views\Home\GetPlace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />

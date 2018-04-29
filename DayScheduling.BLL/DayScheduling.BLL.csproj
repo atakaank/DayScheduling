@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BLLAccount.cs" />
     <Compile Include="BLLActivity.cs" />
+    <Compile Include="BLLPlan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,16 @@
       <Project>{3ad91859-989e-489e-b6f8-fd94909288c8}</Project>
       <Name>DayScheduling.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeoWeb\GeoWeb.csproj">
+      <Project>{97089243-ead6-4ae7-b244-47ec3db00d97}</Project>
+      <Name>GeoWeb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

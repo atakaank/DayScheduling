@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DayScheduling.Data;
 
 namespace DayScheduling.Entities.Activity
 {
@@ -13,12 +14,14 @@ namespace DayScheduling.Entities.Activity
     }
     public class vmPartialActivity
     {
-        public DateTime FinishTime { get; set; }
-        public DateTime StartTime { get; set; }
-        public string ActivityPlaceName { get; set; }
-        public string ActivityPlaceRating { get; set; }
-        public string ActivityPlaceCategory { get; set; }
-        public string ActivityPrice { get; set; }
-        public string ActivityPlaceDescrp { get; set; }
+        public TimeSpan FinishTime { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public Place  place { get; set; }
+        public string ActivityPlaceType {get;set;}
+        public string DirectionDuration { get; set; }
+        public string SourceLat { get; set; }
+        public string SourceLong { get; set; }
+        public string DestLat { get; set; }
+        public string DestLong { get; set; }
     }
 }

@@ -31,6 +31,12 @@ namespace DayScheduling.Data
 
         public string PlaceDescription { get; set; }
 
+        public int NumberOfPerson { get; set; }
+
+        public int PlacePopularityID { get; set; }
+        public int ProvinceID { get; set; }
+        public int RecommendedDuration { get; set; }
+
         public virtual PlaceType PlaceType { get; set; }
     }
 }

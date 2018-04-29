@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Html;
 namespace WebApplication1.AppHtmlHelpers
 {
     public static class Helpers
-    {    
-        public static MvcHtmlString ItinenaryItem(string PlaceName,string PlaceCategory, string PlaceRating, string PlacePrice, DateTime StartTime, DateTime FinishTime, string PlaceDescp)
+    {    //,string PlaceCategory
+        public static MvcHtmlString ItinenaryItem(int PlaceID,string PlaceName, int PlaceRating, string PlacePrice, TimeSpan StartTime, TimeSpan FinishTime, string PlaceDescp)
         {
             TagBuilder tb = new TagBuilder("div");
             TagBuilder divLeftCol = new TagBuilder("div");
@@ -37,19 +37,21 @@ namespace WebApplication1.AppHtmlHelpers
             TagBuilder aTourLinkTextLink = new TagBuilder("a");
             TagBuilder aAttLinkHidden = new TagBuilder("a");
             TagBuilder divClear = new TagBuilder("div");
+            TagBuilder deleteBtn = new TagBuilder("button");
+            TagBuilder updateBtn = new TagBuilder("button");
 
             tb.AddCssClass("itinerary-row visit-row data-holder");
-            tb.GenerateId("itinerary-item-22");
-            tb.Attributes.Add("data-visit-id", "3");
-            tb.Attributes.Add("data-id", "3");
-            tb.Attributes.Add("data-stay-id", "1");
-            tb.Attributes.Add("data-name", "HTMLHELPERS DENEME");
-            tb.Attributes.Add("data-duration", "90");
-            tb.Attributes.Add("data-attraction-id", "420888639");
-            tb.Attributes.Add("data-destination-id", "311325597");
-            tb.Attributes.Add("data-details-url", "/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/konak-square-a420888639");
-            tb.Attributes.Add("data-event-src", "visit-row");
-            tb.Attributes.Add("data-has-notes", "false");
+            //tb.GenerateId("itinerary-item-22");
+            //tb.Attributes.Add("data-visit-id", "3");
+            tb.Attributes.Add("data-id", PlaceID.ToString());
+            //tb.Attributes.Add("data-stay-id", "1");
+            //tb.Attributes.Add("data-name", "HTMLHELPERS DENEME");
+            //tb.Attributes.Add("data-duration", "90");
+            //tb.Attributes.Add("data-attraction-id", "420888639");
+            //tb.Attributes.Add("data-destination-id", "311325597");
+            //tb.Attributes.Add("data-details-url", "/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/konak-square-a420888639");
+            //tb.Attributes.Add("data-event-src", "visit-row");
+            //tb.Attributes.Add("data-has-notes", "false");
 
             divLeftCol.AddCssClass("left-col ");
 
@@ -60,9 +62,9 @@ namespace WebApplication1.AppHtmlHelpers
             divStartTime.AddCssClass("start-time time");
 
             divEndTime.AddCssClass("end-time time");
-            divEndTime.InnerHtml = FinishTime.ToString(); //Activity Modelin FinishTime'ı gelecek ++++
+            divEndTime.InnerHtml = FinishTime.ToString(@"hh\:mm"); //Activity Modelin FinishTime'ı gelecek ++++
 
-            spanTime.InnerHtml = StartTime.ToString(); // Activity Modelin StartTime'ı gelecek ++++
+            spanTime.InnerHtml = StartTime.ToString(@"hh\:mm"); // Activity Modelin StartTime'ı gelecek ++++
 
             divRightCol.AddCssClass("right-col");
 
@@ -90,7 +92,7 @@ namespace WebApplication1.AppHtmlHelpers
             divRatingStars.AddCssClass("rating-stars ");
 
             spanRatingStarsFill.AddCssClass("rating-stars-fill");
-            spanRatingStarsFill.Attributes.Add("style", PlaceRating); //ActivityModeldeki Placein Ratingi. ++++
+            spanRatingStarsFill.Attributes.Add("style", "width:" + PlaceRating + "%;"); //ActivityModeldeki Placein Ratingi. ++++
 
             spanTagsAttractions.AddCssClass("tags-attractions");
 
@@ -99,7 +101,7 @@ namespace WebApplication1.AppHtmlHelpers
 
             spanTag.AddCssClass("tag");
             spanTag.Attributes.Add("data-cat-id", "140");
-            spanTag.InnerHtml = PlaceCategory; // ActivityModelin içindeki Placein Kategorisi Gelecek. +++++
+            spanTag.InnerHtml = "DenemeCategory";//PlaceCategory; // ActivityModelin içindeki Placein Kategorisi Gelecek. +++++
 
             divDesc.AddCssClass("desc");
 
@@ -111,13 +113,23 @@ namespace WebApplication1.AppHtmlHelpers
 
             aTourLinkTextLink.AddCssClass("tours-link text-link attLink jumper");
             aTourLinkTextLink.Attributes.Add("href", "mekanbilgilendirmesi");
-            aTourLinkTextLink.InnerHtml = "Tours from" + PlacePrice; //ActivityModelin Fiyatı Gelecek. ++++
+            aTourLinkTextLink.InnerHtml = "The Estimated Minimum Spend " + PlacePrice +"TL"; //ActivityModelin Fiyatı Gelecek. ++++
 
             aAttLinkHidden.AddCssClass("attLink hidden full-details-link text-link");
             aAttLinkHidden.Attributes.Add("href", "mekanbilgilendirmesi");
             aAttLinkHidden.InnerHtml = "View full attraction details";
 
             divClear.AddCssClass("clear");
+
+            deleteBtn.AddCssClass("cta-button large Delete");
+            deleteBtn.Attributes.Add("type", "button");
+            deleteBtn.Attributes.Add("data-event-src","Delete");
+            deleteBtn.InnerHtml="Delete";
+
+            updateBtn.AddCssClass("cta-button large Update");
+            updateBtn.Attributes.Add("type", "button");
+            updateBtn.Attributes.Add("data-event-src", "Update");
+            updateBtn.InnerHtml = "Update";
 
             divStartTime = combineTags(divStartTime, spanTime);
             divVisitTime = combineTags(divVisitTime, divStartTime);
@@ -146,6 +158,9 @@ namespace WebApplication1.AppHtmlHelpers
             divDetail = combineTags(divDetail, divReviewTagContainer);
             divDetail = combineTags(divDetail,divDesc);
             divDetail = combineTags(divDetail, divTours);
+            divDetail = combineTags(divDetail, deleteBtn);
+            divDetail.InnerHtml += "&nbsp";
+            divDetail = combineTags(divDetail,updateBtn);
 
             divRightCol = combineTags(divRightCol, divDetail);
 
@@ -156,7 +171,7 @@ namespace WebApplication1.AppHtmlHelpers
             return MvcHtmlString.Create(tb.ToString(TagRenderMode.Normal));
         }
 
-        public static MvcHtmlString ItineraryRow()
+        public static MvcHtmlString ItineraryRow(string SourceLat, string SourceLong, string DestLat, string DestLong ,string duration)
         {
                 TagBuilder divItinerarRowHopRow = new TagBuilder("div");
                 TagBuilder spanTravelTime = new TagBuilder("span");
@@ -169,10 +184,16 @@ namespace WebApplication1.AppHtmlHelpers
                 divLeftCol.AddCssClass("left-col ");
                 divRightCol.AddCssClass("right-col");
                 spanTravelTime.AddCssClass("TravelTime");
-                spanTravelTime.InnerHtml = "12&#8203;min";
+                spanTravelTime.InnerHtml = duration +"&#8203;";
 
                 aDirectionsTextLink.AddCssClass("directions text-link");
-                aDirectionsTextLink.Attributes.Add("href", "http://maps.google.com/maps?saddr=38.4106,27.16165&amp;daddr=38.435547,27.139322");
+
+            //https://www.google.com/maps/dir/'38.451,27.21'/'38.4695426,27.0749951'
+            //https://www.google.com/maps/dir/'38.4412,27.143932'/'38.436796,27.143132
+
+            /*https://www.google.com/maps/dir/'38.451,27.21'/'38.4695426,27.0749951'/@38.4681066,27.101598,13z/data=!3m1!4b1!4m10!4m9!1m3!2m2!1d27.21!2d38.451!1m3!2m2!1d27.0749951!2d38.4695426!3e0*/
+
+            aDirectionsTextLink.Attributes.Add("href", "https://www.google.com/maps/dir/" + "'" + SourceLat + "," + SourceLong + "'/" + "'" + DestLat + "," + DestLong + "'");
                 aDirectionsTextLink.Attributes.Add("target", "_blank");
                 aDirectionsTextLink.InnerHtml = "Get details &raquo;";
             
@@ -189,6 +210,24 @@ namespace WebApplication1.AppHtmlHelpers
         //                                        <a class="directions text-link" rel="nofollow noopener" href="http://maps.google.com/maps?saddr=38.4106,27.16165&amp;daddr=38.435547,27.139322" target="_blank">Get details &raquo;</a>
         //                                    </div>
         //                                </div>
+        public static MvcHtmlString Radio(string id,string cssClass,string value)
+        {
+            TagBuilder inputRadio = new TagBuilder("input");
+            
+            inputRadio.Attributes.Add("type", "radio");
+            inputRadio.AddCssClass(cssClass);
+            inputRadio.Attributes.Add("id", id);
+            inputRadio.Attributes.Add("name", "style");
+            inputRadio.Attributes.Add("values",value);
+            return MvcHtmlString.Create(inputRadio.ToString(TagRenderMode.Normal));
+        }
+        public static MvcHtmlString Label(string labelTitle)
+        {
+            TagBuilder label = new TagBuilder("label");
+            label.Attributes.Add("title", labelTitle);
+            label.InnerHtml = labelTitle;
+            return MvcHtmlString.Create(label.ToString(TagRenderMode.Normal));
+        }
 
         private static TagBuilder combineTags(TagBuilder t1,TagBuilder t2)
         {

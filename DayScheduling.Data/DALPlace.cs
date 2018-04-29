@@ -43,29 +43,32 @@ namespace DayScheduling.Data
             //Models.Database.ExecuteSqlCommand(result.ToString());
             //return result.ToString();
         }
-        public int Add(string PlaceName, int PlaceTypeID, string PlaceAddress, string Phone, int PlaceRate, int PlacePrice, string PlaceDescription) //Veritabanına gitcek kullanıcı tarafından girilecek parametreler
+
+        public Place getBreakfastPlace(int provinceID, int budget, string Popularity, int NOF)
         {
-            string query = @"INSERT INTO Place(PlaceName,PlaceTypeID,PlaceAddress,Phone,PlaceRate,PlacePrice,PlaceDescription)
-                        Values((SELECT TOP 1 PlaceID FROM Place ORDER BY PlaceID DESC)+1,@placeName,@placeTypeID,@placeAddress,@phone,@placeRate,@placePrice,@placeDescription)"; //normal sqlserverdaki gibi sql
-            int res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@placeName", PlaceName), new SqlParameter("@placeTypeID", PlaceTypeID), new SqlParameter("@placeAddress", PlaceAddress),
-                        new SqlParameter("@phone", Phone), new SqlParameter("@placeRate", PlaceRate), new SqlParameter("@placePrice", PlacePrice), new SqlParameter("@placeDescription", PlaceDescription)); // querye bize gelmiş olan parametreleri ekliyoruz.
-            return res;
+            string query = @"SELECT * FROM Place P WHERE P.ProvinceID = @provinceID AND P.PlacePrice <= @budget AND P.PlacePopularityID = @Popularity AND((P.NumberOfPerson>=@NOF) OR (P.NumberOfPerson = 0)) AND (P.PlaceTypeID = 10)";
+            var res = Models.Database.SqlQuery<Place>(query, new SqlParameter("@provinceID", provinceID), new SqlParameter("@budget", budget),new SqlParameter("@Popularity", Popularity), new SqlParameter("@NOF", NOF));
+            return res.FirstOrDefault();
+        }
+        public Place getCulturelPlace(int provinceID, int budget, string Popularity, int NOF)
+        {
+            string query = @"SELECT * FROM Place P WHERE P.ProvinceID = @provinceID AND P.PlacePrice <= @budget AND P.PlacePopularityID = @Popularity AND((P.NumberOfPerson>=@NOF) OR (P.NumberOfPerson = 0)) AND (P.PlaceTypeID = 140)";
+            var res = Models.Database.SqlQuery<Place>(query, new SqlParameter("@provinceID", provinceID), new SqlParameter("@budget", budget), new SqlParameter("@Popularity", Popularity), new SqlParameter("@NOF", NOF));
+            return res.FirstOrDefault();
+        }
+        public Place getShoppingPlace(int provinceID, int budget, string Popularity, int NOF)
+        {
+            string query = @"SELECT * FROM Place P WHERE P.ProvinceID = @provinceID AND P.PlacePrice <= @budget AND P.PlacePopularityID = @Popularity AND((P.NumberOfPerson>=@NOF) OR (P.NumberOfPerson = 0)) AND (P.PlaceTypeID = 70)";
+            var res = Models.Database.SqlQuery<Place>(query, new SqlParameter("@provinceID", provinceID), new SqlParameter("@budget", budget), new SqlParameter("@Popularity", Popularity), new SqlParameter("@NOF", NOF));
+            return res.FirstOrDefault();
         }
 
-        public int Update(int PlaceID, string PlaceName, int PlaceTypeID, string PlaceAddress, string Phone, int PlaceRate, int PlacePrice, string PlaceDescription)
+        public Place getHistoricSites(int provinceID, int budget, string Popularity, int NOF)
         {
-            string query = @"UPDATE Place SET PlaceName = @placeName,PlaceTypeID = @placeTypeID,PlaceAddress=@placeAddress,Phone=@phone
-                            PlaceRate= @placerate, PlacePrice= @placeprice, PlaceDescription= @placeDescription WHERE PlaceID=@PlaceID";
-            return Models.Database.ExecuteSqlCommand(query, new SqlParameter("@placeID", PlaceID), new SqlParameter("@placeName", PlaceName), new SqlParameter("@placeTypeID", PlaceTypeID),
-                    new SqlParameter("@placeAddress", PlaceAddress), new SqlParameter("@phone", Phone), new SqlParameter("@placeRate", PlaceRate), new SqlParameter("@placeDescription", PlaceDescription));
+            string query = @"SELECT * FROM Place P WHERE P.ProvinceID = @provinceID AND P.PlacePrice <= @budget AND P.PlacePopularityID = @Popularity AND((P.NumberOfPerson>=@NOF) OR (P.NumberOfPerson = 0)) AND (P.PlaceTypeID = 80)";
+            var res = Models.Database.SqlQuery<Place>(query, new SqlParameter("@provinceID", provinceID), new SqlParameter("@budget", budget), new SqlParameter("@Popularity", Popularity), new SqlParameter("@NOF", NOF));
+            return res.FirstOrDefault();
         }
 
-
-        public int Delete(int PlaceID)
-        {
-            var query = @"DELETE FROM Place WHERE PlaceID = @placeID";
-            var res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@placeID", PlaceID));//bulamadığında 0 dönüyor. bulduğunda 1 dönüyor.
-            return (res);
-        }
     }
 }

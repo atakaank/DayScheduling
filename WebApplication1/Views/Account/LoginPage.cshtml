@@ -113,7 +113,7 @@
                                 </div>
                             </li>
                             <li id="userLogin" class="">
-                                <a rel="nofollow" class="login-button" href="/Home/LoginPage">
+                                <a rel="nofollow" class="login-button" href="/Account/LoginPage">
                                     <span>Log in</span>
                                 </a>
                             </li>
@@ -160,12 +160,12 @@
 
                         <button id="loginbtn" class="cta-button login large">Login</button>
                         <div class="options">
-                            <span>New User? &nbsp;<a href=@Url.Action("SignUp","Home") class="to-signup text-link">Sign Up</a></span>
+                            <span>New User? &nbsp;<a href=@Url.Action("SignUp","Account") class="to-signup text-link">Sign Up</a></span>
                         </div>
                         <div class="clear"></div>
                     </div>
                     <div class="login-progress hidden">
-                        <img class="progress-img" src="~/s.inspirock.com/images/misc/bulb.gif" alt="Logging in..." />
+                        <img class="progress-img" src="~/res/images/assets/bulb.gif" alt="Logging in..." />
                         <div class="progress-txt"></div>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                     <div class="login-progress hidden">
-                        <img class="progress-img" src="~/s.inspirock.com/images/misc/bulb.gif" alt="Registering..." />
+                        <img class="progress-img" src="~/res/images/assets/bulb.gif" alt="Registering..." />
                         <div class="progress-txt"></div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                         <div class="clear"></div>
                     </div>
                     <div class="login-progress hidden">
-                        <img class="progress-img" src="../s.inspirock.com/images/misc/bulb.gif" alt="" />
+                        <img class="progress-img" src="~/res/images/assets/bulb.gif" alt="" />
                         <div class="progress-txt"></div>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
                     window.location.href = data;
                 }
             })*@
-            $.post('@Url.Action("isLoginSuccess", "Home")', { NameOrEmail: email, password: pass }, function (data) {
+            $.post('@Url.Action("isLoginSuccess", "Account")', { NameOrEmail: email, password: pass }, function (data) {
                 if (data.Success == "True") {
                     window.location.replace(data.TargetUrl)
                 }
@@ -359,9 +359,9 @@
     </script>
     <script src="~/js/common.js"></script>
     <script type="text/javascript">
-        require.config({ baseUrl: '~/s.inspirock.com/3.2.1/res/js' });
+        require.config({ baseUrl: '~/js' });
     </script>
-    <script src="../s.inspirock.com/3.2.1/res/js/login.js"></script>
+    <script src="~/js/login.js"></script>
     <script type="text/javascript" src="../www.googleadservices.com/pagead/f.txt">
     </script>
     <noscript>

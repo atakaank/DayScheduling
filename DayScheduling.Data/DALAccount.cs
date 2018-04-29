@@ -24,7 +24,7 @@ namespace DayScheduling.Data
         }
         public Account LoginIsSuccess(string UsernameOrEmail,string password)
         {
-            string query = @"SELECT * FROM Account A,Users U WHERE A.AccountPassword = @Password AND A.UserID = U.UserID AND U.Email =@Email"; //cilem.akcay@hotmail.com
+            string query = @"SELECT * FROM Account A,Users U WHERE A.AccountPassword = @Password AND A.UserID = U.UserID AND U.Email =@Email";
             var res = Models.Database.SqlQuery<Account>(query,new SqlParameter("@Password",password),new SqlParameter("@Email",UsernameOrEmail));
             return res.FirstOrDefault();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DayScheduling.Entities.Login
 {
-    class LoginViewModel
+    public class LoginViewModel
     {
 
     }
