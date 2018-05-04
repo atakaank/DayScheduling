@@ -56,10 +56,34 @@ namespace DayScheduling.Entities.Plan
         Restaurant = 3
     }
 
-    public enum DrinkCategories
+    public enum ActivityTypeUpdate
     {
-        CoffeShop = 110,
-        Alcohol = 200
+        Restaurant =3,        
+        Breakfast = 10,
+        [Display(Name = "Fast Food")]
+        FastFood = 11,
+        [Display(Name = "Meat&Chicken")]
+        MeatChicken = 12,
+        [Display(Name = "Sea Food")]
+        SeaFood = 13,
+        Homemade = 15,
+        Patisserie = 30,
+        Tavern = 40,
+        Bar = 50,
+        Club = 60,
+        Fun = 1,
+        Shopping = 2,
+        Beaches = 3,
+        Outdoors = 4,
+        Relaxing = 5,
+        Culturel = 6
+    }
+
+    public enum AlcoholCategories
+    {
+        Tavern = 40,
+        Bar = 50,
+        Club = 60
     }
 
     public class Travel
@@ -73,12 +97,15 @@ namespace DayScheduling.Entities.Plan
 
     public class vmDayByDayPlan
     {
+        public int PlanID { get; set; } 
         public string Province { get; set; }
+        public int ProvinceID { get; set; }
         public List<vmPartialActivity> Plan { get; set; }
         public TimeSpan StartTime = new TimeSpan(10,0,0);
         public TimeSpan CurrentTime { get; set; }
         public TimeSpan FinishTime { get; set; }
         public List<Travel> TravelList { get; set; }
+        public string Popularity { get; set; }
     }
 
     public class vmPlanCriteria
@@ -97,11 +124,11 @@ namespace DayScheduling.Entities.Plan
         public string style { get; set; }
         public List<string> categoryGroupNames { get; set; }
         public string FoodCategory { get; set; }
-        public string DrinkCategory { get; set; }
+        public string AlcoholCategory { get; set; }
     }
-
     public class vmPlaceDetail
     {
+        public int PlaceID { get; set; }
         public string PlaceName { get; set; }
         public string ActivityStartTime { get; set; }
         public string ActivityFinishTime { get; set; }
@@ -110,11 +137,27 @@ namespace DayScheduling.Entities.Plan
         public string PlaceAddress { get; set; }
         public string Phone { get; set; }
         public int RecomendedDuration { get; set; }
+        public string Photo { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
     }
     public class pmPlaceDetail
     {
         public int PlaceID { get; set; }
-        public string StartTime { get; set; }
-        public string FinishTime { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan FinishTime { get; set; }
     }
+
+    public class pmUpdateActivity
+    {
+        public int updatePlanIDSave { get; set; }
+        public int updateActivityID { get; set; }
+        //public int updateActivityIDSave { get; set; }
+        public int updateProvinceID { get; set; }
+        public int updatePlaceIDSave { get; set; }
+        public string updateActivityTypeSave { get; set; }
+    }
+
 }

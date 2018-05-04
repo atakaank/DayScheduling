@@ -1,0 +1,591 @@
+﻿@model DayScheduling.Entities.Plan.vmPlaceDetail
+<!DOCTYPE html>
+@{
+    ViewBag.Title = "PlaceDetail";
+}
+<html lang="en" xmlns:og="http://opengraphprotocol.org/schema/">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <link rel="preload" href="~/fonts/Lato-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="~/fonts/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="~/fonts/Lato-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="~/fonts/Lato-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="~/fonts/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="~/fonts/Lato-900.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validation.net.webforms.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validation.net.webforms.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.8.13.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.8.13.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui.unobtrusive.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.core.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.theme.css" />
+    <link rel="Shortcut Icon" href="~/img/logo.ico" type="image/x-icon">
+    <style>
+             /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+             #map {
+                 height: 30%;
+             }
+             /* Optional: Makes the sample page fill the window. */
+             html, body {
+                 height: 100%;
+                 margin: 0;
+                 padding: 0;
+             }
+    </style>
+    <style>
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 300;
+            font-style: normal;
+            src: local('Lato Light'), local('Lato-300'), url('../../fonts/Lato-300.woff2') format('woff2'), url('../../fonts/Lato-300.woff') format('woff'), url('../../fonts/Lato-300.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-style: normal;
+            src: local('Lato Regular'), local('Lato-regular'), url('../../fonts/Lato-regular.woff2') format('woff2'), url('../../fonts/Lato-regular.woff') format('woff'), url('../../fonts/Lato-regular.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-style: italic;
+            src: local('Lato Italic'), local('Lato-italic'), url('../../fonts/Lato-italic.woff2') format('woff2'), url('../../fonts/Lato-italic.woff') format('woff'), url('../../fonts/Lato-italic.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 700;
+            font-style: normal;
+            src: local('Lato Bold'), local('Lato-700'), url('../../fonts/Lato-700.woff2') format('woff2'), url('../../fonts/Lato-700.woff') format('woff'), url('../../fonts/Lato-700.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 700;
+            font-style: italic;
+            src: local('Lato Bold Italic'), local('Lato-700italic'), url('../../fonts/Lato-700italic.woff2') format('woff2'), url('../../fonts/Lato-700italic.woff') format('woff'), url('../../fonts/Lato-700italic.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 900;
+            font-style: normal;
+            src: local('Lato Black'), local('Lato-900'), url('../../fonts/Lato-900.woff2') format('woff2'), url('../../fonts/Lato-900.woff') format('woff'), url('../../fonts/Lato-900.ttf') format('truetype');
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href='~/css/commoncss.css'>
+    <link rel="stylesheet" type="text/css" href='~/css/resultpage.css'>
+    <link rel="stylesheet" type="text/css" href='~/css/homepage.css'>
+</head>
+<body>
+    <script src="https://s.inspirock.com/3.2.7.1/res/js/icons.js" type="text/javascript" async></script>
+    <div id="pageWrapper" class="page-wrapper ">
+        <header class="page-header  transparent" id="pageHeader">
+            <div class="header-fixer" style="">
+                <div class="header-contents clearfix">
+                    <div class="header-logo">
+                        <a href="/" title="For planning your day!">
+                            <a href="/Home/Index" title="Day Scheduling Day Planner">
+                                <img src="~/img/logo.png" border=5 width=45 height=40>
+                            </a>
+                            <span class="tagline">
+                                <font face="Berlin Sans FB" size="4" color="white">
+                                    For planning your day!
+                                </font>
+                    </div>
+                    <nav class="page-nav left">
+                    </nav>
+                    <nav class="page-nav right">
+                        <ul>
+                            <li id="headerstartplanning" class="headerstartplanning hidden">
+                                <button class="cta-button small">Start planning</button>
+                            </li>
+                            <li id="myPlans" data-dropdown-url="/myPlansDropdown" data-has-plans="true">
+                                <a rel="nofollow" href="~/Views/Home/UserPage.cshtml">
+                                    <span>My plans</span>
+                                </a>
+                            </li>
+                            <li id="userOptions" class="">
+                                <a rel="nofollow" href="javascript:void(0);">
+                                    <span class="name">@DayScheduling.Entities.Account.AccountUser.User.UserName</span>
+                                </a>
+                                <div id="dvlogout" class="hidden">
+                                    <div id="userDropdown">
+                                        <ul>
+                                            <li class="logout-button">Log out</li>
+                                        </ul>
+                                    </div>
+                                    <form id="logoutForm" action="/logout" method="POST">
+                                        <a rel="nofollow" href="~/Views/Home/Index.cshtml"></a>
+
+                                        <div>
+                                            <input type="hidden" name="_csrf" value="f9994fec-b30c-45bc-8b2c-28d77075f441" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="vertical-line"></li>
+                            <li class="liLogOut">
+                                <a rel="nofollow" href="">
+                                    <span class="name">Log Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </header>
+        <div class="page-content plan-header-hidden clear" id="pageContent">
+            <div id="analytics-metadata"
+                 data-page-type="Destination City Page"
+                 data-page-type-new="Anonymous plan"
+                 data-entity-type="NightStay"
+                 data-entity="Izmir (311325597)"></div><div id="plan"
+                                                            data-registration-required="true"
+                                                            data-plan-id="a2f6de2f7-eef8-4914-a130-4bc3380476d4"
+                                                            data-version="0"
+                                                            data-is-create-logged="true"
+                                                            data-domains="Izmir"
+                                                            data-domain-type="single-night-stay"
+                                                            data-is-printed="false"
+                                                            data-edit-enabled="false"
+                                                            data-plan-params="{&#034;endDate&#034;:&#034;2018-02-21&#034;,&#034;city&#034;:false,&#034;destinations&#034;:[&#034;Izmir&#034;],&#034;pace&#034;:&#034;Medium&#034;,&#034;adults&#034;:true,&#034;teens&#034;:false,&#034;unwind&#034;:false,&#034;duration&#034;:2,&#034;outdoors&#034;:false,&#034;romantic&#034;:false,&#034;culture&#034;:true,&#034;style&#034;:&#034;Popular&#034;,&#034;categories&#034;:[],&#034;startDate&#034;:&#034;2018-02-20&#034;,&#034;kids&#034;:false}"
+                                                            data-collaboration-enabled="false"
+                                                            data-cotraveler-names=""
+                                                            data-collaborator-names=""
+                                                            data-plan-user-role="VIEWER"
+                                                            data-user-type="anonymousUser"
+                                                            data-creation-date="Tue Feb 20 11:24:08 UTC 2018"
+                                                            data-notification-seen-timestamp="0"
+                                                            data-user-id="anonymousUser"
+                                                            data-current-user-firstname=""
+                                                            data-plan-owner-firstname=""
+                                                            data-has-email="false"
+                                                            data-response-comment-id=""
+                                                            data-collab-invite-name=""
+                                                            data-collab-invite-token=""
+                                                            data-plan-name="2 days in Izmir Itinerary"
+                                                            data-plan-start-date="2018-02-20"
+                                                            data-plan-end-date="2018-02-21"
+                                                            data-collab-invite-role=""
+                                                            data-collab-invite-user=""
+                                                            data-is-public="false"
+                                                            data-is-anonymous="true"
+                                                            data-login-prompt="true"
+                                                            data-coverage="Europe, Americas, Asia, South Pacific, & Africa"
+                                                            data-is-driving="false"
+                                                            data-num-adults="2"
+                                                            data-num-teens="0"
+                                                            data-num-kids="0"
+                                                            data-travel-modes="Bus,Car,Drive,Ferry,Helicopter,Plane,Flight,Fly,Shuttle,Subway,Taxi,Train,Tram"
+                                                            data-travel-agent-button-text=""
+                                                            data-destination-names-abridged="Izmir"
+                                                            data-sky-scanner-key="in592557844571737435824179653162"
+                                                            data-country-code="TR"
+                                                            data-currency="TRY"
+                                                            data-locale="en"
+                                                            data-allowed-file-types="image/jpeg,image/png,image/gif,image/bmp,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,application/rtf,text/plain"
+                                                            data-allowed-file-extension="jpg, jpeg, gif, bmp, png, pdf, doc, docx, odt, rtf, txt"
+                                                            data-max-file-upload-size="5000000"
+                                                            data-reservation-email="plans-dev@inspirock.com"
+                                                            data-reservations-enabled="false">
+            </div>
+            <div class="plan-heading hidden">
+                <div class="plan-hero hidden">
+                    <div class="plan-overview-big">
+                        <div class="overview-header" style="background-image: url('../../photos/saat-kulesi-clock-tower-352339852.jpg');"></div>
+                        <div class="plan-title-wrapper">
+                            <div class="plan-title-wrapper-2">
+                                <div class="hidden-title">2 days in Izmir Itinerary</div>
+                                <h1 class="plan-title">
+                                    2 days in Izmir Itinerary
+                                </h1>
+                                <h2 class="line2">Created using Day Scheduling <a href='https://www.inspirock.com/turkey-trip-planner' target='_blank'>Turkey trip planner</a></h2>
+                            </div>
+                        </div>
+                        <span class="copyright-fancy-box-div copyright"
+                              data-type="attraction"
+                              data-id="111497851"
+                              data-img-path="saat-kulesi-clock-tower-352339852.html">&copy;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="planHeaderWrapper">
+                <header class="plan-header" id="planHeader"></header>
+            </div>
+            <div class="transportation-background hidden">
+                <div class="flight-background hidden" style="background-image: url('../../photos/transport/flight.jpg');"></div>
+                <div class="car-background hidden" style="background-image: url('../../photos/transport/car.jpg');"></div>
+                <div class="train-background hidden" style="background-image: url('../../photos/transport/train.jpg');"></div>
+            </div>
+            <div class="plan-content" id="planContent">
+                <div class="resultpage-content" id="resultpageContent">
+                    <div id="overview" class="tab-content hidden" data-url="/trip/2-days-in-izmir-itinerary-with-culture-a2f6de2f7-eef8-4914-a130-4bc3380476d4/overview">
+                        <div id="overviewRoutePane" class="overview-route-pane one-destination one-view">
+                            <div class="edit-container hidden">
+                                <div class="edit-title">Edit dates & travelers</div>
+                                <div class="dates clearfix">
+                                    <div class="calendar-input date-range">
+                                        <input name="startDate" type="text" class="startDate container hidden" value="02/20/18" data-num-months="2" data-highlight-range="1" readonly />
+                                        <input name="startDate-alt" type="text" value="" class="startDate-alt datepicker flat" placeholder="Start" readonly="readonly" data-num-months="2" data-highlight-range="1" />
+                                        <input name="endDate" type="text" class="endDate container hidden" value="02/21/18" data-num-months="2" data-highlight-range="1" readonly />
+                                        <input name="endDate-alt" type="text" value="" class="endDate-alt datepicker flat" placeholder="End" readonly="readonly" />
+                                        <svg class="calendar-icon"><use xlink:href="#icon-calendar" /></svg>
+                                        <svg class="arrow notranslate"><use xlink:href="#icon-plan-form-arrow" /></svg>
+                                        <div class="delete"></div>
+                                    </div>
+                                    <div class="travelers">
+                                        <div class="travelers-btn">
+                                            <span>2 adults</span>
+                                            <div class="arrow-down"></div>
+                                        </div>
+                                        <div class="travel-with clearfix">
+                                            <table>
+                                                <tr>
+                                                    <td class="type">Adults</td>
+                                                    <td class="picker">
+                                                        <div class="clearfix">
+                                                            <span class="minus">-</span>
+                                                            <input name="numAdults" class="whoAdults num" value="2" readonly data-min="1" />
+                                                            <span class="plus">+</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="type">Teens</td>
+                                                    <td class="picker">
+                                                        <div class="clearfix">
+                                                            <span class="minus disabled">-</span>
+                                                            <input name="numTeens" class="whoTeens num disabled" value="0" readonly />
+                                                            <span class="plus">+</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="type">Kids</td>
+                                                    <td class="picker">
+                                                        <div class="clearfix">
+                                                            <span class="minus disabled">-</span>
+                                                            <input name="numKids" class="whoKids num disabled" value="0" readonly />
+                                                            <span class="plus">+</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="close">Close</div>
+                                        </div>
+                                    </div>
+                                </div><div class="edit-plan-container">
+                                    <button class="cta-button large edit-plan">Save</button>
+                                </div>
+                            </div>
+                            <div id="route" class="clearfix">
+                                <div class="one-dest-toggle clearfix">
+                                    <h2 class="one-dest-heading">Route & dates</h2>
+                                    <button class="edit cta-button large">Edit</button>
+                                </div>
+                                <div class="one-destination route-main-pane " data-start-date="2018-02-20"
+                                     data-user-end-date="2018-02-21" data-end-date="2018-02-21" data-start-date-time="2018-02-20T09:00" data-end-date-time="2018-02-21T18:30"
+                                     data-is-driving="false"
+                                     data-priority-id="0">
+                                    <h2 class="edit-route-title ">
+
+                                        View / edit route
+                                    </h2>
+                                    <div class="route-rows">
+                                        <div class="route-row boundary-row non-editable-rowstart"
+                                             data-destination-id="311325597"
+                                             data-name="Izmir"
+                                             data-city-iata-code="IZM"
+                                             data-country-code="TR"
+                                             data-boundary-type="start">
+                                            <div class="left">
+                                                <div class="marker"></div>
+                                                <div class="line down"></div>
+                                            </div>
+                                            <div class="content">
+                                                <div class="title" data-event-src="boundary"></div>
+                                            </div>
+                                        </div><div id="travel-row-0" class="drop-row route-row travel-row editable-route-option
+    hidden" data-travel-id="0"
+                                                   data-start-date="2018-02-20"
+                                                   data-start-time="2018-02-20T09:00:00"
+                                                   data-end-time="2018-02-20T09:00:00"
+                                                   data-end-date="2018-02-20"
+                                                   data-selected-route-index=""
+                                                   data-duration="0"
+                                                   data-notes=""
+                                                   data-attachments="[]"
+                                                   data-reservations="[]"
+                                                   data-custom-travel-name=""
+                                                   data-custom-travel-start-time=""
+                                                   data-custom-travel-end-time=""
+                                                   data-custom-travel-duration=""
+                                                   data-is-train-bookable="com.inspirock.fe.model.TrainProvider@4291d23c">
+                                            <div class="left">
+                                                <div class="transport-mode">
+                                                    <svg class="icons car" data-mode-icon="icon-travel-car"><use xlink:href="#icon-travel-car" /></svg>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                            </div>
+                                        </div>
+                                        <div id="destinations-stay-row-1" class="draggable route-row stay-row non-editable-row"
+                                             data-stay-id="1"
+                                             data-lat="38.423733"
+                                             data-lng="27.142826"
+                                             data-country-lat="38.963745"
+                                             data-country-lng="35.24332"
+                                             data-duration="2"
+                                             data-nights="1"
+                                             data-destination-id="311325597"
+                                             data-name="Izmir"
+                                             data-pos="1"
+                                             data-arrival-date="2018-02-20"
+                                             data-arrival-min-slot-index="12"
+                                             data-arrival-max-slot-index="23"
+                                             data-departure-date="2018-02-21"
+                                             data-departure-min-slot-index="32"
+                                             data-departure-max-slot-index="39"
+                                             data-city-iata-code="IZM"
+                                             data-arrival-date-time="2018-02-20T09:00:00"
+                                             data-departure-date-time="2018-02-21T18:30:00"
+                                             data-check-in-date="2018-02-20"
+                                             data-check-out-date="2018-02-21"
+                                             data-earliest-arrival-date-time="2018-02-20T00:30"
+                                             data-state-code=""
+                                             data-country-code="TR"
+                                             data-stay-properties=""
+                                             data-travel-id="20"
+                                             data-in-plan="true"
+                                             data-has-notes="false">
+                                            <div class="left">
+                                                <div class="handle">
+                                                    <div class="up fa fa-angle-up"></div>
+                                                    <div class="hr"></div>
+                                                    <div class="down fa fa-angle-down"></div>
+                                                </div>
+                                                <div class="marker">
+                                                    <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-map-marker"></use></svg>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                                <div class="title clickable-text">
+                                                    Izmir
+                                                </div>
+                                                <span class="durationText"> &mdash; 1 night</span>
+                                                <span class="line-hr"></span>
+                                                <svg class="arrow-up stay-icon hidden"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-up"></use></svg><svg class="arrow-down stay-icon hidden"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-down"></use></svg><svg class="edit stay-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-edit"></use></svg><svg class="collapse stay-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-collapse"></use></svg>
+                                            </div>
+                                            <div class="edit-details collapse">
+                                                <div class="arrive clearfix">
+                                                    <label>Arrive</label>
+                                                    <div class="calendar-input">
+                                                        <svg class="calendar-icon"><use xlink:href="#icon-calendar" /></svg>
+                                                        <input type="text" name="arriveDate" class="arriveDate container-datepicker" value="2018-02-20" data-num-months="2" data-highlight-range="1" readonly />
+                                                        <input name="arriveDate-alt" type="text" value="Tue 2/20" class="arriveDate-alt datepicker hasdate flat" placeholder="Depart" readonly="readonly" />
+                                                    </div>
+                                                    <select class="time-slot" data-type="arrival">
+                                                        <option data-min="0" data-max="11">Before 6AM</option>
+                                                        <option selected data-min="12" data-max="23">Morning</option>
+                                                        <option data-min="24" data-max="31">Afternoon</option>
+                                                        <option data-min="32" data-max="39">Evening</option>
+                                                        <option data-min="40" data-max="47">Night</option>
+                                                    </select>
+                                                </div>
+                                                <div class="depart clearfix">
+                                                    <label>Depart</label>
+                                                    <div class="calendar-input">
+                                                        <svg class="calendar-icon"><use xlink:href="#icon-calendar" /></svg>
+                                                        <input type="text" name="departDate" class="departDate container-datepicker" value="2018-02-21" data-num-months="2" data-highlight-range="1" readonly />
+                                                        <input name="departDate-alt" type="text" value="Wed 2/21" class="departDate-alt datepicker hasdate flat" placeholder="Depart" readonly="readonly" />
+                                                    </div>
+                                                    <select class="time-slot" data-type="departure">
+                                                        <option data-min="0" data-max="11">Before 6AM</option>
+                                                        <option data-min="12" data-max="23">Morning</option>
+                                                        <option data-min="24" data-max="31">Afternoon</option>
+                                                        <option selected data-min="32" data-max="39">Evening</option>
+                                                        <option data-min="40" data-max="47">Night</option>
+                                                    </select>
+                                                </div>
+                                                <div class="delete-destination hidden">
+                                                    <svg class="trash stay-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-trash"></use></svg>
+                                                    Delete destination
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="travel-row-20" class="drop-row route-row travel-row editable-route-option
+    hidden" data-travel-id="20"
+                                         data-start-date="2018-02-21"
+                                         data-start-time="2018-02-21T18:30:00"
+                                         data-end-time="2018-02-21T18:30:00"
+                                         data-end-date="2018-02-21"
+                                         data-selected-route-index=""
+                                         data-duration="0"
+                                         data-notes=""
+                                         data-attachments="[]"
+                                         data-reservations="[]"
+                                         data-custom-travel-name=""
+                                         data-custom-travel-start-time=""
+                                         data-custom-travel-end-time=""
+                                         data-custom-travel-duration=""
+                                         data-is-train-bookable="com.inspirock.fe.model.TrainProvider@4291d23c">
+                                        <div class="left">
+                                            <div class="transport-mode">
+                                                <svg class="icons car" data-mode-icon="icon-travel-car"><use xlink:href="#icon-travel-car" /></svg>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                        </div>
+                                    </div>
+                                    <div class="route-row boundary-row non-editable-rowend"
+                                         data-destination-id="311325597"
+                                         data-name="Izmir"
+                                         data-city-iata-code="IZM"
+                                         data-country-code="TR"
+                                         data-boundary-type="end">
+                                        <div class="left">
+                                            <div class="marker"></div>
+                                            <div class="line up"></div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="title" data-event-src="boundary"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="route-right-pane read-only">
+                                <button class="add-destination cta-button large claimPlanLink"> + Add destination</button>
+                                <div class="actions clearfix">
+                                    <button class="done-btn cta-button large">Done</button>
+                                    <button class="cancel-btn cta-button large">Cancel</button>
+                                </div>
+                                <div class="mini-map route-map" data-enlarge-map="true"></div>
+                                <hr />
+                                <div class="display-dates claimPlanLink">
+                                    <span class="dates notranslate"></span>
+                                    <span class="text-link change-dates-link claimPlanLink">Change</span>
+                                </div>
+                                <div class="date-edit hidden notranslate">
+                                    <div class="dates">
+                                        <div class="calendar-input date-range">
+                                            <input type="text" name="startDate" class="startDate container-datepicker hidden" value="2018-02-20" data-num-months="2" data-highlight-range="1" readonly />
+                                            <input name="startDate-alt" type="text" value="Tue 2/20" class="startDate-alt datepicker hasdate flat" placeholder="Depart" readonly="readonly" />
+                                            <input type="text" name="endDate" class="endDate container-datepicker hidden" value="2018-02-21" readonly />
+                                            <input name="endDate-alt" type="text" value="Wed 2/21" class="endDate-alt datepicker hasdate flat" placeholder="Return" readonly="readonly" />
+                                            <svg class="calendar-icon"><use xlink:href="#icon-calendar" /></svg>
+                                            <svg class="arrow notranslate"><use xlink:href="#icon-plan-form-arrow" /></svg>
+                                            <div class="delete"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mini-calendar"></div>
+                                <div class="view-full-calendar-container">
+                                    <div class="text-link view-full-calendar">View full calendar</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan-edit-hide">
+                        <div id="overview-stay-1"
+                             class="overview-stay-pane"
+                             data-stay-id="1"
+                             data-name="Izmir"
+                             data-lat="38.423733"
+                             data-lng="27.142826"
+                             data-country-lat="38.963745"
+                             data-country-lng="35.24332"
+                             data-duration="2"
+                             data-destination-id="311325597"
+                             data-travel-id="overview-travel-pane-1"
+                             data-check-in-date="2018-02-20"
+                             data-check-out-date="2018-02-21"
+                             data-country-code="TR">
+                            <div class="pane-content">
+                                <h2 class="stay-title">
+                                    <div class="in-wrap">
+                                        <div class="bar"></div>
+                                    </div>
+                                <div class="left-col ">
+                                    <div class="title-area">
+                                        <span class="title destinationDetailsLink clickable-text" data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597" data-event-src="stay-pane-overview.title">@Model.PlaceName</span>
+                                        <button type="button" class="cta-button small dayByDayStayLink" data-date="2018-02-20" data-name="Izmir"><p><font face="Berlin Sans FB" size="4" color="white"><b>Location</b></font></p></button>
+                                    </div>
+                                </div>
+                                    <div class="rating">
+                                        <div class="ins-rating">
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rating</span><div class="rating-stars ">
+                                                <span class="rating-stars-fill" style="width:@Model.PlaceRate%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h2>
+                                <div class="stay-content clearfix">
+                                    <div class="route-big">
+                                        <img class="stay-img clickable-image destinationDetailsLink"
+                                             src="../../photos/@Model.Photo"
+                                             onerror="onImgError(this);"/>
+                                    </div><div class="right-col clearfix">
+                                        <div class="attraction-metadata">
+                                            <aside>
+                                                <div class="cat-title">
+                                                    <span style="font-weight:bold">Recomended Duration</span>
+                                                </div>
+                                                <div>@Model.RecomendedDuration</div>
+                                            </aside>
+                                            <aside class="opening-hours">
+                                                <div class="cat-title">
+                                                    <span style="font-weight:bold">Day-Hours</span>
+                                                </div>
+                                                <div><span>@Model.ActivityStartTime-@Model.ActivityFinishTime in your plan.</span></div>
+                                            </aside>
+                                            <aside>
+                                                <div class="cat-title"><span style="font-weight:bold">Contact</span></div>
+                                                <p>@Model.PlaceAddress</p>
+                                                <p class="phone">
+                                                    <span>@Model.Phone</span>
+                                                    <div class="desc"><blockquote cite="mekanbilgilendirmesi" class="trim-desc">@Model.PlaceDescription</blockquote></div>
+                                                </p>
+                                            </aside> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="map"></div>
+<script>
+
+    function initMap() {
+        debugger;
+        var myLatLng = {lat: -25.363, lng: 131.044};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjS9eZc7OB_Hk2PDalIJYGowUUeCFQvk4&callback=initMap">
+</script>
+</body>

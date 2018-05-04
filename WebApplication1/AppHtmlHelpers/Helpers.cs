@@ -9,7 +9,7 @@ namespace WebApplication1.AppHtmlHelpers
 {
     public static class Helpers
     {    //,string PlaceCategory
-        public static MvcHtmlString ItinenaryItem(int PlaceID,string PlaceName, int PlaceRating, string PlacePrice, TimeSpan StartTime, TimeSpan FinishTime, string PlaceDescp)
+        public static MvcHtmlString ItinenaryItem(string ActivityID,int PlaceID,string PlaceName, int PlaceRating, string PlacePrice, TimeSpan StartTime, TimeSpan FinishTime, string PlaceDescp,string PlaceType)
         {
             TagBuilder tb = new TagBuilder("div");
             TagBuilder divLeftCol = new TagBuilder("div");
@@ -29,7 +29,6 @@ namespace WebApplication1.AppHtmlHelpers
             TagBuilder divRatingStars = new TagBuilder("div");
             TagBuilder spanRatingStarsFill = new TagBuilder("span");
             TagBuilder spanTagsAttractions = new TagBuilder("span");
-            TagBuilder spanTagMustSeeTag = new TagBuilder("span");
             TagBuilder spanTag = new TagBuilder("span");
             TagBuilder divDesc = new TagBuilder("div");
             TagBuilder blockquoteTrimDesc = new TagBuilder("blockquote");
@@ -37,8 +36,7 @@ namespace WebApplication1.AppHtmlHelpers
             TagBuilder aTourLinkTextLink = new TagBuilder("a");
             TagBuilder aAttLinkHidden = new TagBuilder("a");
             TagBuilder divClear = new TagBuilder("div");
-            TagBuilder detailBtn = new TagBuilder("button");
-
+            TagBuilder btnUpdate = new TagBuilder("button");
 
             tb.AddCssClass("itinerary-row visit-row data-holder");
             //tb.GenerateId("itinerary-item-22");
@@ -52,6 +50,15 @@ namespace WebApplication1.AppHtmlHelpers
             //tb.Attributes.Add("data-details-url", "/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/konak-square-a420888639");
             //tb.Attributes.Add("data-event-src", "visit-row");
             //tb.Attributes.Add("data-has-notes", "false");
+
+
+            btnUpdate.Attributes.Add("type", "button");
+            btnUpdate.AddCssClass("cta-button large Update");
+            btnUpdate.Attributes.Add("id", "btnUpdate" + ActivityID);
+            btnUpdate.Attributes.Add("data-id", ActivityID);
+            btnUpdate.Attributes.Add("data-toggle","modal");
+            btnUpdate.Attributes.Add("data-target", "#UpdateModal");
+            btnUpdate.InnerHtml = "Change Activity";
 
             divLeftCol.AddCssClass("left-col ");
 
@@ -71,14 +78,14 @@ namespace WebApplication1.AppHtmlHelpers
             divVisitRowMedium.AddCssClass("visit-row-medium");
 
             divPhotoClickable.AddCssClass("photo clickable-image attLink");
-            divPhotoClickable.Attributes.Add("style", "background-image: url('../../photos/konak-square--622289667.jpg')");
-            divPhotoClickable.Attributes.Add("data-link", "'/turkey/izmir/konak-square-a420888639'");
+            divPhotoClickable.Attributes.Add("style", "background-image: url('../../photos/"+ PlaceID +".jpg')");
+            //divPhotoClickable.Attributes.Add("data-link", "'/turkey/izmir/konak-square-a420888639'");
 
-            spanFancyBox.AddCssClass("copyright-fancy-box-div copyright");
-            spanFancyBox.Attributes.Add("data-type", "attraction");
-            spanFancyBox.Attributes.Add("data-id", "420888639");
-            spanFancyBox.Attributes.Add("data-img-path", "konak-square--622289667.html");
-            spanFancyBox.InnerHtml = "&copy;";
+            //spanFancyBox.AddCssClass("copyright-fancy-box-div copyright");
+            //spanFancyBox.Attributes.Add("data-type", "attraction");
+            //spanFancyBox.Attributes.Add("data-id", "420888639");
+            //spanFancyBox.Attributes.Add("data-img-path", "konak-square--622289667.html");
+            //spanFancyBox.InnerHtml = "&copy;";
 
             divDetail.AddCssClass("detail");
 
@@ -92,16 +99,13 @@ namespace WebApplication1.AppHtmlHelpers
             divRatingStars.AddCssClass("rating-stars ");
 
             spanRatingStarsFill.AddCssClass("rating-stars-fill");
-            spanRatingStarsFill.Attributes.Add("style", "width:" + PlaceRating + "%;"); //ActivityModeldeki Placein Ratingi. ++++
+            spanRatingStarsFill.Attributes.Add("style", "width:" + PlaceRating*20 + "%;"); //ActivityModeldeki Placein Ratingi. ++++
 
             spanTagsAttractions.AddCssClass("tags-attractions");
 
-            spanTagMustSeeTag.AddCssClass("tag must-see-tag"); // Kaldırılabilir. Bakılacak.
-            spanTagMustSeeTag.InnerHtml = "#Must See,";
-
             spanTag.AddCssClass("tag");
             spanTag.Attributes.Add("data-cat-id", "140");
-            spanTag.InnerHtml = "DenemeCategory";//PlaceCategory; // ActivityModelin içindeki Placein Kategorisi Gelecek. +++++
+            spanTag.InnerHtml = PlaceType;//PlaceCategory; // ActivityModelin içindeki Placein Kategorisi Gelecek. +++++
 
             divDesc.AddCssClass("desc");
 
@@ -121,15 +125,6 @@ namespace WebApplication1.AppHtmlHelpers
 
             divClear.AddCssClass("clear");
 
-            detailBtn.AddCssClass("cta-button large");
-            detailBtn.Attributes.Add("data-id", PlaceID.ToString());
-            detailBtn.Attributes.Add("data-start", StartTime.ToString());
-            detailBtn.Attributes.Add("data-finish", FinishTime.ToString());
-            detailBtn.Attributes.Add("type", "button");
-            detailBtn.Attributes.Add("data-event-src", "Delete");
-            detailBtn.InnerHtml = "Detail";
-
-
             divStartTime = combineTags(divStartTime, spanTime);
             divVisitTime = combineTags(divVisitTime, divStartTime);
             divVisitTime = combineTags(divVisitTime, divEndTime);
@@ -144,7 +139,6 @@ namespace WebApplication1.AppHtmlHelpers
             spanReview = combineTags(spanReview,divRatingStars);
             divReviewTagContainer = combineTags(divReviewTagContainer,spanReview);
 
-            spanTagsAttractions = combineTags(spanTagsAttractions,spanTagMustSeeTag);
             spanTagsAttractions = combineTags(spanTagsAttractions,spanTag);
             divReviewTagContainer = combineTags(divReviewTagContainer, spanTagsAttractions);
 
@@ -157,14 +151,13 @@ namespace WebApplication1.AppHtmlHelpers
             divDetail = combineTags(divDetail, divReviewTagContainer);
             divDetail = combineTags(divDetail,divDesc);
             divDetail = combineTags(divDetail, divTours);
-            divDetail = combineTags(divDetail, detailBtn);
+            divDetail = combineTags(divDetail, btnUpdate);
 
             divRightCol = combineTags(divRightCol, divDetail);
 
             divClearfix = combineTags(divClearfix, divRightCol);
             divClearfix = combineTags(divClearfix, divClear);
             tb = combineTags(tb, divClearfix);
-
             return MvcHtmlString.Create(tb.ToString(TagRenderMode.Normal));
         }
 

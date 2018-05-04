@@ -9,12 +9,12 @@ using System.Web.Mvc;
 using DayScheduling.BLL;
 using GoogleMaps.LocationServices;
 
-
 namespace WebApplication1.Controllers
 {
     public class PlanController : Controller
     {
         BLLPlan bllplan = new BLLPlan();
+        BLLActivity bllact = new BLLActivity();
         public ActionResult PlanCriterias()
         {
             return View();
@@ -28,17 +28,56 @@ namespace WebApplication1.Controllers
             return View(Model);
         }
 
+        public ActionResult GetPlan()
+        {
+            vmDayByDayPlan Model = new vmDayByDayPlan();
+            if (TempData.Count != 0)
+            {
+                var model = TempData["ExistPlan"] as vmDayByDayPlan;
+                return View(model);
+            }
+            return View(Model);
+        }
+
+        public ActionResult DeleteActivity(int ID,int PlanID)
+        {
+            bllact.DeleteActivity(ID);
+            TempData["ExistPlan"] = bllplan.GetExistPlan(PlanID);
+            var res = new { TargetUrl = Url.Action("GetPlan", "Plan") };
+            return Json(res,JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult PlaceDetail(pmPlaceDetail param)
         {
             vmPlaceDetail model = bllplan.getPlaceDetail(param);
             return View(model);
         }
 
-        public ActionResult DeleteActivity()
+        [HttpPost]
+        public ActionResult GetExistActivity(int ActivityID)
         {
-            BLLActivity bll = new BLLActivity();
-            bll.DeleteActivity(1009);
-            return RedirectToAction("DayByDay");
+            vmPartialActivity activity =  bllact.GetExistActivity(ActivityID);
+            var res = new {PlaceID = activity.place.PlaceID, PlaceName = activity.place.PlaceName, PlaceRate = activity.place.PlaceRate, Activitytype = activity.ActivityPlaceType };
+            return Json(res,JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeActivity(int ActivityID,int BudgetInfo, int NumOfFriends, string PlaceType, int ProvinceID, string Popularity)
+        {
+            //bllact.DeleteActivity(int.Parse(param.updatePlaceID));
+            vmPartialActivity existAct =  bllact.GetExistActivity(ActivityID);
+            vmPartialActivity newAct =  bllact.GetActivitytoChange(BudgetInfo,NumOfFriends,PlaceType,ProvinceID,Popularity,existAct.StartTime);
+            var res = new {activityID= newAct.ActivityID, PlaceID = newAct.place.PlaceID, PlaceName = newAct.place.PlaceName, PlaceRate = newAct.place.PlaceRate, Activitytype = newAct.ActivityPlaceType };
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateActivity(pmUpdateActivity param)
+        {
+            bllact.DeleteActivity(param.updateActivityID);
+            bllact.RecordActivity(param.updateActivityID, param.updateActivityID + "Activity" + AccountUser.Account.AccountID, param.updateActivityTypeSave, true,param.updatePlaceIDSave, param.updatePlanIDSave);
+            TempData["ExistPlan"] =  bllplan.GetExistPlan(param.updatePlanIDSave);
+            return RedirectToAction("GetPlan","Plan");
         }
     }
 }

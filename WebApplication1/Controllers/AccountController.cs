@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult isSignUpSuccess(string UserSurname, string UserName, string Gender, DateTime DOB, string Email, string Phone, string Address, string Job, string Password, string AccountType)
         {
-            var resSuccess = new { Success = "True", Message = "ACCOUNT IS ADDED.", TargetUrl = Url.Action("PlanCriterias", "Plan") };//userpage
+            var resSuccess = new { Success = "True", Message = "ACCOUNT IS ADDED.", TargetUrl = Url.Action("LoginPage", "Account") };
             var resFail = new { Success = "False", Message = "EMAIL IS ALREADY TAKEN.", TargetUrl = "" };
             if (bllAcc.AddAccountUser(UserSurname, UserName, Gender, DOB, Email, Phone, Address, Job, Password, AccountType) == 2)
             {

@@ -36,12 +36,32 @@
     <link rel="preconnect" href="http://netdna.bootstrapcdn.com/" crossorigin>
     <link rel="dns-prefetch" href="http://netdna.bootstrapcdn.com/">
     <link rel="preconnect" href="http://www.google-analytics.com/" crossorigin>
+    <script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validation.net.webforms.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validation.net.webforms.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.8.13.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.8.13.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui.unobtrusive.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.core.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.theme.css" />
     <link rel="preload" href="~/fonts/Lato-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="~/fonts/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="~/fonts/Lato-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="~/fonts/Lato-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="~/fonts/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="~/fonts/Lato-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
 @@font-face {font-family: 'Lato'; font-weight: 300; font-style: normal; src: local('Lato Light'), local('Lato-300'), url('../../fonts/Lato-300.woff2') format('woff2'), url('../../fonts/Lato-300.woff') format('woff'), url('../../fonts/Lato-300.ttf') format('truetype');}
 @@font-face {font-family: 'Lato'; font-weight: 400; font-style: normal; src: local('Lato Regular'), local('Lato-regular'), url('../../fonts/Lato-regular.woff2') format('woff2'), url('../../fonts/Lato-regular.woff') format('woff'), url('../../fonts/Lato-regular.ttf') format('truetype');}
@@ -49,6 +69,17 @@
 @@font-face {font-family: 'Lato'; font-weight: 700; font-style: normal; src: local('Lato Bold'), local('Lato-700'), url('../../fonts/Lato-700.woff2') format('woff2'), url('../../fonts/Lato-700.woff') format('woff'), url('../../fonts/Lato-700.ttf') format('truetype');}
 @@font-face {font-family: 'Lato'; font-weight: 700; font-style: italic; src: local('Lato Bold Italic'), local('Lato-700italic'), url('../../fonts/Lato-700italic.woff2') format('woff2'), url('../../fonts/Lato-700italic.woff') format('woff'), url('../../fonts/Lato-700italic.ttf') format('truetype');}
 @@font-face {font-family: 'Lato'; font-weight: 900; font-style: normal; src: local('Lato Black'), local('Lato-900'), url('../../fonts/Lato-900.woff2') format('woff2'), url('../../fonts/Lato-900.woff') format('woff'), url('../../fonts/Lato-900.ttf') format('truetype');}
+    </style>
+    <style>
+    .mydropdownlist1
+    {
+    color: #a5cc0f;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px 12px;
+    background-color: #999;
+    font-weight: bold;
+    }
     </style>
     <link rel="stylesheet" type="text/css" href='~/css/commoncss.css'>
     <link rel="stylesheet" type="text/css" href='~/css/resultpage.css'>
@@ -89,7 +120,7 @@
         fbq('track', 'PageView');
     </script>
     <noscript>
-        
+
     </noscript>
 </head>
 <body class="resultspage edit-disabled normal" data-browser-lang-code="en"
@@ -155,7 +186,7 @@
                                     <span><span class="selected-currency">TL</span> <span class="dropdown"></span></span>
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </nav>
                 </div>
@@ -173,7 +204,7 @@
                             <div class="itinerary-subnav-bg"></div>
                             <div class="itinerary-subnav-contents subnav-pane clearfix">
                                 <div class="subnav-tabs ">
-                                    <div class="selectview" title="2 days in Izmir Itinerary">Your daily plan in @Model.Province</div>
+                                    <div class="selectview" title="2 days in Izmir Itinerary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your daily plan in @Model.Province</div>
                                     <div id="daybydaylink" class="subnavlink active" data-target="daybyday" data-url="/trip/2-days-in-izmir-itinerary-with-culture-a2f6de2f7-eef8-4914-a130-4bc3380476d4/itinerary/list">
                                         <span class="title">Timeline</span>
                                     </div>
@@ -185,28 +216,7 @@
                                     </div>
                                 </div>
                                 <ul class="subnav-actions">
-                                    <li>
-                                        <button type="button" class="cta-button large Add" data-event-src="Add">Add</button>
-                                    </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <div id="itineraryLeftTimelinePane"
-                             class="itinerary-left-timeline-pane  daybyday col-1">
-                            <div class="day-box in-plan "
-                                 data-stay-id="1"
-                                 data-destination-id="311325597"
-                                 data-date="2018-02-20"
-                                 data-day-index="0">
-                                <div class="month">Feb</div>
-                                <div class="day text-link" data-title="Izmir">20</div>
-                            </div>
-                            <div class="day-box in-plan "
-                                 data-stay-id="1"
-                                 data-destination-id="311325597"
-                                 data-date="2018-02-21"
-                                 data-day-index="1">
-                                <div class="day text-link" data-title="Izmir">21</div>
                             </div>
                         </div>
                         <div id="itineraryMainPane" class="itinerary-main-pane  col-9 daybyday" data-has-reservation="false">
@@ -220,614 +230,103 @@
                                          data-date="2018-02-20">
                                         <div class="day-title clearfix readonly stay-1" data-stay-id="1">
                                             <div class="day-title-container">
-                                                <div class="start-end-dates">Tue, Feb 20</div>
+                                                <div class="start-end-dates">@DateTime.Now.ToString("MMM ddd d")</div>
                                                 <div class="line-between"></div>
                                                 <div class="line-between-2"></div>
                                                 <div class="stay-area">
                                                     <span class="stayName destinationDetailsLink clickable-text"
                                                           data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597"
-                                                          data-event-src="day-title">Izmir</span>
+                                                          data-event-src="day-title">@Model.Province</span>
                                                 </div>
-                                                <span class="conflict-icon hidden">
-                                                    <svg>
-                                                        <use xlink:href="#icon-error-circle"></use>
-                                                    </svg>
-                                                </span>
                                                 <div class="line-between-2"></div>
-                                            </div>
-                                        </div><div class="itinerary-row car-rental-upsell-row clearfix"
-                                                   data-destination-id=""
-                                                   data-upsell="CARRENTAL"
-                                                   data-stay-id="1"
-                                                   data-id="1">
-
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                                <div class="carrental-icon">
-                                                    <svg>
-                                                        <use xlink:href="#icon-travel-car"></use>
-                                                    </svg>
-                                                </div>
-                                               
-                                            </div>
-                                        
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-5"
-                                             data-visit-id="5"
-                                             data-id="5"
-                                             data-stay-id="1"
-                                             data-name="Saat Kulesi (Clock Tower)"
-                                             data-duration="60"
-                                             data-attraction-id="111497851"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/saat-kulesi-clock-tower-a111497851"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>11:30am</span>
-                                                        </div>
-                                                        <div class="end-time time">12:30pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../photos/saat-kulesi-clock-tower-352339852.jpg')"
-                                                             data-link="/turkey/izmir/saat-kulesi-clock-tower-a111497851">
-                                                        </div>
-                                                        <span class="copyright-fancy-box-div copyright"
-                                                              data-type="attraction"
-                                                              data-id="111497851"
-                                                              data-img-path="saat-kulesi-clock-tower-352339852.html">&copy;</span>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Saat Kulesi (Clock Tower)</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:88.00000000000001%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag must-see-tag">#Must See</span>, <span class="tag" data-cat-id="208">#Landmark</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/saat-kulesi-clock-tower-a111497851" cite="https://www.inspirock.com/turkey/izmir/saat-kulesi-clock-tower-a111497851">
-                                                                View the Ottoman-style tower that has come to represent the city at Saat Kulesi (Clock Tower). Built in 1901 to mark the 25th anniversary of
-                                                            </blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/saat-kulesi-clock-tower-a111497851">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row    " data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                                <span class="travelTime">9&#8203;min</span>
-                                                <a class="directions text-link" rel="nofollow noopener" href="http://maps.google.com/maps?saddr=38.418888,27.12865&amp;daddr=38.408886,27.117561" target="_blank">Get details &raquo;</a>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-7"
-                                             data-visit-id="7"
-                                             data-id="7"
-                                             data-stay-id="1"
-                                             data-name="Tarihi Asansor"
-                                             data-duration="60"
-                                             data-attraction-id="111699973"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/tarihi-asansor-a111699973"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>1:00pm</span>
-                                                        </div>
-                                                        <div class="end-time time">2:00pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../photos/tarihi-asansor--2108472464.jpg')"
-                                                             data-link="/turkey/izmir/tarihi-asansor-a111699973">
-                                                        </div>
-                                                        <span class="copyright-fancy-box-div copyright"
-                                                              data-type="attraction"
-                                                              data-id="111699973"
-                                                              data-img-path="tarihi-asansor--2108472464.html">&copy;</span>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Tarihi Asansor</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:86.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag must-see-tag">#Must See</span>, <span class="tag" data-cat-id="208">#Landmark</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/tarihi-asansor-a111699973" cite="https://www.inspirock.com/turkey/izmir/tarihi-asansor-a111699973">
-                                                                Reach the upper levels of the community for expansive views of the city, the bay, and the surrounding landscape with Tarihi Asansor. The orig
-                                                            </blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/tarihi-asansor-a111699973">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row    " data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                                <span class="travelTime">12&#8203;min</span>
-                                                <a class="directions text-link" rel="nofollow noopener" href="http://maps.google.com/maps?saddr=38.408886,27.117561&amp;daddr=38.4106,27.16165" target="_blank">Get details &raquo;</a>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-9"
-                                             data-visit-id="9"
-                                             data-id="9"
-                                             data-stay-id="1"
-                                             data-name="Kemeralti Market"
-                                             data-duration="90"
-                                             data-attraction-id="811497927"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/kemeralti-market-a811497927"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>2:30pm</span>
-                                                        </div>
-                                                        <div class="end-time time">4:00pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../res2/images/defaults/neighborhoods.jpg')"
-                                                             data-link="/turkey/izmir/kemeralti-market-a811497927">
-                                                            <svg class="binocs">
-                                                                <use xlink:href="#icon-binocs" />
-                                                            </svg>
-                                                        </div>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Kemeralti Market</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:76.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag must-see-tag">#Must See</span>, <span class="tag" data-cat-group-id="25">#Neighborhood</span>, <span class="tag" data-other-id="culture">#Culture</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/kemeralti-market-a811497927" cite="https://www.inspirock.com/turkey/izmir/kemeralti-market-a811497927">
-                                                                For centuries Kemeralti Market was one of the city's most important commercial hubs, and this historical bazaar still preserves its original
-                                                            </blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="tours-link text-link attLink jumper" href="https://www.inspirock.com/turkey/izmir/kemeralti-market-a811497927#Related">
-                                                                Tours from TL393
-                                                            </a>
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/kemeralti-market-a811497927">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row    " data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                                <span class="travelTime">12&#8203;min</span>
-                                                <a class="directions text-link" rel="nofollow noopener" href="http://maps.google.com/maps?saddr=38.4106,27.16165&amp;daddr=38.435547,27.139322" target="_blank">Get details &raquo;</a>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-11"
-                                             data-visit-id="11"
-                                             data-id="11"
-                                             data-stay-id="1"
-                                             data-name="Kordonboyu"
-                                             data-duration="90"
-                                             data-attraction-id="520004341"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/kordonboyu-a520004341"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>4:30pm</span>
-                                                        </div>
-                                                        <div class="end-time time">6:00pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../res2/images/defaults/sightseeing.jpg')"
-                                                             data-link="/turkey/izmir/kordonboyu-a520004341">
-                                                            <svg class="binocs">
-                                                                <use xlink:href="#icon-binocs" />
-                                                            </svg>
-                                                        </div>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Kordonboyu</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:90.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag must-see-tag">#Must See</span>, <span class="tag" data-cat-id="140">#Pier / Boardwalk</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/kordonboyu-a520004341" cite="https://www.inspirock.com/turkey/izmir/kordonboyu-a520004341">
-                                                                Known as one of the best parts of the city to dine, Kordonboyu also offers grassy areas, long jogging paths, and tranquility away from the bu
-                                                            </blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="tours-link text-link attLink jumper" href="https://www.inspirock.com/turkey/izmir/kordonboyu-a520004341#Related">
-                                                                Tours from TL1,051
-                                                            </a>
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/kordonboyu-a520004341">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row  last  no-time" data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hotels-row clearfix  upsell"
-                                             data-event-src="list-find-hotel"
-                                             data-stay-id="1"
-                                             data-id="1"
-                                             data-name="Izmir"
-                                             data-country-code="TR"
-                                             data-checkin-date="2018-02-20"
-                                             data-checkout-date="2018-02-21"
-                                             data-start-end-date="Feb 20 &mdash; 21"
-                                             data-same-date="false"
-                                             data-destination-id="311325597"
-                                             data-upsell="HOTEL">
-                                            <div class="left-col"></div>
-
-                                            <div class="right-col">
-                                                <div class="upsell"                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                                                                         <div class="day-end-line"></div>
-                                    </div>
-                                    <div class="day-block"
-                                         id="itineraryDay2018-02-21"
-                                         data-destination-id="311325597"
-                                         data-destination-name="Izmir"
-                                         data-stay-id="1"
-                                         data-date="2018-02-21">
-                                        <div class="day-title clearfix readonly " data-stay-id="1">
-                                            <div class="day-title-container">
-                                                <div class="start-end-dates">Wed, Feb 21</div>
-                                                <div class="line-between"></div>
-                                            </div>
-                                        </div><div class="itinerary-row hop-row first   no-time" data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-14"
-                                             data-visit-id="14"
-                                             data-id="14"
-                                             data-stay-id="1"
-                                             data-name="Izmir Wild Life Park"
-                                             data-duration="150"
-                                             data-attraction-id="8146297227"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/izmir-wild-life-park-a8146297227"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                             <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>10:00am</span>
-                                                        </div>
-                                                        <div class="end-time time">12:30pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../photos/izmir-wild-life-park--1301659474.jpg')"
-                                                             data-link="/turkey/izmir/izmir-wild-life-park-a8146297227">
-                                                        </div>
-                                                        <span class="copyright-fancy-box-div copyright"
-                                                              data-type="attraction"
-                                                              data-id="8146297227"
-                                                              data-img-path="izmir-wild-life-park--1301659474.html">&copy;</span>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Izmir Wild Life Park</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:90.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag must-see-tag">#Must See</span>, <span class="tag" data-cat-id="198">#Nature / Park</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/izmir-wild-life-park-a8146297227" cite="https://www.inspirock.com/turkey/izmir/izmir-wild-life-park-a8146297227"></blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/izmir-wild-life-park-a8146297227">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row    " data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                                <span class="travelTime">34&#8203;min</span>
-                                                <a class="directions text-link" rel="nofollow noopener" href="http://maps.google.com/maps?saddr=38.4928,26.96301&amp;daddr=38.435177,27.139713" target="_blank">Get details &raquo;</a>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-16"
-                                             data-visit-id="16"
-                                             data-id="16"
-                                             data-stay-id="1"
-                                             data-name="Alsancak"
-                                             data-duration="150"
-                                             data-attraction-id="721029885"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/alsancak-a721029885"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>2:00pm</span>
-                                                        </div>
-                                                        <div class="end-time time">4:30pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../photos/alsancak-448123171.jpg')"
-                                                             data-link="/turkey/izmir/alsancak-a721029885">
-                                                        </div>
-                                                        <span class="copyright-fancy-box-div copyright"
-                                                              data-type="attraction"
-                                                              data-id="721029885"
-                                                              data-img-path="alsancak-448123171.html">&copy;</span>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Alsancak</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:84.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/alsancak-a721029885" cite="https://www.inspirock.com/turkey/izmir/alsancak-a721029885">
-                                                                Situated within the historical center of the city, Alsancak lures tourists with its restaurants, cafes, and shops. Known as "Punta" during th
-                                                            </blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="tours-link text-link attLink jumper" href="https://www.inspirock.com/turkey/izmir/alsancak-a721029885#Related">
-                                                                Tours from TL1,051
-                                                            </a>
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/alsancak-a721029885">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row    " data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                                <span class="travelTime">12&#8203;min</span>
-                                                <a class="directions text-link" rel="nofollow noopener" href="http://maps.google.com/maps?saddr=38.435177,27.139713&amp;daddr=38.41904,27.137722" target="_blank">Get details &raquo;</a>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-18"
-                                             data-visit-id="18"
-                                             data-id="18"
-                                             data-stay-id="1"
-                                             data-name="Agora Open Air Museum"
-                                             data-duration="60"
-                                             data-attraction-id="2138163175"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/agora-open-air-museum-a2138163175"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>5:00pm</span>
-                                                        </div>
-                                                        <div class="end-time time">6:00pm</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../photos/agora-open-air-museum-1452834830.jpg')"
-                                                             data-link="/turkey/izmir/agora-open-air-museum-a2138163175">
-                                                        </div>
-                                                        <span class="copyright-fancy-box-div copyright"
-                                                              data-type="attraction"
-                                                              data-id="2138163175"
-                                                              data-img-path="agora-open-air-museum-1452834830.html">&copy;</span>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Agora Open Air Museum</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:72.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag" data-cat-id="3">#Ruin</span>, <span class="tag" data-other-id="culture">#Culture</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/agora-open-air-museum-a2138163175" cite="https://www.inspirock.com/turkey/izmir/agora-open-air-museum-a2138163175"></blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="tours-link text-link attLink jumper" href="https://www.inspirock.com/turkey/izmir/agora-open-air-museum-a2138163175#Related">
-                                                                Tours from TL189
-                                                            </a>
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/agora-open-air-museum-a2138163175">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row hop-row  last  no-time" data-stay-id="1">
-                                            <div class="left-col"></div>
-                                            <div class="right-col">
-                                            </div>
-                                        </div>
-                                        <div class="itinerary-row visit-row data-holder "
-                                             id="itinerary-item-20"
-                                             data-visit-id="3"
-                                             data-id="3"
-                                             data-stay-id="1"
-                                             data-name="Comak Square"
-                                             data-duration="90"
-                                             data-attraction-id="420888639"
-                                             data-destination-id="311325597"
-                                             data-details-url="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/konak-square-a420888639"
-                                             data-event-src="visit-row"
-                                             data-has-notes="false">
-                                            
-                                            <div class="visit-contents clearfix">
-                                                <div class="left-col ">
-                                                    <div class="visit-time">
-                                                        <div class="start-time time ">
-                                                            <span>10:00am</span>
-                                                        </div>
-                                                        <div class="end-time time">11:30am</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-col">
-                                                    <div class="visit-row-medium">
-                                                        <div class="photo clickable-image attLink"
-                                                             style="background-image: url('../../photos/konak-square--622289667.jpg')"
-                                                             data-link="/turkey/izmir/konak-square-a420888639">
-                                                        </div>
-                                                        <span class="copyright-fancy-box-div copyright"
-                                                              data-type="attraction"
-                                                              data-id="420888639"
-                                                              data-img-path="konak-square--622289667.html">&copy;</span>
-                                                    </div><div class="detail">
-                                                        <div class="name attLink clickable-text">Çomak Square</div>
-                                                        <div class="review-tag-container">
-                                                            <span class="review">
-                                                                <div class="rating-stars ">
-                                                                    <span class="rating-stars-fill" style="width:76.0%;"></span>
-                                                                </div>
-                                                            </span>
-                                                            <span class="tags-attractions">
-                                                                <span class="tag" data-cat-id="208">#Landmark</span>
-                                                            </span>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <blockquote class="trim-desc" data-more-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/konak-square-a420888639" cite="https://www.inspirock.com/turkey/izmir/konak-square-a420888639"></blockquote>
-                                                        </div>
-                                                        <div class="tours">
-                                                            <a class="tours-link text-link attLink jumper" href="https://www.inspirock.com/turkey/izmir/konak-square-a420888639#Related">
-                                                                Tours from TL1,051
-                                                            </a>
-                                                            <a class="attLink hidden full-details-link text-link" href="https://www.inspirock.com/turkey/izmir/konak-square-a420888639">
-                                                                View full attraction details
-                                                            </a>
-                                                        </div>
-                                                              <button type="button" class="cta-button large Delete" data-event-src="Delete">Delete</button>
-                                                              <button type="button" class="cta-button large Update" data-event-src="Update">Update</button>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
                                             </div>
                                         </div>
                                         @foreach (var item in Model.Plan)
                                         {
                                             @Helpers.ItineraryRow(item.SourceLat, item.SourceLong, item.DestLat, item.DestLong,item.DirectionDuration);
-                                            @Helpers.ItinenaryItem(item.place.PlaceID,item.place.PlaceName, item.place.PlaceRate, item.place.PlacePrice.ToString(),
-                                                                item.StartTime, item.FinishTime, item.place.PlaceDescription);
+                                            @Helpers.ItinenaryItem(item.ActivityID,item.place.PlaceID,item.place.PlaceName, item.place.PlaceRate, item.place.PlacePrice.ToString(),
+                                                                item.StartTime, item.FinishTime, item.place.PlaceDescription,item.ActivityPlaceType);
+                                            @Html.ActionLink("View Activity Detail", "PlaceDetail", "Plan",new {PlaceID = item.place.PlaceID, StartTime = item.StartTime, FinishTime = item.FinishTime, Lat = item.DestLat, Long = item.DestLong },new {@class = "cta-button large" })@*.ToString(@"hh\:mm")*@
                                         }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page-wrapper">
+                                <div class="container">
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="UpdateModal" role="dialog">
+                                        <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front dlg-calendar-edit-item dlg-visit-item row animated mediumx open" aria-describedby="ui-id-3" aria-labelledby="ui-id-4" style="height: auto; width: 830px; top: 194px; left: 554px; display: block; position: relative;">
+                                            <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"><span id="ui-id-4" class="ui-dialog-title">&nbsp;</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title=""><span class="ui-button-icon ui-icon ui-icon-closethick" data-dismiss="modal"></span><span class="ui-button-icon-space"> </span></button></div><div id="ui-id-3" class="ui-dialog-content ui-widget-content" style="display: block; width: auto; min-height: 0px; max-height: none; height: auto;">
+                                                <div class="visit event-data" data-attraction-id="6371424123" data-stay-arrival="1524128400000" data-stay-departure="1524162600000" data-visit-start="720" data-visit-end="870" data-visit-date="2018-04-19">
+                                                    <div class="photo-name-container clearfix">
+                                                        <div class="copyright-info">
+                                                            <div class="visit-row-medium">
+                                                                <div id="divPlacePhoto" class="photo clickable-image attLink" style="background-image: url('../../photos/142.jpg')">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="event-title-container">
+                                                            <div class="event-title attLink attractionDetailsLink" id="divPlaceName"></div>
+                                                            <div class="review-tag-container">
+                                                                <span class="review">
+                                                                    <div class="rating-stars ">
+                                                                        <span id="spanRate" class="rating-stars-fill" style="width:60%;"></span>
+                                                                    </div>
+                                                                </span>
+                                                                <span class="tags-attractions">
+                                                                    <span class="tag" id="divPlaceType"></span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="desc">
+                                                                <span class="alt-desc hidden"></span>
+                                                            </div>
+                                                            <div class="tours">
+                                                                <a class="attLink hidden full-details-link text-link" href="/turkey/izmir/mavibahce-shopping-center-a6371424123">
+                                                                    View full attraction details
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<input type="text" class="unfocus-datepicker"> <div class="edit-box">*@
+                                                    @using (Html.BeginForm("UpdateActivity", "Plan", FormMethod.Post, new { id = "updatePlanForm", @class = "planning-form expanded", autocomplete = "off" }))
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="custom-event-date-title title">Activity Criterias</div>
+                                                                <div class="event-date calendar-input">
+                                                                    @Html.Hidden("updateActivityID")
+                                                                    @Html.Hidden("updatePlanIDSave",Model.PlanID)
+                                                                    @*@Html.Hidden("updateActivityIDSave")*@
+                                                                    @Html.Hidden("updateProvinceID", Model.ProvinceID)
+                                                                    @Html.Hidden("updatePlaceIDSave")
+                                                                    @Html.Hidden("updateActivityTypeSave")
+                                                                    @Html.TextBox("updateBudgetInfo", "", new { @class = "flat", placeholder = "Budget" })
+                                                                    <br /><br />@Html.TextBox("updateNumberOfFriends", "", new { @class = "flat", placeholder = "Number Of Friends" })
+                                                                    @*<input type="text" name="visit-event-date-copy" class="event-date-copy container-datepicker hasDatepicker" readonly="readonly" id="dp1525353568601">
+                                                                        <input type="text" name="visit-event-date-box" class="event-date-box flat" placeholder="Enter date" readonly="readonly">*@
+                                                                </div>
+                                                            </div>
+                                                            <div class="time-holder col-3 start">
+                                                                <div class="start-time-title title">Place Type</div>
+                                                                @Html.DropDownList("updateActivityType", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.ActivityTypeUpdate)), "Activity Type", new { @class = "mydropdownlist1" })
+                                                                <div class="style clearfix">
+                                                                    <div class="column3"><input type="radio" id="newplan-stylePopular" class="stylePopular flat" name="style" value="1" checked /><label title="Popular" for="newplan-stylePopular">Popular</label></div>
+                                                                    <div class="column3"><input type="radio" id="newplan-styleBalanced" class="styleBlanaced flat" name="style" value="2" /><label title="Balanced" for="newplan-styleBalanced">Balanced</label></div>
+                                                                    <div class="column3"><input type="radio" id="newplan-styleHiddenGems" class="styleHiddenGems flat" name="style" value="3" /><label title="Hidden gems" for="newplan-styleHiddenGems">Hidden gems</label></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            <br /><br />
+                                                            <button type="submit" class="cta-button large" enabled="" value="Submit">Save</button>
+                                                            <button id="updateChangeBtn" type="button" class="cta-button large" enabled="">Change</button>
+                                                        </div>
+                                                    }
+                                                        <div id="dvdeleteAct" class="delete-event secondary-text-link">Delete Activity</div>
+                                                    </div>
+                                                </div>
+                                            </div><div class="ui-selectmenu-menu ui-front"><ul aria-hidden="true" aria-labelledby="start-time-button" id="start-time-menu" role="listbox" tabindex="0" class="ui-menu ui-corner-bottom ui-widget ui-widget-content"></ul></div><div class="ui-selectmenu-menu ui-front"><ul aria-hidden="true" aria-labelledby="end-time-button" id="end-time-menu" role="listbox" tabindex="0" class="ui-menu ui-corner-bottom ui-widget ui-widget-content"></ul></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -869,7 +368,7 @@
                                             class="legend-day-list"
                                             data-lat="38.423733" data-lng="27.142826" data-stay-name="Izmir"
                                             data-stay-id="1" data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597">
-                                            <div class="slot-date hidden">Tuesday, Feb 20</div>
+                                            <div class="slot-date hidden"></div>
                                             <li id="param-stay-1-slot-0"
                                                 class="legendOption hidden"
                                                 data-date-text="Tuesday, Feb 20" data-date="2018-02-20"
@@ -1120,6 +619,7 @@
             </div>
             <div id="scrollable-dialog-area" class="hidden"></div>
         </div>
+
         <footer class="page-footer">
             <div class="footer-content">
                 <div class="row">
@@ -1134,8 +634,8 @@
 
                 </div>
             </div>
-                    <div class="col-6 menu-items">                                        
-                    </div>                         
+                    <div class="col-6 menu-items">
+                    </div>
 
                         </li>
                     </ul>
@@ -1144,6 +644,65 @@
         </footer>
     </div>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $(".cta-button.large.Update").click(function (event) {
+                debugger;
+                $('#updateActivityID').val($(this).attr("data-id"));
+                var activityID = $('#updateActivityID').val();
+                $.post('@Url.Action("GetExistActivity","Plan")', { ActivityID: activityID }, function (data) {
+                    $('#divPlaceName').html(data.PlaceName);//'../../photos/142.jpg'  style="width:88.00000000000001%;"
+                    $('#divPlacePhoto').css("background-image", "url('../../photos/" + data.PlaceID + ".jpg')");
+                    $('#spanRate').css("width", data.PlaceRate + "%;");
+                    $('#divPlaceType').html(data.Activitytype);
+                });
+            });
+
+            $('#updateChangeBtn').click(function (data) {
+                debugger;
+                var activityID = $('#updateActivityID').val();
+                var budget = $('#updateBudgetInfo').val();
+                var nof = $('#updateNumberOfFriends').val();
+                var type = $('#updateActivityType option:selected').val();
+                var provinceID = $('#updateProvinceID').val();
+                var popularity = $('input[name=style]:checked').val();
+                $.post('@Url.Action("ChangeActivity","Plan")', { ActivityID : activityID,  BudgetInfo: budget, NumOfFriends: nof, PlaceType: type, ProvinceID: provinceID, Popularity: popularity }, function (data) {
+                    $('#divPlaceName').html(data.PlaceName);//'../../photos/142.jpg'  style="width:88.00000000000001%;"
+                    $('#divPlacePhoto').css("background-image", "url('../../photos/" + data.PlaceID + ".jpg')");
+                    $('#spanRate').css("width", data.PlaceRate + "%;");
+                    $('#divPlaceType').html(data.Activitytype);
+                    $('#updateActivityIDSave').val(data.activityID);
+                    $('#updatePlaceIDSave').val(data.PlaceID);
+                    $('#updateActivityTypeSave').val(data.Activitytype);
+                });
+            });
+
+            $('#dvdeleteAct').click(function (data) {
+                debugger;
+                var ActivityID = $('#updateActivityID').val();
+                var planID = $('#updatePlanIDSave').val();
+                $.post('@Url.Action("DeleteActivity", "Plan")', { ID: ActivityID, PlanID: planID  }, function (data) {
+                    window.location.replace(data.TargetUrl);
+                });
+            });
+
+        });
+
+        @*$('#btnadd').click(function () {
+            debugger;
+        });
+
+        $('.cta-button.large').click(function () {
+            debugger;
+            var id = $(this).attr('data-id');
+            var startTime = $(this).attr('data-start');
+            var finishTime = $(this).attr('data-finish');
+            $.post('@Url.Action("PlaceDetail", "Plan")', { PlaceID: id, StartTime: startTime, FinishTime: finishTime }, function () {
+            });
+        });
+
+        $('.desc').click(function () {
+            debugger;
+        });*@
 
         $('.cta-button.large').click(function () {
             debugger;

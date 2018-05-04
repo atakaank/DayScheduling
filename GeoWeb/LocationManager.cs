@@ -32,7 +32,7 @@ namespace GeoWeb
             Directions dir = new Directions();
             dir = locationService.GetDirections(addressSource, addressDest);
             res.Duration = dir.Duration;
-            res.SourceLat = p1.Latitude.ToString().Replace(",",".");
+            res.SourceLat = p1.Latitude.ToString().Replace(",","."); //null reference ??
             res.SourceLong = p1.Longitude.ToString().Replace(",", ".");
             res.DestinationLat  = p2.Latitude.ToString().Replace(",", ".");
             res.DestinationLong = p2.Longitude.ToString().Replace(",", ".");

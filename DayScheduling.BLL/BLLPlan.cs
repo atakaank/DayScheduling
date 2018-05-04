@@ -17,73 +17,88 @@ namespace DayScheduling.BLL
         BLLActivity bllAct = new BLLActivity();
         DALPlace dalplace = new DALPlace();
         DALPlaceType dalpt = new DALPlaceType();
-        
+        DALPlan dalplan = new DALPlan();
+
+        #region GetvmDayByDay
         public vmDayByDayPlan GetvmDayByDay(pmPlanCriteria param)
         {
             LocationManager locationManager = new LocationManager();
             Dictionary<string, string> MustDoList = new Dictionary<string, string>();
             Place currentPlace = new Place();
-            //MustDoList.Add("AllComplete", "0");
             for (int i = 0; i < param.categoryGroupNames.Count && param.categoryGroupNames != null; i++)
             {
                 MustDoList.Add(param.categoryGroupNames.ElementAt(i), param.categoryGroupNames.ElementAt(i));
-            } 
-            if(!string.IsNullOrEmpty(param.FoodCategory))
-            MustDoList.Add("food", param.FoodCategory);
-            if (!string.IsNullOrEmpty(param.DrinkCategory))
-            MustDoList.Add("drink", param.DrinkCategory);
+            }
+            if (!string.IsNullOrEmpty(param.FoodCategory))
+                MustDoList.Add("food", param.FoodCategory);
+            if (!string.IsNullOrEmpty(param.AlcoholCategory))
+                MustDoList.Add("alcohol", param.AlcoholCategory);
             Random rnd = new Random();
             vmDayByDayPlan model = new vmDayByDayPlan();
             model.Province = Enum.GetName(typeof(Provinces), param.ProvinceId);
+            model.ProvinceID = param.ProvinceId;
             model.Plan = new List<vmPartialActivity>();
             model.TravelList = new List<Travel>();
             model.CurrentTime = model.StartTime;
-            while(MustDoList.Count !=0) // model.CurrentTime <= new TimeSpan(19,0,0) && hepsi yapılmışsa ve saat en az 19.00'u geçmişse. Hepsi yapılmış ve 19.00u geçmemişse yine random bir category seçilir.
+            model.Popularity = param.style;
+            recordPlan(model);
+            dalplan.RecordPlantoHistory(AccountUser.Account.AccountID, model.PlanID);
+            while (MustDoList.Count != 0) // model.CurrentTime <= new TimeSpan(19,0,0) && hepsi yapılmışsa ve saat en az 19.00'u geçmişse. Hepsi yapılmış ve 19.00u geçmemişse yine random bir category seçilir.
             {
                 Travel travel = new Travel();
                 vmPartialActivity currentAct = new vmPartialActivity();
                 DirectionLatLong direction = new DirectionLatLong();
                 if (param.FoodCategory == "10" && model.CurrentTime == model.StartTime)
                 {
-                    currentAct = getBreakfastActivity(param, model.CurrentTime);
-                    if(currentAct != null)
+                    currentAct = bllAct.getBreakfastActivity(param, model.CurrentTime, "food");
+                    if (currentAct != null)
                     {
                         model.CurrentTime = currentAct.FinishTime;
                         MustDoList.Remove("food");
                         model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
                     }
                 }
                 int index = rnd.Next(0, MustDoList.Count - 1);
                 if (MustDoList.ElementAt(index).Key == "culture")
                 {
-                    currentAct = getCulturelActivity(param, model.CurrentTime);
+                    currentAct = bllAct.getCulturelActivity(param,"Culture");
                     if (currentAct != null)
                     {
-                        if(model.Plan.Count!= 0) //ondan önce activityler varsa ilk activity değilse.
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
                         {
-                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName, currentAct.place.PlaceName); //adress yapılcak.
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); 
                             currentAct.SourceLat = direction.SourceLat;
                             currentAct.SourceLong = direction.SourceLong;
                             currentAct.DestLat = direction.DestinationLat;
                             currentAct.DestLong = direction.DestinationLong;
                             currentAct.DirectionDuration = direction.Duration;
 
-                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Replace(" mins", ""))));
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
                             if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
                             {
                                 currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
                             }
-                            else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours+1,0,0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
                             {
                                 currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
                             }
                             currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
 
                             model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("culture");
                             model.TravelList.Add(travel);
                         }
-                        MustDoList.Remove("culture");
-                        model.Plan.Add(currentAct); 
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("culture");
+                        }
+
+                        model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
                     }
                     else
                     {
@@ -92,19 +107,19 @@ namespace DayScheduling.BLL
                 }
                 else if (MustDoList.ElementAt(index).Key == "Shopping")
                 {
-                    currentAct = getShoppingActivity(param, model.CurrentTime); // Place bulamazsa activity null döncek.
+                    currentAct = bllAct.getShoppingActivity(param, "Shopping"); // Place bulamazsa activity null döncek.
                     if (currentAct != null) // null değilse zaten time güncellenip activity eklenecek.
                     {
                         if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
                         {
-                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName, currentAct.place.PlaceName); //adress yapılcak.
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
                             currentAct.SourceLat = direction.SourceLat;
                             currentAct.SourceLong = direction.SourceLong;
                             currentAct.DestLat = direction.DestinationLat;
                             currentAct.DestLong = direction.DestinationLong;
                             currentAct.DirectionDuration = direction.Duration;
 
-                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Replace(" mins", ""))));
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
                             if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
                             {
                                 currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
@@ -117,31 +132,40 @@ namespace DayScheduling.BLL
 
 
                             model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("Shopping");
                             model.TravelList.Add(travel);
                         }
-                        MustDoList.Remove("Shopping");
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("Shopping");
+                        }
+
                         model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
                     }
                     else
                     {
                         MustDoList.Remove("Shopping");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
                     }
                 }
-                else if(MustDoList.ElementAt(index).Key == "Historic Sites")
+                else if (MustDoList.ElementAt(index).Key == "Historic Sites")
                 {
-                    currentAct = getHistoricSitesActivity(param, model.CurrentTime);
-                    if(currentAct != null)
+                    currentAct = bllAct.getHistoricSitesActivity(param, "Historic Sites");
+                    if (currentAct != null)
                     {
                         if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
                         {
-                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName, currentAct.place.PlaceName); //adress yapılcak.
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
                             currentAct.SourceLat = direction.SourceLat;
                             currentAct.SourceLong = direction.SourceLong;
                             currentAct.DestLat = direction.DestinationLat;
                             currentAct.DestLong = direction.DestinationLong;
                             currentAct.DirectionDuration = direction.Duration;
 
-                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Replace(" mins", ""))));
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));// Replace(" mins", ""))));
                             if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
                             {
                                 currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
@@ -154,76 +178,394 @@ namespace DayScheduling.BLL
 
 
                             model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("Historic Sites");
                             model.TravelList.Add(travel);
                         }
-                        model.CurrentTime = currentAct.FinishTime;
-                        MustDoList.Remove("Historic Sites");
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("Historic Sites");
+                        }
+
                         model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
                     }
                     else
                     {
                         MustDoList.Remove("Historic Sites");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
                     }
                 }
-                    //model.CurrentTime = new TimeSpan(19, 30, 0);
+                else if (MustDoList.ElementAt(index).Key == "fun")
+                {
+                    currentAct = bllAct.getFunActivity(param, "Fun");
+                    if (currentAct != null)
+                    {
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
+                        {
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
+                            currentAct.SourceLat = direction.SourceLat;
+                            currentAct.SourceLong = direction.SourceLong;
+                            currentAct.DestLat = direction.DestinationLat;
+                            currentAct.DestLong = direction.DestinationLong;
+                            currentAct.DirectionDuration = direction.Duration;
+
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                            if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                            }
+                            else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                            }
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("fun");
+                            model.TravelList.Add(travel);
+                        }
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("fun");
+                        }
+                        model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                    }
+                    else
+                    {
+                        MustDoList.Remove("fun");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
+                    }
+                }
+                else if (MustDoList.ElementAt(index).Key == "Beaches")
+                {
+                    currentAct = bllAct.getBeachActivity(param, "Beaches");
+                    if (currentAct != null)
+                    {
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
+                        {
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
+                            currentAct.SourceLat = direction.SourceLat;
+                            currentAct.SourceLong = direction.SourceLong;
+                            currentAct.DestLat = direction.DestinationLat;
+                            currentAct.DestLong = direction.DestinationLong;
+                            currentAct.DirectionDuration = direction.Duration;
+
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                            if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                            }
+                            else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                            }
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("Beaches");
+                            model.TravelList.Add(travel);
+                        }
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("Beaches");
+                        }
+
+                        model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                    }
+                    else
+                    {
+                        MustDoList.Remove("Beaches");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
+                    }
+                }
+                else if (MustDoList.ElementAt(index).Key == "unwind")
+                {
+                    currentAct = bllAct.getRelaxingActivity(param, "Relaxing");
+                    if (currentAct != null)
+                    {
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
+                        {
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
+                            currentAct.SourceLat = direction.SourceLat;
+                            currentAct.SourceLong = direction.SourceLong;
+                            currentAct.DestLat = direction.DestinationLat;
+                            currentAct.DestLong = direction.DestinationLong;
+                            currentAct.DirectionDuration = direction.Duration;
+
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                            if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                            }
+                            else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                            }
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("unwind");
+                            model.TravelList.Add(travel);
+                        }
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("unwind");
+                        }
+
+                        model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                    }
+                    else
+                    {
+                        MustDoList.Remove("unwind");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
+                    }
+                }
+                else if (MustDoList.ElementAt(index).Key == "outdoors")
+                {
+                    currentAct = bllAct.getOutdoorActivity(param, "outdoors");
+                    if (currentAct != null)
+                    {
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
+                        {
+                            direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
+                            currentAct.SourceLat = direction.SourceLat;
+                            currentAct.SourceLong = direction.SourceLong;
+                            currentAct.DestLat = direction.DestinationLat;
+                            currentAct.DestLong = direction.DestinationLong;
+                            currentAct.DirectionDuration = direction.Duration;
+
+                            model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                            if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                            }
+                            else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                            {
+                                currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                            }
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("outdoors");
+                            model.TravelList.Add(travel);
+                        }
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            MustDoList.Remove("outdoors");
+                        }
+                        model.Plan.Add(currentAct);
+                        currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                    }
+                    else
+                    {
+                        MustDoList.Remove("outdoors");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
+                    }
+                }
+                else if (MustDoList.ElementAt(index).Key == "food")
+                {
+                    bool hourControl = true;
+                    currentAct = bllAct.getFoodActivity(param, MustDoList.ElementAt(index).Value,"food");
+                    if (currentAct != null)
+                    {
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
+                        {
+                            if ((currentAct.place.PlaceTypeID == 3 && model.CurrentTime >= new TimeSpan(16, 0, 0)) || currentAct.place.PlaceTypeID != 3) //restaurant olup saat 4ten önce değilse veya restaurant değilse.
+                            {
+                                direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
+                                currentAct.SourceLat = direction.SourceLat;
+                                currentAct.SourceLong = direction.SourceLong;
+                                currentAct.DestLat = direction.DestinationLat;
+                                currentAct.DestLong = direction.DestinationLong;
+                                currentAct.DirectionDuration = direction.Duration;
+
+                                model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                                if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                                {
+                                    currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                                }
+                                else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                                {
+                                    currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                                }
+                                currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                                model.CurrentTime = currentAct.FinishTime;
+                                model.Plan.Add(currentAct);
+                                currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                                MustDoList.Remove("food");
+                                model.TravelList.Add(travel);
+                            }
+                            else
+                            {
+                                hourControl = false;
+                            }
+                        }
+                        else
+                        {
+                            currentAct.StartTime = model.CurrentTime;
+                            currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+                            model.CurrentTime = currentAct.FinishTime;
+                            model.Plan.Add(currentAct);
+                            currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                            MustDoList.Remove("food");
+                        }
+                        if (!hourControl && MustDoList.Count == 1 && currentAct.place.PlaceTypeID == 3) // sadece alkol aktivitesi kaldıysa ve o meyhane veya bar ise saat başka aktivite ile artmıcağından saati ileri alıyoruz.
+                            model.CurrentTime = new TimeSpan(16, 0, 0);
+                    }
+                    else
+                    {
+                        MustDoList.Remove("food");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
+                    }
+                }
+                else if (MustDoList.ElementAt(index).Key == "alcohol")
+                {
+                    bool hourControl = true; //club bar için saatin uygunluğunu detect etmeye yarıyor.
+                    currentAct = bllAct.getAlcoholActivity(param, MustDoList.ElementAt(index).Value, "alcohol");
+                    if (currentAct != null)
+                    {
+                        if (model.Plan.Count != 0) //ondan önce activityler varsa ilk activity değilse.
+                        {
+                            if (((currentAct.place.PlaceTypeID == 50 || currentAct.place.PlaceTypeID == 40) && model.CurrentTime >= new TimeSpan(16, 0, 0)) || (currentAct.place.PlaceTypeID == 60 && model.CurrentTime >= new TimeSpan(20, 0, 0)))
+                            {
+                                direction = locationManager.getDirection(model.Plan[model.Plan.Count - 1].place.PlaceName + " " + model.Plan[model.Plan.Count - 1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress); //adress yapılcak.
+                                currentAct.SourceLat = direction.SourceLat;
+                                currentAct.SourceLong = direction.SourceLong;
+                                currentAct.DestLat = direction.DestinationLat;
+                                currentAct.DestLong = direction.DestinationLong;
+                                currentAct.DirectionDuration = direction.Duration;
+
+                                model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                                if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                                {
+                                    currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                                }
+                                else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                                {
+                                    currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                                }
+                                currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                                model.CurrentTime = currentAct.FinishTime;
+                                model.Plan.Add(currentAct);
+                                currentAct.ActivityID = model.PlanID.ToString() + model.Plan.IndexOf(currentAct).ToString(); //ActivityID
+                                MustDoList.Remove("alcohol");
+                                model.TravelList.Add(travel);
+                            }
+                            else
+                            {
+                                hourControl = false; // saat uygun değilse false.
+                            }
+                        }
+                        //else
+                        //{
+                        //    currentAct.StartTime = model.CurrentTime;
+                        //    currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration)); // ilk aktivite olamaz.
+                        //    model.CurrentTime = currentAct.FinishTime;
+                        //    MustDoList.Remove("alcohol");
+                        //}
+                        if (!hourControl && MustDoList.Count == 1 && (currentAct.place.PlaceTypeID == 40 || currentAct.place.PlaceTypeID == 50)) // sadece alkol aktivitesi kaldıysa ve o meyhane veya bar ise saat başka aktivite ile artmıcağından saati ileri alıyoruz.
+                            model.CurrentTime = new TimeSpan(16, 0, 0);
+                        else if (!hourControl && MustDoList.Count == 1 && currentAct.place.PlaceTypeID == 60)// sadece alkol aktivitesi kaldıysa ve o club ise saat başka aktivite ile artmıcağından saati ileri alıyoruz.
+                            model.CurrentTime = new TimeSpan(20, 0, 0);
+                        //MustDoList.Remove("alcohol");
+                        //model.Plan.Add(currentAct);
+                    }
+                    else
+                    {
+                        MustDoList.Remove("alcohol");// nullsa da kaldırılması gerekiyor çünkü seçilen semtte kritere uygun mekan yok demektir ve kriter kaldırılır.
+                    }
+                }
+                //model.CurrentTime = new TimeSpan(19, 30, 0);
+            }
+            bllAct.RecordActivities(model);
+            return model;
+        }
+        #endregion
+
+        #region GetExistPlan
+        public vmDayByDayPlan GetExistPlan(int PlanID)
+        {
+            vmDayByDayPlan model = new vmDayByDayPlan();
+            vmPartialActivity currentAct = new vmPartialActivity();
+            model.Plan =  bllAct.GetActivities(PlanID);
+            LocationManager locationManager = new LocationManager();
+            DirectionLatLong direction = new DirectionLatLong();
+            model.CurrentTime = model.StartTime;
+            model.PlanID = model.Plan[0].PlanID; //Act olmadığı için.
+            model.ProvinceID = model.Plan[0].place.ProvinceID;
+            model.Province = Enum.GetName(typeof(Provinces), model.Plan[0].place.ProvinceID);
+            model.Plan[0].StartTime = model.CurrentTime;
+            model.Plan[0].FinishTime = model.Plan[0].StartTime.Add(TimeSpan.FromHours(model.Plan[0].place.RecommendedDuration));
+            model.CurrentTime = model.Plan[0].FinishTime;
+            for (int i=1; i<model.Plan.Count; i++)
+            {
+                currentAct = model.Plan[i];
+                direction = locationManager.getDirection(model.Plan[i-1].place.PlaceName + " " + model.Plan[i-1].place.PlaceAddress, currentAct.place.PlaceName + " " + currentAct.place.PlaceAddress);
+                currentAct.SourceLat = direction.SourceLat;
+                currentAct.SourceLong = direction.SourceLong;
+                currentAct.DestLat = direction.DestinationLat;
+                currentAct.DestLong = direction.DestinationLong;
+                currentAct.DirectionDuration = direction.Duration;
+
+                model.CurrentTime = model.CurrentTime.Add(TimeSpan.FromMinutes(int.Parse(direction.Duration.Substring(0, direction.Duration.IndexOf(" ")))));
+                if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                {
+                    currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours, 30, 0);
+                }
+                else if (model.CurrentTime <= new TimeSpan(model.CurrentTime.Hours + 1, 0, 0) && model.CurrentTime > new TimeSpan(model.CurrentTime.Hours, 30, 0))
+                {
+                    currentAct.StartTime = new TimeSpan(model.CurrentTime.Hours + 1, 0, 0);
+                }
+                currentAct.FinishTime = currentAct.StartTime.Add(TimeSpan.FromHours(currentAct.place.RecommendedDuration));
+
+                model.CurrentTime = currentAct.FinishTime;
             }
             return model;
         }
 
-        private vmPartialActivity getBreakfastActivity(pmPlanCriteria param,TimeSpan currentTime)
-        {
-            vmPartialActivity breakfastActivity = new vmPartialActivity();
-            Place placeBreakfast = dalplace.getBreakfastPlace(param.ProvinceId, param.BudgetInfo, param.style, param.NumberOfFriends);
-            if(placeBreakfast != null)
-            {
-                breakfastActivity.place = placeBreakfast;
-                breakfastActivity.StartTime = currentTime;
-                breakfastActivity.FinishTime = breakfastActivity.StartTime.Add(TimeSpan.FromHours(breakfastActivity.place.RecommendedDuration));
-                return breakfastActivity;
-            }
-            return null;
-        }
+        #endregion
 
-        private vmPartialActivity getCulturelActivity(pmPlanCriteria param, TimeSpan currentTime)
+        private void recordPlan(vmDayByDayPlan model)
         {
-            vmPartialActivity culturelActivity = new vmPartialActivity();
-            Place placeCulture = dalplace.getCulturelPlace(param.ProvinceId, param.BudgetInfo, param.style, param.NumberOfFriends);
-            if (placeCulture != null)
-            {
-                culturelActivity.place = placeCulture;
-                //culturelActivity.StartTime = currentTime;
-                //culturelActivity.FinishTime = culturelActivity.StartTime.Add(TimeSpan.FromHours(culturelActivity.place.RecommendedDuration));
-                return culturelActivity;
-            }
-            return null;
-        }
+            Plan newPlan = new Plan();
+            newPlan.PlanName = "Plan" + AccountUser.User.UserName + AccountUser.Account.AccountID;
+            newPlan.PlanDate = DateTime.Now;
+            newPlan.PlanPopularity = int.Parse(model.Popularity);
+            dalplan.RecordPlan(newPlan.PlanName,newPlan.PlanDate,newPlan.PlanPopularity);
+            model.PlanID = dalplan.GetLastPlanID();
+            //newPlan.PlanComplete
+            //newPlan.PlanType             
+        } 
 
-        private vmPartialActivity getShoppingActivity(pmPlanCriteria param, TimeSpan currentTime)
+        public vmPlaceDetail getPlaceDetail(pmPlaceDetail param)
         {
-            vmPartialActivity shoppingActivity = new vmPartialActivity();
-            Place placeShopping = dalplace.getShoppingPlace(param.ProvinceId, param.BudgetInfo, param.style, param.NumberOfFriends);
-            if(placeShopping != null)
-            {
-                shoppingActivity.place = placeShopping;
-                shoppingActivity.StartTime = currentTime;
-                //shoppingActivity.FinishTime = shoppingActivity.StartTime.Add(TimeSpan.FromHours(shoppingActivity.place.RecommendedDuration));
-                return shoppingActivity;
-            }
-            return null;
-        }
-
-        private vmPartialActivity getHistoricSitesActivity(pmPlanCriteria param,TimeSpan currentTime)
-        {
-            vmPartialActivity historicSitesActivity = new vmPartialActivity();
-            Place placeHistoricSite = dalplace.getHistoricSites(param.ProvinceId, param.BudgetInfo, param.style, param.NumberOfFriends);
-            if (placeHistoricSite != null)
-            {
-                historicSitesActivity.place = placeHistoricSite;
-                //historicSitesActivity.StartTime = currentTime;
-                //historicSitesActivity.FinishTime = historicSitesActivity.StartTime.Add(TimeSpan.FromHours(historicSitesActivity.place.RecommendedDuration));
-                return historicSitesActivity;
-            }
-            return null;
+            vmPlaceDetail vmplacedetail = new vmPlaceDetail();
+            Place place = dalplace.Get(param.PlaceID);
+            vmplacedetail.PlaceID = param.PlaceID;
+            vmplacedetail.Phone = place.Phone; //Null olabilir.
+            vmplacedetail.PlaceAddress = place.PlaceAddress;
+            vmplacedetail.PlaceDescription = place.PlaceDescription;
+            vmplacedetail.PlaceName = place.PlaceName;
+            vmplacedetail.PlaceRate = place.PlaceRate*20;
+            vmplacedetail.RecomendedDuration = place.RecommendedDuration;
+            vmplacedetail.ActivityStartTime = param.StartTime.ToString(@"hh\:mm");
+            vmplacedetail.ActivityFinishTime = param.FinishTime.ToString(@"hh\:mm");
+            vmplacedetail.Photo = param.PlaceID + ".jpg";
+            return vmplacedetail;
         }
         public vmPlaceDetail getPlaceDetail(pmPlaceDetail param)
         {

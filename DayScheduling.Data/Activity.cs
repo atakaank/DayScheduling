@@ -34,7 +34,8 @@ namespace DayScheduling.Data
 
         [Required]
         public int ActivityPlaceID { get; set; }
-
+        [Required]
+        public int PlanID { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Plan> Plans { get; set; }
     }

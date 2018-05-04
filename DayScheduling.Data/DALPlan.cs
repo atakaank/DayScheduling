@@ -7,45 +7,30 @@ using System.Threading.Tasks;
 
 namespace DayScheduling.Data
 {
-    class DALPlan
+    public class DALPlan
     {
         DaySchedulingModelDataModels Models = new DaySchedulingModelDataModels();
-
-        public Plan Get(int ID)
+        public int RecordPlan(string PlanName, DateTime PlanDate, int Popularity)
         {
-            string query = @"SELECT * FROM Plan P, WHERE P.PlanID=@planID"; //cilem.akcay@hotmail.com
-            var res = Models.Database.SqlQuery<Plan>(query, new SqlParameter("@planID", ID));
-            return res.FirstOrDefault();
-        }
-        public List<Plan> GetList()
-        {
-            string query = @"SELECT * FROM Plan";
-            var res = Models.Database.SqlQuery<Plan>(query);
-            return res.ToList();
-        }
-        public int Add(string PlanName, DateTime PlanDate, string PlanType, int PlanPopularity, bool PlanComplete, int PlanRate) //Veritabanına gitcek kullanıcı tarafından girilecek parametreler
-        {
-            string query = @"INSERT INTO Plan(PlanName,PlanDate,PlanType,PlanPopularity,PlanComplete,PlanRate)
-                        Values((SELECT TOP 1 PlanID FROM Plan ORDER BY PlanID DESC)+1,@planName,@planDate,@planType,@planPopularity,@planComplete,@planRate)"; //normal sqlserverdaki gibi sql
-            int res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@planName", PlanName), new SqlParameter("@planDate", PlanDate), new SqlParameter("@planType", PlanType),
-                        new SqlParameter("@planPopularity", PlanPopularity), new SqlParameter("@planComplete", PlanComplete), new SqlParameter("@planRate", PlanRate)); // querye bize gelmiş olan parametreleri ekliyoruz.
+            string query = @"INSERT INTO Plans(PlanID,PlanName,PlanDate,PlanType,PlanPopularity,PlanComplete,PlanRate)
+                        Values((SELECT TOP 1 PlanID FROM Plans ORDER BY PlanID DESC)+1,@PlanName,@PlanDate,'Type',@PlanPopularity,1,60)"; //normal sqlserverdaki gibi sql
+            int res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@PlanName", PlanName), new SqlParameter("@PlanDate", PlanDate), new SqlParameter("@PlanPopularity", Popularity)); // querye bize gelmiş olan parametreleri ekliyoruz.
             return res;
         }
 
-        public int Update(int PlanID,string PlanName, DateTime PlanDate, string PlanType, int PlanPopularity, bool PlanComplete, int PlanRate)
+        public int RecordPlantoHistory(int AccountID,int PlanID)
         {
-            string query = @"UPDATE Plan SET PlanName = @planName,PlanDate= @planDate,PlanType=@planType,PlanPopularity=@planPopularity,
-                            PlanComplete=@planComplete,PlanRate=@planRate WHERE PlanID=@planID";
-            return Models.Database.ExecuteSqlCommand(query, new SqlParameter("@planID", PlanID), new SqlParameter("@planName", PlanName), new SqlParameter("@planType", PlanType),
-                    new SqlParameter("@planPopularity", PlanPopularity), new SqlParameter("@planComplete", PlanComplete), new SqlParameter("@planRate", PlanRate));
+            string recordPlantoHistory = @"INSERT INTO PlanHistory(AccountID,PlanID) Values(@AccountID,@PlanId)";
+            var res = Models.Database.ExecuteSqlCommand(recordPlantoHistory, new SqlParameter("@AccountID",AccountID), new SqlParameter("@PlanID", PlanID));
+            return res;
         }
 
-
-        public int Delete(int PlanID)
+        public int GetLastPlanID()
         {
-            var query = @"DELETE FROM Plan WHERE PlanID = @planID";
-            var res = Models.Database.ExecuteSqlCommand(query, new SqlParameter("@planID", PlanID));//bulamadığında 0 dönüyor. bulduğunda 1 dönüyor.
-            return (res);
+            string query = @"SELECT TOP 1 PlanID FROM PLANS ORDER BY PlanID DESC"; //cilem.akcay@hotmail.com
+            var res = Models.Database.SqlQuery<int>(query);
+            int id = res.FirstOrDefault();
+            return id;
         }
     }
 }

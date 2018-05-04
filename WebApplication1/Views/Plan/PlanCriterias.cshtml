@@ -140,7 +140,7 @@
                             </li>
                             <li id="userLogin" class="">
                                 <a rel="nofollow" class="login-button" href="/login">
-                                    <span>Log in</span>
+                                    <span>@DayScheduling.Entities.Account.AccountUser.User.UserName</span>
                                 </a>
                             </li>
                             <li class="vertical-line"></li>
@@ -209,11 +209,11 @@
                         <div id="fooddiv" class="step-content">
                             <div class="interests">
                                 <div class="column3">
-                                    @Html.DropDownList("FoodCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.FoodCategories)), "Select Food", new { @class = "mydropdownlist1" })
+                                    @Html.DropDownList("FoodCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.FoodCategories)), "Food Place", new { @class = "mydropdownlist1" })
                                 </div>
                                 <div class="column3">&nbsp;</div>
                                 <div class="column3">
-                                    @Html.DropDownList("DrinkCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.DrinkCategories)), "Select Drink", new { @class = "mydropdownlist1" })
+                                    @Html.DropDownList("AlcoholCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.AlcoholCategories)), "Alcohol Place", new { @class = "mydropdownlist1" })
                                 </div>
                             </div>
                         </div>
@@ -231,7 +231,6 @@
             </div>
         </div>
 
-        <button type="button" class="cta-button large Add" data-event-src="Add" href="https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Alsancak&key=AIzaSyBjS9eZc7OB_Hk2PDalIJYGowUUeCFQvk4">GET</button>
         <footer class="page-footer">
             <div class="footer-content">
                 <div class="row">
@@ -343,15 +342,6 @@
         </footer>
     </div>
     <script type="text/javascript">
-        //$('#PlanBeginTime').datetimepicker({
-        //    step: 30
-        //});
-        //$('#PlanEndTime').datetimepicker({
-        //    step: 30
-        //});
-        //$('#PlanBeginTime').hide();
-        //$('#PlanEndTime').hide();
-        $('#fooddiv').hide();
 
         $('#arrow').click(function () {
             $('#arrow').removeClass(".down")
@@ -359,43 +349,35 @@
             //$('#arrow').toggleClass("fa-angle-up");
             $('#fooddiv').slideToggle();
         });
-
-        //$(function () {
-        //    var provinces = [
-        //        "Buca",
-        //        "Alsancak",
-        //        "Konak",
-        //        "Bornova",
-        //        "Balçova",
-        //        "Çeşme",
-        //        "Urla",
-        //        "Narlıdere",
-        //        "Karşıyaka",
-        //        "Bostanlı",
-        //        "Mavişehir",
-        //        "Güzelbahçe",
-        //        "Gaziemir",
-        //        "Buca",
-        //        "Bayraklı",
-        //        "Foça",
-        //        "Seferihisar",
-        //        "Karabağlar",
-        //        "Karaburun",
-        //        "Selçuk",
-        //        "Ödemiş",
-        //        "Bergama",
-        //        "Tire",
-        //        "Kemalpaşa",
-        //        "Çiğli",
-        //        "Dikili",
-        //        "Üçyol",
-        //        "Güzelyalı",
-        //        "Özdere"
-        //    ];
-        //    $('#PlaceAdress').autocomplete({
-        //        source: provinces
-        //    });
-        //});
+        $('#newplan-category19').click(function () {
+            debugger;
+            if ($('#newplan-category19').prop('checked')) {
+                $('#newplan-interestCulture').attr("checked", false);
+                $('#newplan-interestOutdoor').attr("checked", false);
+                $('#newplan-interestUnwind').attr("checked", false);
+                $('#newplan-interestFun').attr("checked", false);
+                $('#newplan-category10').attr("checked", false);
+                $('#newplan-category26').attr("checked", false);
+                $('#newplan-category4').attr("checked", false);
+                $('#newplan-interestCulture').attr("disabled", true);
+                $('#newplan-interestOutdoor').attr("disabled", true);
+                $('#newplan-interestUnwind').attr("disabled", true);
+                $('#newplan-interestFun').attr("disabled", true);
+                $('#newplan-category10').attr("disabled", true);
+                $('#newplan-category26').attr("disabled", true);
+                $('#newplan-category4').attr("disabled", true);
+            } else {
+                $('#newplan-interestCulture').attr("disabled", false);
+                $('#newplan-interestOutdoor').attr("disabled", false);
+                $('#newplan-interestUnwind').attr("disabled", false);
+                $('#newplan-interestFun').attr("disabled", false);
+                $('#newplan-category10').attr("disabled", false);
+                $('#newplan-category26').attr("disabled", false);
+                $('#newplan-category4').attr("disabled", false);
+            }
+        });
+        
+        
 
         $('#newPlanForm').validate({
             rules: {

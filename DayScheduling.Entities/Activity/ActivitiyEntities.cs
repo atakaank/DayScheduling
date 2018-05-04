@@ -14,6 +14,8 @@ namespace DayScheduling.Entities.Activity
     }
     public class vmPartialActivity
     {
+        public int PlanID { get;set;}
+        public string ActivityID { get; set; }
         public TimeSpan FinishTime { get; set; }
         public TimeSpan StartTime { get; set; }
         public Place  place { get; set; }
