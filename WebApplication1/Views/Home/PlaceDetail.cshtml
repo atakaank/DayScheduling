@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model DayScheduling.Entities.Plan.vmPlaceDetail
+<!DOCTYPE html>
 @{
     ViewBag.Title = "PlaceDetail";
 }
@@ -199,27 +200,7 @@
                 </div>
             </div>
             <div class="planHeaderWrapper">
-                <header class="plan-header" id="planHeader">
-                    <div class="plan-header-wrap">
-                        <div class="plan-header-center clearfix">
-                            <nav id="plan-nav" class="plan-nav">
-                                <ul class="tabs clearfix">
-                                    <li title="Route" class="tab-overview "
-                                        data-target="overview">
-                                        <a href="javascript:void(0);">Route</a>
-                                    </li>
-                                    <li title="Day by Day" class="tab-itinerary active"
-                                        data-target="itinerary">
-                                        <a href="/Plan/DayByDay">Day by Day</a>
-                                    </li>
-                                    <li title="How to Travel" class="tab-transportation "
-                                        data-target="transportation">
-                                        <a href="javascript:void(0);">How to Travel</a>
-                                    </li>
-
-                        </div>
-                    </div>
-
+                <header class="plan-header" id="planHeader"> 
                 </header>
             </div>
             <div class="transportation-background hidden">
@@ -421,24 +402,6 @@
                                                     <svg class="trash stay-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-trash"></use></svg>
                                                     Delete destination
                                                 </div>
-                                                <div class="find-hotel text-link anonymous">Find places to stay &raquo;</div>
-
-                                                <div class="booking-option text-link airbnbBookingService"
-                                                     data-booking-url="https://airbnb.7eer.net/c/297397/264339/4273?u=www.airbnb.com/s/Izmir--Turkey&amp;subid1=a933aad43ba14e9096af1d41e7431180"
-                                                     data-booking-checkin-date-format="[&p.checkin=]YYYY[-]MM[-]DD"
-                                                     data-booking-checkout-date-format="[&p.checkout=]YYYY[-]MM[-]DD"
-                                                     data-booking-nights-format=""
-                                                     data-traveler-details="&p.adults=2">
-                                                    Check out homes on Airbnb &raquo;
-                                                </div>
-                                                <div class="booking-option text-link tripAdvisorBookingService"
-                                                     data-booking-url="https://tripadvisor.inspirock.com/find-hotel/click-7599246-10775740?sid=a933aad43ba14e9096af1d41e7431180&amp;URL=https://www.tripadvisor.com.tr/SmartDeals-g298006-a_cja.10775740-a_cjp.7599246-m13092-Hotel-Deals.html?uguests%3D1_2"
-                                                     data-booking-checkin-date-format="[&staydates=]YYYY[_]MM[_]DD"
-                                                     data-booking-checkout-date-format="[_]YYYY[_]MM[_]DD"
-                                                     data-booking-nights-format=""
-                                                     data-traveler-details="">
-                                                    Find hotels on TripAdvisor &raquo;
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -531,22 +494,25 @@
                              data-country-code="TR">
                             <div class="pane-content">
                                 <h2 class="stay-title">
-                                    <div class="days">
-                                        <div class="num-days ">2</div>
-                                        <div class="units">days</div>
-                                    </div>
                                     <div class="in-wrap">
                                         <div class="bar"></div>
-                                    </div>
+                                    </div> 
                                     <div class="title-area">
-                                        <span class="title destinationDetailsLink clickable-text" data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597" data-event-src="stay-pane-overview.title">Izmir</span>
-                                        <button type="button" class="cta-button large dayByDayStayLink" data-date="2018-02-20" data-name="Izmir" data-stay-id="1" data-event-src="edit-itinerary">See day by day plan</button>
+                                        <span class="title destinationDetailsLink clickable-text" data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597" data-event-src="stay-pane-overview.title">@Model.PlaceName</span> 
+                                        <button type="button" class="cta-button small dayByDayStayLink" data-date="2018-02-20" data-name="Izmir"><p><font face="Berlin Sans FB" size="4" color="white"><b>Delete</b></font></p></button>
+                                    </div> 
+                                    <div class="rating">
+                                        <div class="ins-rating">
+                                            <span>Rating</span><div class="rating-stars ">
+                                                <span class="rating-stars-fill" style="width:80.0%;"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </h2>
                                 <div class="stay-content clearfix">
                                     <div class="route-big">
                                         <img class="stay-img clickable-image destinationDetailsLink"
-                                             src="~/photos/izmir-wild-life-park--1301659474.jpg"
+                                             src="~/photos/mekan/128.jpg"
                                              data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597"
                                              data-event-src="stay-img"
                                              alt="Izmir"
@@ -556,412 +522,27 @@
                                               data-id="8146297227"
                                               data-img-path="izmir-wild-life-park--1301659474.html">&copy;</span>
                                     </div><div class="right-col clearfix">
-                                        <h3 class="title tagline clickable-text destinationDetailsLink" data-link="/trip/a2f6de2f7-eef8-4914-a130-4bc3380476d4/turkey/izmir/trip-planner-d311325597" data-event-src="stay-pane.title">Pearl of the Aegean</h3>
-                                        <div class="autogen data-holder" data-event-src="stay.autogen">
-                                            <div class="desc" data-collapsed-lines="3"><blockquote cite="https://www.inspirock.com/turkey/izmir-trip-planner">The birthplace of Homer, the ancient port city of Izmir boasts a colorful heritage that includes traces of Greek, Armenian, and Jewish cultures.</blockquote> Start off your visit on the 20th (Tue): don't miss a visit to <a class="attLink" href="https://www.inspirock.com/turkey/izmir/konak-square-a420888639"><i>Konak Square</i></a>, don't miss a visit to <a class="attLink" href="https://www.inspirock.com/turkey/izmir/saat-kulesi-clock-tower-a111497851"><i>Saat Kulesi (Clock Tower)</i></a>, then make a trip to <a class="attLink" href="https://www.inspirock.com/turkey/izmir/tarihi-asansor-a111699973"><i>Tarihi Asansor</i></a>, then take a stroll through <a class="attLink" href="https://www.inspirock.com/turkey/izmir/kemeralti-market-a811497927"><i>Kemeralti Market</i></a>, and finally take in the waterfront at <a class="attLink" href="https://www.inspirock.com/turkey/izmir/kordonboyu-a520004341"><i>Kordonboyu</i></a>. On the next day, stroll through <a class="attLink" href="https://www.inspirock.com/turkey/izmir/izmir-wild-life-park-a8146297227"><i>Izmir Wild Life Park</i></a> and then delve into the distant past at <a class="attLink" href="https://www.inspirock.com/turkey/izmir/agora-open-air-museum-a2138163175"><i>Agora Open Air Museum</i></a>.<br /><br />For traveler tips, more things to do, ratings, and other tourist information, you can read our <a class="landing-trip-planner-link text-link" target="_blank" href='https://www.inspirock.com/turkey/izmir-trip-planner'>Izmir travel</a> planner.<br /><br />In February, daily temperatures in Izmir can reach 13&deg;C, while at night they dip to 11&deg;C. Finish your sightseeing early on the 21st (Wed) to allow enough time to travel back home.</div>
-                                            <span class="secondary-text-link read-more hidden">more <i class="fa fa-angle-down"></i></span>
-                                            <span class="secondary-text-link read-less hidden">less <i class="fa fa-angle-up"></i></span>
-                                        </div>
-                                        <h4 class="title">Things to do in Izmir</h4>
-                                        <div class="tags-destinations">
-                                            <span class="tag" data-cat-group-id="14">#Parks</span>, <span class="tag" data-cat-group-id="25">#Neighborhoods</span>, <span class="tag" data-cat-group-id="26">#Historic Sites</span>
-                                        </div>
-                                        <div class="title">Accommodations</div>
-                                        <div class="wtsadvice">Get expert advice on where to stay in Izmir.</div>
-                                        <a href="javascript:void(0);" class="text-link find-hotel" data-event-src="stay-pane-book-hotel" data-stay-id="1" data-name="Izmir">Find places to stay &raquo;</a>
-                                        <div class="booking-options hidden">
-                                            <div class="booking-option text-link airbnbBookingService"
-                                                 data-booking-url="https://airbnb.7eer.net/c/297397/264339/4273?u=www.airbnb.com/s/Izmir--Turkey&amp;subid1=a933aad43ba14e9096af1d41e7431180"
-                                                 data-booking-checkin-date-format="[&p.checkin=]YYYY[-]MM[-]DD"
-                                                 data-booking-checkout-date-format="[&p.checkout=]YYYY[-]MM[-]DD"
-                                                 data-booking-nights-format=""
-                                                 data-traveler-details="&p.adults=2">
-                                                Check out homes on Airbnb &raquo;
-                                            </div>
-                                            <div class="booking-option text-link tripAdvisorBookingService"
-                                                 data-booking-url="https://tripadvisor.inspirock.com/find-hotel/click-7599246-10775740?sid=a933aad43ba14e9096af1d41e7431180&amp;URL=https://www.tripadvisor.com.tr/SmartDeals-g298006-a_cja.10775740-a_cjp.7599246-m13092-Hotel-Deals.html?uguests%3D1_2"
-                                                 data-booking-checkin-date-format="[&staydates=]YYYY[_]MM[_]DD"
-                                                 data-booking-checkout-date-format="[_]YYYY[_]MM[_]DD"
-                                                 data-booking-nights-format=""
-                                                 data-traveler-details="">
-                                                Find hotels on TripAdvisor &raquo;
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="highlight-list">
-                                    <div class="highlights-title">Highlights from your plan</div>
-                                    <div class="highlights clearfix">
-                                        <div class="highlight data-holder"
-                                             data-attraction-id="8146297227"
-                                             data-details-url="/turkey/izmir/izmir-wild-life-park-a8146297227"
-                                             data-event-src="stay-highlights">
-                                            <div class="route-small">
-                                                <img class="visit-img attLink"
-                                                     src="~/photos/izmir-wild-life-park--1301659474.jpg"
-                                                     alt="Izmir Wild Life Park"
-                                                     onerror="onImgError(this);" />
-                                                <span class="copyright-fancy-box-img copyright"
-                                                      data-type="attraction"
-                                                      data-id="8146297227"
-                                                      data-img-path="izmir-wild-life-park--1301659474.html">&copy;</span>
-                                            </div><div class="visit-info">
-                                                <a class="name attLink" href="https://www.inspirock.com/turkey/izmir/izmir-wild-life-park-a8146297227">Izmir Wild Life Park</a>
-                                                <div class="text-link date-time calendarLink" data-date="2018-02-21" data-visit-id="14">
-                                                    10:00am, Wed&nbsp;Feb 21
+                                        <div class="attraction-metadata">
+                                            <aside>
+                                                <div class="cat-title">
+                                                    <span style="font-weight:bold">Recomended Duration</span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="highlight data-holder"
-                                             data-attraction-id="2138163175"
-                                             data-details-url="/turkey/izmir/agora-open-air-museum-a2138163175"
-                                             data-event-src="stay-highlights">
-                                            <div class="route-small">
-                                                <img class="visit-img attLink"
-                                                     src="~/photos/agora-open-air-museum-1452834830.jpg"
-                                                     alt="Agora Open Air Museum"
-                                                     onerror="onImgError(this);" />
-                                                <span class="copyright-fancy-box-img copyright"
-                                                      data-type="attraction"
-                                                      data-id="2138163175"
-                                                      data-img-path="agora-open-air-museum-1452834830.html">&copy;</span>
-                                            </div><div class="visit-info">
-                                                <a class="name attLink" href="https://www.inspirock.com/turkey/izmir/agora-open-air-museum-a2138163175">Agora Open Air Museum</a>
-                                                <div class="text-link date-time calendarLink" data-date="2018-02-21" data-visit-id="18">
-                                                    5:00pm, Wed&nbsp;Feb 21
+                                                <div>@Model.RecomendedDuration</div>
+                                            </aside>
+                                            <aside class="opening-hours">
+                                                <div class="cat-title">
+                                                    <span style="font-weight:bold">Day-Hours</span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="highlight data-holder"
-                                             data-attraction-id="111699973"
-                                             data-details-url="/turkey/izmir/tarihi-asansor-a111699973"
-                                             data-event-src="stay-highlights">
-                                            <div class="route-small">
-                                                <img class="visit-img attLink"
-                                                     src="~/photos/tarihi-asansor--2108472464.jpg"
-                                                     alt="Tarihi Asansor"
-                                                     onerror="onImgError(this);" />
-                                                <span class="copyright-fancy-box-img copyright"
-                                                      data-type="attraction"
-                                                      data-id="111699973"
-                                                      data-img-path="tarihi-asansor--2108472464.html">&copy;</span>
-                                            </div><div class="visit-info">
-                                                <a class="name attLink" href="https://www.inspirock.com/turkey/izmir/tarihi-asansor-a111699973">Tarihi Asansor</a>
-                                                <div class="text-link date-time calendarLink" data-date="2018-02-20" data-visit-id="7">
-                                                    1:00pm, Tue&nbsp;Feb 20
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <div><span>@Model.ActivityStartTime-@Model.ActivityFinishTime in your plan.</span></div>
+                                            </aside>
+                                            <aside>
+                                                <div class="cat-title"><span style="font-weight:bold">Contact</span></div>
+                                                <p>@Model.PlaceAddress</p>
+                                                <p class="phone">
+                                                    <span>@Model.Phone</span>
+                                                </p>
+                                            </aside> 
                                 </div>
                             </div>
                         </div>
-                        <div class="similar-plans">
-                            <h2>Similar Plans</h2>
-                            <div class="similar-plans-list clearfix">
-                                <div class="similar-plans-tile-container clearfix">
-                                    <a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/6-days-in-izmir-itinerary-with-outdoors-relaxing-and-wildlife-a3cb82a2a-40a8-4865-b98d-a53284a53470" data-plan-id="a3cb82a2a-40a8-4865-b98d-a53284a53470" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/sirince-koyu-869957610.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">6 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM KUWAIT</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">March, outdoors, relaxing, wildlife, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> March, outdoors, relaxing, wildlife
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/3-days-in-izmir-itinerary-with-culture-relaxing-romantic-and-historic-sites-a2c8db6c8-d0e9-4b50-b873-6ad2cdb87ce3" data-plan-id="a2c8db6c8-d0e9-4b50-b873-6ad2cdb87ce3" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/saat-kulesi-clock-tower-352339852.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">3 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM TURKEY</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">May, culture, relaxing, romantic, historic sites, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> May, culture, relaxing, romantic, historic sites
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/5-days-in-izmir-itinerary-with-relaxing-a4c8563f7-d573-4ec6-b10a-4471a31fc91a" data-plan-id="a4c8563f7-d573-4ec6-b10a-4471a31fc91a" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/sirince-koyu-869957610.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">5 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM KUWAIT</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">April, relaxing, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> April, relaxing
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/15-days-in-izmir-and-istanbul-itinerary-with-outdoors-relaxing-romantic-museums-and-shopping-a5dfa0b2e-1533-4363-9de6-171371221473" data-plan-id="a5dfa0b2e-1533-4363-9de6-171371221473" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/istanbul.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">15 days in Izmir & Istanbul</span>
-                                                <span class="secondarytext country">BY A USER FROM ITALY</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">February, outdoors, relaxing, romantic, museums, shopping, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> February, outdoors, relaxing, romantic, museums, shopping
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/3-days-in-izmir-itinerary-in-april-a990983bb-6274-4069-89e4-646231868039" data-plan-id="a990983bb-6274-4069-89e4-646231868039" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/saat-kulesi-clock-tower-352339852.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">3 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM KUWAIT</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">April, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> April
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/4-days-in-izmir-itinerary-in-april-a377b6a9d-8914-4628-96b6-208b249e2447" data-plan-id="a377b6a9d-8914-4628-96b6-208b249e2447" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/ancient-city-of-ephesus--527100546.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">4 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM GREECE</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">April, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> April
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/4-days-in-izmir-itinerary-in-april-a5351e241-3e88-40b0-ba86-1b2ee14cfa1d" data-plan-id="a5351e241-3e88-40b0-ba86-1b2ee14cfa1d" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/ancient-city-of-ephesus--527100546.jpg"></span> <!--../../../../-->
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">4 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM GREECE</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">April, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> April
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/3-days-in-izmir-itinerary-in-april-ab2cbdf3e-a654-45e6-975b-f8e3d5d678cc" data-plan-id="ab2cbdf3e-a654-45e6-975b-f8e3d5d678cc" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/saat-kulesi-clock-tower-352339852.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">3 days in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM UNITED STATES</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">April, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> April
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/1-day-in-izmir-itinerary-with-beaches-and-shopping-a6693742d-0879-46a7-9ef8-e41f80e04b24" data-plan-id="a6693742d-0879-46a7-9ef8-e41f80e04b24" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/saat-kulesi-clock-tower-352339852.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">1 day in Izmir</span>
-                                                <span class="secondarytext country">BY A USER FROM TURKEY</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">February, beaches, shopping, fast-paced, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> February, beaches, shopping
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Fast-paced
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/9-days-in-turkey-itinerary-with-culture-outdoors-hidden-gems-historic-sites-museums-shopping-and-wildlife-af147f5a1-94e9-48f3-8c26-ce24e790ee14" data-plan-id="af147f5a1-94e9-48f3-8c26-ce24e790ee14" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/turkey-goreme.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">9 days in Turkey</span>
-                                                <span class="secondarytext country">BY A USER FROM LEBANON</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">March, culture, outdoors, historic sites, museums, shopping, wildlife, hidden gems</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> March, culture, outdoors, historic sites, museums, shopping, wildlife
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Hidden gems
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/17-days-in-turkey-itinerary-with-culture-outdoors-romantic-historic-sites-museums-and-wildlife-a545b1cd5-120c-4201-b080-0b56be35323c" data-plan-id="a545b1cd5-120c-4201-b080-0b56be35323c" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/istanbul.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">17 days in Turkey</span>
-                                                <span class="secondarytext country">BY A USER FROM THAILAND</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">May, culture, outdoors, romantic, historic sites, museums, wildlife, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> May, culture, outdoors, romantic, historic sites, museums, wildlife
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a><a class="block sm plan anonymous notranslate" href="https://www.inspirock.com/trip/9-days-in-turkey-itinerary-in-march-ae683046d-37ee-4075-a973-6217e3a716f7" data-plan-id="ae683046d-37ee-4075-a973-6217e3a716f7" data-owner="false">
-                                        <span class="dest-image lazyload" data-url="~/photos/istanbul.jpg"></span>
-                                        <span class="box">
-                                            <span class="text in-box">
-                                                <span class="primarytext">9 days in Turkey</span>
-                                                <span class="secondarytext country">BY A USER FROM UNITED ARAB EMIRATES</span>
-                                            </span>
-                                            <span class="subtext-box in-box">
-                                                <span class="subtext">
-                                                    <span class="default">March, popular</span>
-                                                    <span class="hover">
-                                                        <span class="line">
-                                                            <strong>PREFERENCES:</strong> March
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>ATTRACTION STYLE:</strong> Popular
-                                                        </span>
-                                                        <span class="line">
-                                                            <strong>PACE:</strong> Medium
-                                                        </span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
                     </div>
-                    <div class="right col-6">
-                    </div>
-                    </ul>
-                </div>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-</body>
-</html>

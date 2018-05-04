@@ -99,4 +99,22 @@ namespace DayScheduling.Entities.Plan
         public string FoodCategory { get; set; }
         public string DrinkCategory { get; set; }
     }
+
+    public class vmPlaceDetail
+    {
+        public string PlaceName { get; set; }
+        public string ActivityStartTime { get; set; }
+        public string ActivityFinishTime { get; set; }
+        public string PlaceDescription { get; set; }
+        public int PlaceRate { get; set; }
+        public string PlaceAddress { get; set; }
+        public string Phone { get; set; }
+        public int RecomendedDuration { get; set; }
+    }
+    public class pmPlaceDetail
+    {
+        public int PlaceID { get; set; }
+        public string StartTime { get; set; }
+        public string FinishTime { get; set; }
+    }
 }

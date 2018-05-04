@@ -37,8 +37,8 @@ namespace WebApplication1.AppHtmlHelpers
             TagBuilder aTourLinkTextLink = new TagBuilder("a");
             TagBuilder aAttLinkHidden = new TagBuilder("a");
             TagBuilder divClear = new TagBuilder("div");
-            TagBuilder deleteBtn = new TagBuilder("button");
-            TagBuilder updateBtn = new TagBuilder("button");
+            TagBuilder detailBtn = new TagBuilder("button");
+
 
             tb.AddCssClass("itinerary-row visit-row data-holder");
             //tb.GenerateId("itinerary-item-22");
@@ -121,15 +121,14 @@ namespace WebApplication1.AppHtmlHelpers
 
             divClear.AddCssClass("clear");
 
-            deleteBtn.AddCssClass("cta-button large Delete");
-            deleteBtn.Attributes.Add("type", "button");
-            deleteBtn.Attributes.Add("data-event-src","Delete");
-            deleteBtn.InnerHtml="Delete";
+            detailBtn.AddCssClass("cta-button large");
+            detailBtn.Attributes.Add("data-id", PlaceID.ToString());
+            detailBtn.Attributes.Add("data-start", StartTime.ToString());
+            detailBtn.Attributes.Add("data-finish", FinishTime.ToString());
+            detailBtn.Attributes.Add("type", "button");
+            detailBtn.Attributes.Add("data-event-src", "Delete");
+            detailBtn.InnerHtml = "Detail";
 
-            updateBtn.AddCssClass("cta-button large Update");
-            updateBtn.Attributes.Add("type", "button");
-            updateBtn.Attributes.Add("data-event-src", "Update");
-            updateBtn.InnerHtml = "Update";
 
             divStartTime = combineTags(divStartTime, spanTime);
             divVisitTime = combineTags(divVisitTime, divStartTime);
@@ -158,9 +157,7 @@ namespace WebApplication1.AppHtmlHelpers
             divDetail = combineTags(divDetail, divReviewTagContainer);
             divDetail = combineTags(divDetail,divDesc);
             divDetail = combineTags(divDetail, divTours);
-            divDetail = combineTags(divDetail, deleteBtn);
-            divDetail.InnerHtml += "&nbsp";
-            divDetail = combineTags(divDetail,updateBtn);
+            divDetail = combineTags(divDetail, detailBtn);
 
             divRightCol = combineTags(divRightCol, divDetail);
 

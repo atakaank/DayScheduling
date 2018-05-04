@@ -1145,6 +1145,14 @@
     </div>
     <script type="text/javascript">
 
+        $('.cta-button.large').click(function () {
+            debugger;
+            var id = $(this).attr('data-id');
+            var startTime = $(this).attr('data-start');
+            var finishTime = $(this).attr('data-finish');
+            $.post('@Url.Action("PlaceDetail", "Plan")', { PlaceID: id, StartTime: startTime, FinishTime: finishTime }, function () {
+            });
+        });
 
             /* <![CDATA[ */
             var google_conversion_id = 1035570068;
@@ -1267,3 +1275,15 @@
 </body>
 </html>
 
+
+
+
+@*<button type="button" class="cta-button large dayByDayStayLink" data-date="2018-02-20" data-name="Izmir" data-stay-id="1" data-event-src="edit-itinerary">
+    <p>
+        <font face="Berlin Sans FB" size="4" color="white">
+            <b>Delete Activity</b>
+        </font>
+    </p>
+</button>*@
+
+<button type="button" class="cta-button small dayByDayStayLink" data-date="2018-02-20" data-name="Izmir"><p><font face="Berlin Sans FB" size="4" color="white"><b>Delete</b></font></p></button>

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DayScheduling.BLL;
 using GoogleMaps.LocationServices;
 
+
 namespace WebApplication1.Controllers
 {
     public class PlanController : Controller
@@ -26,6 +27,13 @@ namespace WebApplication1.Controllers
             vmDayByDayPlan Model = bllplan.GetvmDayByDay(param);
             return View(Model);
         }
+
+        public ActionResult PlaceDetail(pmPlaceDetail param)
+        {
+            vmPlaceDetail model = bllplan.getPlaceDetail(param);
+            return View(model);
+        }
+
         public ActionResult DeleteActivity()
         {
             BLLActivity bll = new BLLActivity();

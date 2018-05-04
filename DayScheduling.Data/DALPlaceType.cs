@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DayScheduling.Data
 {
-    class DALPlaceType
+    public class DALPlaceType
     {
         DaySchedulingModelDataModels Models = new DaySchedulingModelDataModels();
         public PlaceType Get(int ID)
