@@ -86,6 +86,12 @@ namespace DayScheduling.Entities.Plan
         Club = 60
     }
 
+    public enum Popularity
+    {
+        Popular = 1,
+        HiddenGems = 2
+    }
+
     public class Travel
     {
         public string tDuration { get; set; }
@@ -160,4 +166,21 @@ namespace DayScheduling.Entities.Plan
         public string updateActivityTypeSave { get; set; }
     }
 
+    public class vmPlanBlock
+    {
+        public string Categories { get; set; }
+        public string Popularity { get; set; }
+        public string ProvinceName { get; set; }
+        public int ProvinceID { get; set; }
+        public int PlanID { get; set; }
+    }
+    
+    public class vmUserPage
+    {
+        public List<vmPlanBlock> PlanBlockList { get; set; }
+    }
+    public class vmMyPlans
+    {
+        public List<vmPlanBlock> PlanBlockList { get; set; }
+    }
 }

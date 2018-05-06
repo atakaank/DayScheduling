@@ -15,12 +15,15 @@ namespace WebApplication1.Controllers
         BLLAccount bllAcc = new BLLAccount();
         public ActionResult LoginPage()
         {
+            if(!AccountUser.isLogined)
             return View();
+
+            return RedirectToAction("UserPage", "Home");
         }
         [HttpPost]
         public ActionResult isLoginSuccess(string NameOrEmail, string password)
         {
-            var resSuccess = new { Success = "True", Message = "", TargetUrl = Url.Action("PlanCriterias", "Plan") };
+            var resSuccess = new { Success = "True", Message = "", TargetUrl = Url.Action("UserPage", "Home") };
             var resFail = new { Success = "False", Message = "Invalid email or password", TargetUrl = "" };
             if (bllAcc.LoginIsSuccess(NameOrEmail, password))
             {
@@ -46,7 +49,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult isSignUpSuccess(string UserSurname, string UserName, string Gender, DateTime DOB, string Email, string Phone, string Address, string Job, string Password, string AccountType)
         {
-            var resSuccess = new { Success = "True", Message = "ACCOUNT IS ADDED.", TargetUrl = Url.Action("LoginPage", "Account") };
+            var resSuccess = new { Success = "True", Message = "ACCOUNT IS ADDED.", TargetUrl = Url.Action("UserPage", "Home") };
             var resFail = new { Success = "False", Message = "EMAIL IS ALREADY TAKEN.", TargetUrl = "" };
             if (bllAcc.AddAccountUser(UserSurname, UserName, Gender, DOB, Email, Phone, Address, Job, Password, AccountType) == 2)
             {

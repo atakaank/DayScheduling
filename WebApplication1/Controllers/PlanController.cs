@@ -28,6 +28,13 @@ namespace WebApplication1.Controllers
             return View(Model);
         }
 
+        public ActionResult GetPlanFromHistory(int PlanID)
+        {
+            TempData["ExistPlan"] = bllplan.GetExistPlan(PlanID);
+            var res = new { TargetUrl = Url.Action("GetPlan", "Plan") };
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetPlan()
         {
             vmDayByDayPlan Model = new vmDayByDayPlan();
@@ -37,6 +44,17 @@ namespace WebApplication1.Controllers
                 return View(model);
             }
             return View(Model);
+        }
+        public ActionResult DeletePlan(int PlanID, bool userpage)
+        {
+            bllplan.DeletePlan(PlanID);
+            var resUserPage = new { TargetUrl = Url.Action("UserPage", "Home") };
+            var resMyPlans = new { TargetUrl = Url.Action("myPlans", "Plan") };
+            if (userpage)
+            {
+                return Json(resUserPage, JsonRequestBehavior.AllowGet);
+            }
+            return Json(resMyPlans, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DeleteActivity(int ID,int PlanID)
@@ -79,5 +97,14 @@ namespace WebApplication1.Controllers
             TempData["ExistPlan"] =  bllplan.GetExistPlan(param.updatePlanIDSave);
             return RedirectToAction("GetPlan","Plan");
         }
+
+        [DSAuthorize]
+        public ActionResult myPlans()
+        {
+            vmMyPlans model = new vmMyPlans();
+            model.PlanBlockList = bllplan.GetPlanBlockList(AccountUser.Account.AccountID, false);
+            return View(model);
+        }
+
     }
 }

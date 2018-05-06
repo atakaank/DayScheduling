@@ -43,7 +43,7 @@ namespace DayScheduling.BLL
             model.CurrentTime = model.StartTime;
             model.Popularity = param.style;
             recordPlan(model);
-            dalplan.RecordPlantoHistory(AccountUser.Account.AccountID, model.PlanID);
+            //dalplan.RecordPlantoHistory(AccountUser.Account.AccountID, model.PlanID);
             while (MustDoList.Count != 0) // model.CurrentTime <= new TimeSpan(19,0,0) && hepsi yapılmışsa ve saat en az 19.00'u geçmişse. Hepsi yapılmış ve 19.00u geçmemişse yine random bir category seçilir.
             {
                 Travel travel = new Travel();
@@ -546,11 +546,46 @@ namespace DayScheduling.BLL
             newPlan.PlanName = "Plan" + AccountUser.User.UserName + AccountUser.Account.AccountID;
             newPlan.PlanDate = DateTime.Now;
             newPlan.PlanPopularity = int.Parse(model.Popularity);
-            dalplan.RecordPlan(newPlan.PlanName,newPlan.PlanDate,newPlan.PlanPopularity);
+            dalplan.RecordPlan(newPlan.PlanName,newPlan.PlanDate,newPlan.PlanPopularity,model.ProvinceID,AccountUser.Account.AccountID);
             model.PlanID = dalplan.GetLastPlanID();
             //newPlan.PlanComplete
             //newPlan.PlanType             
-        } 
+        }
+
+        public List<vmPlanBlock> GetPlanBlockList(int AccountID, bool userpage)
+        {
+            List<Plan> PlanList = dalplan.GetList(AccountID);
+            List<vmPlanBlock> PlanBlockList = new List<vmPlanBlock>();
+            int userPageBlockCount = 0;
+            foreach (var item in PlanList)
+            {
+                if (userPageBlockCount == 3 && userpage)
+                    break;
+                vmPlanBlock planBlock = new vmPlanBlock();
+                planBlock.PlanID = item.PlanID;
+                planBlock.Popularity = Enum.GetName(typeof(Popularity), item.PlanPopularity);
+                planBlock.ProvinceID = item.ProvinceID;
+                planBlock.ProvinceName = Enum.GetName(typeof(Provinces), item.ProvinceID);
+                List<vmPartialActivity> actList = bllAct.GetActivities(planBlock.PlanID);
+                planBlock.Categories = actList[0].ActivityPlaceType;
+                for (int i = 1; i < actList.Count; i++)
+                {
+                    //if (i == actList.Count - 1)
+                    //{
+                    //    planBlock.Categories += actList[i].ActivityPlaceType;
+                    //}
+                    planBlock.Categories += "," + actList[i].ActivityPlaceType;
+                }
+                PlanBlockList.Add(planBlock);
+                userPageBlockCount++;
+            }
+            return PlanBlockList;
+        }
+
+        public void DeletePlan(int PlanID)
+        {
+            dalplan.DeletePlan(PlanID);
+        }
 
         public vmPlaceDetail getPlaceDetail(pmPlaceDetail param)
         {

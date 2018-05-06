@@ -34,6 +34,10 @@ namespace DayScheduling.Data
 
         public int PlanRate { get; set; }
 
+        public int ProvinceID { get; set; }
+
+        public int AccountID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activities { get; set; }
 

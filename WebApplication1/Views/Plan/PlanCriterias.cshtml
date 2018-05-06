@@ -1,44 +1,35 @@
-﻿@{
-    ViewBag.Title = "Plan Criterias";
-}
-@model DayScheduling.Entities.Plan.vmPlanCriteria
-@using WebApplication1.AppHtmlHelpers;
-@using System.Web.Mvc;
+﻿@using WebApplication1.AppHtmlHelpers;
 <!DOCTYPE html>
 <html lang="en" xmlns:og="http://opengraphprotocol.org/schema/">
 <head>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="canonical" href="https://www.inspirock.com/trip-planner">
-    <meta name="robots" content="noindex,follow" />
-    <title>Trip Planner Online - Plan Your Holiday Itinerary For Free • Inspirock</title>
-    <meta name="description" content="See & Do more with a personal sightseeing itinerary for your entire vacation in 5 minutes. Free!" />
+    <link rel="canonical" href="https://www.inspirock.com/">
+    <meta name="robots" content="index,follow" />
+    <title>Day Planner</title>
     <meta name="_csrf_parameter" content="_csrf" />
     <meta name="_csrf_header" content="X-CSRF-TOKEN" />
-    <meta name="_csrf" content="0cc231fc-9c37-453e-8c03-6422a07a69a7" />
-    <link rel="apple-touch-icon" sizes="57x57" href="../../../res/images/assets/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="../../../res/images/assets/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../../../res/images/assets/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="../../../res/images/assets/apple-touch-icon-76x76.png">
-    <link rel="icon" type="image/png" href="../../../res/images/assets/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="../../../res/images/assets/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="../../../res/images/assets/favicon-16x16.png" sizes="16x16">
-    <link rel="shortcut icon" href="~/res/images/assets/favicon.ico">
-    <link rel="manifest" href="~/res/images/assets/manifest.json">
+    <meta name="_csrf" content="fabbdc7e-77ee-40cb-a6f3-8ebf1f728bb3" />
+    @*<link rel="apple-touch-icon" sizes="57x57" href="https://s.inspirock.com/images/meta/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="https://s.inspirock.com/images/meta/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="https://s.inspirock.com/images/meta/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://s.inspirock.com/images/meta/apple-touch-icon-76x76.png">
+        <link rel="icon" type="image/png" href="https://s.inspirock.com/images/meta/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="https://s.inspirock.com/images/meta/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="https://s.inspirock.com/images/meta/favicon-16x16.png" sizes="16x16">
+        <link rel="shortcut icon" href="https://s.inspirock.com/images/meta/favicon.ico">
+        <link rel="manifest" href="https://s.inspirock.com/images/meta/manifest.json">*@
+    <link rel="Shortcut Icon" href="~/img/logo.ico" type="image/x-icon">
     <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-config" content="res/images/assets/browserconfig.xml">
+    <meta name="msapplication-config" content="https://s.inspirock.com/images/meta/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+    <link href="https://plus.google.com/+Inspirock" rel="publisher" />
+    <meta name="og:image" content="https://s.inspirock.com/images/home/v42-hero-white.jpg" />
+    <meta name="twitter:image" content="https://s.inspirock.com/images/home/v42-hero-white.jpg" />
+    <link rel="preload" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="//netdna.bootstrapcdn.com" crossorigin>
     <link rel="dns-prefetch" href="//netdna.bootstrapcdn.com">
     <link rel="preconnect" href="//www.google-analytics.com" crossorigin>
-    <link rel="preload" href="~/fonts/Lato-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="~/fonts/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="~/fonts/Lato-300.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="~/fonts/Lato-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="~/fonts/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="~/fonts/Lato-900.woff2" as="font" type="font/woff2" crossorigin>
     <script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
@@ -53,346 +44,294 @@
     <script src="~/Scripts/jquery-ui-1.8.13.min.js" type="text/javascript"></script>
     <script src="~/Scripts/modernizr-2.6.2.js" type="text/javascript"></script>
     <script src="~/Scripts/jquery-ui.unobtrusive.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.core.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery.ui.theme.css" />
-    <link rel="Shortcut Icon" href="~/img/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="~/css/jquery.datetimepicker.min.css" />
-    <script src="~/js/jquery.js" type="text/javascript"></script>
-    <script src="~/js/jquery.datetimepicker.full.js" type="text/javascript"></script>
+    <link rel="preload" href="//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="//s.inspirock.com/fonts/Lato-300/Lato-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="//s.inspirock.com/fonts/Lato-700/Lato-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="//s.inspirock.com/fonts/Lato-900/Lato-900.woff2" as="font" type="font/woff2" crossorigin>
+
     <style>
-@@font-face {font-family: 'Lato'; font-weight: 300; font-style: normal; src: local('Lato Light'), local('Lato-300'), url('../../fonts/Lato-300.woff2') format('woff2'), url('../../fonts/Lato-300.woff') format('woff'), url('../../fonts/Lato-300.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 400; font-style: normal; src: local('Lato Regular'), local('Lato-regular'), url('../../fonts/Lato-regular.woff2') format('woff2'), url('../../fonts/Lato-regular.woff') format('woff'), url('../../fonts/Lato-regular.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 400; font-style: italic; src: local('Lato Italic'), local('Lato-italic'), url('../../fonts/Lato-italic.woff2') format('woff2'), url('../../fonts/Lato-italic.woff') format('woff'), url('../../fonts/Lato-italic.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 700; font-style: normal; src: local('Lato Bold'), local('Lato-700'), url('../../fonts/Lato-700.woff2') format('woff2'), url('../../fonts/Lato-700.woff') format('woff'), url('../../fonts/Lato-700.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 700; font-style: italic; src: local('Lato Bold Italic'), local('Lato-700italic'), url('../../fonts/Lato-700italic.woff2') format('woff2'), url('../../fonts/Lato-700italic.woff') format('woff'), url('../../fonts/Lato-700italic.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 900; font-style: normal; src: local('Lato Black'), local('Lato-900'), url('../../fonts/Lato-900.woff2') format('woff2'), url('../../fonts/Lato-900.woff') format('woff'), url('../../fonts/Lato-900.ttf') format('truetype');}
-    </style>
-    <style>
-    .mydropdownlist1
-    {
-    color: #a5cc0f;
-    font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 5px 12px;
-    background-color: #999;
-    font-weight: bold;
-    }
-    .mydropdownlist
-    {
-    color: #a5cc0f;
-    font-size: 20px;
-    padding: 5px 38px;
-    border-radius: 5px 12px;
-    background-color: #999;
-    font-weight: bold;
-    }
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 300;
+            font-style: normal;
+            src: local('Lato Light'), local('Lato-300'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-style: normal;
+            src: local('Lato Regular'), local('Lato-regular'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-style: italic;
+            src: local('Lato Italic'), local('Lato-italic'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 700;
+            font-style: normal;
+            src: local('Lato Bold'), local('Lato-700'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 700;
+            font-style: italic;
+            src: local('Lato Bold Italic'), local('Lato-700italic'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 900;
+            font-style: normal;
+            src: local('Lato Black'), local('Lato-900'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.ttf') format('truetype');
+        }
     </style>
     <link rel="stylesheet" type="text/css" href='~/css/commoncss.css'>
-    <link rel="stylesheet" type="text/css" href='~/css/newplan.css'>
+    <link rel="stylesheet" type="text/css" href='~/css/homepage.css'>
+    <script type="text/javascript">
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-42855545-3', {'siteSpeedSampleRate': 100, 'cookieDomain': 'auto'});
+
+        ga('require', 'linkid', 'linkid.js');
+        ga('set', 'dimension1', '3.2.11');
+        ga('set', 'dimension2', 'N/A');
+        ga('set', 'dimension4', 'N/A');
+        ga('set', 'dimension5', 'Registered');
+        ga('set', 'dimension6', '5a311409e0744140933ac483');
+        ga('set', 'dimension7', 'N/A');
+        ga('set', 'dimension8', 'N/A');
+        ga('set', 'dimension9', 'N/A');
+        ga('set', 'dimension10', 'N/A');
+            ga('set', '&uid', '5a311409e0744140933ac483');
+        ga('set', 'dimension11', 'N/A');
+        ga('set', 'dimension12', 'N/A');
+        ga('set', 'dimension13', 'N/A');
+        ga('set', 'dimension14', 'N/A');
+        ga(function(t) {setCookie('gaclientid', t.get('clientId'));});
+        ga('set', 'dimension17', 'N/A'); </script>
+
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1753771061530174');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=1753771061530174&ev=PageView&noscript=1" />
+    </noscript>
+    <script type="text/javascript" src="https://cdn.distiltag.com/api/v1/script/zzJMFTQhJ40gqxxRDxN0bKfUAtCkhnKgS74Pk36o?GA_TID=UA-42855545-3&GA_CDI=19" async defer></script>
+    <noscript><img src="https://cdn.distiltag.com/api/v1/noscript/zzJMFTQhJ40gqxxRDxN0bKfUAtCkhnKgS74Pk36o?GA_TID=UA-42855545-3&GA_CDI=19"></noscript>
 </head>
-<body class=" normal" data-browser-lang-code="en"
-      data-browser-lang-name="english">
-    <div id="icon-container"></div>
-    <script src="~/js/icons.js" type="text/javascript" async></script>
+<div id="pageWrapper" class="page-wrapper ">
+    <header class="page-header  transparent" id="pageHeader">
+        <div class="header-fixer" style="">
+            <div class="header-contents clearfix">
 
-    <div id="fb-root"></div>
-
-    <div id="pageWrapper" class="page-wrapper ">
-        <header class="page-header " id="pageHeader">
-            <div class="header-fixer" style="">
-                <div class="header-contents clearfix">
-                    <div class="header-logo">
-                        <a href="/" title="Inspirock Trip Planner">
-                            <svg class="icon-logo"><use xlink:href="#icon-logo" /></svg>
-                            <span class="tm"> &reg;</span>
+                <div class="header-logo">
+                    <a href="/" title="For planning your day!">
+                        <a href="/Home/UserPage" title="Day Scheduling Day Planner">
+                            <img src="~/img/logo.png" border=5 width=45 height=40>
                         </a>
-                        <span class="tagline">Inspiration to see the planet</span>
-                    </div>
-                    <nav class="page-nav left">
-                    </nav>
-                    <nav class="page-nav right">
-                        <ul>
-                            <li id="headerstartplanning" class="headerstartplanning hidden">
-                                <button class="cta-button small">Start planning</button>
-                            </li>
-                            <li id="myPlans" data-dropdown-url="/myPlansDropdown" data-has-plans="false">
-                                <a rel="nofollow" href="javascript:void(0);">
-                                    <span>My plans</span>
-                                </a>
-                            </li>
-                            <li id="userOptions" class="hidden">
-                                <a rel="nofollow" href="javascript:void(0);">
-                                    <span class="name">Profile</span>
-                                </a>
-                                <div class="hidden">
-                                    <div id="userDropdown">
-                                        <ul>
-                                            <li class="logout-button">Log out</li>
-                                        </ul>
-                                    </div>
-                                    <form id="logoutForm" action="/logout" method="POST">
-                                        <div>
-                                            <input type="hidden" name="_csrf" value="0cc231fc-9c37-453e-8c03-6422a07a69a7" />
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li id="userLogin" class="">
-                                <a rel="nofollow" class="login-button" href="/login">
-                                    <span>@DayScheduling.Entities.Account.AccountUser.User.UserName</span>
-                                </a>
-                            </li>
-                            <li class="vertical-line"></li>
-                            <li id="language" data-browser-lang-code="en"
-                                data-browser-lang-name="english" data-dropdown-url="/languageOptions"><span class="language-text">english</span><span class="dropdown"></span></li>
-                            <li id="currency" data-dropdown-url="/currencyOptions">
-                                <a rel="nofollow" href="javascript:void(0);">
-                                    <span><span class="selected-currency">TL</span> <span class="dropdown"></span></span>
-                                </a>
-                            </li>
-                            <li id="help-container">
-                                <a href="javascript:void(0)" class="help-tips notranslate">?</a>
-                            </li>
-                        </ul>
-                    </nav>
+                        <span class="tagline">
+                            <font face="Berlin Sans FB" size="4" color="white">
+                                For planning your day!
+                            </font>
                 </div>
-
-            </div>
-        </header>
-        <div class="page-content  clear" id="pageContent">
-            <div class="newplan-content v6" data-max-plan-length="60" data-theme="shaded">
-                <img class="hero-image-img lazyload"
-                     data-url="../../photos/turkey-goreme.jpg" />
-                <img class="hero-image-polaroids lazyload"
-                     data-url="../../photos/polaroids.png" />
-                <div id="shade" class="shade"></div>
-                @using (Html.BeginForm("DayByDay", "Plan", FormMethod.Post, new { id = "newPlanForm", @class = "planning-form expanded", autocomplete = "off" }))
-                {
-                    <div class="steps">
-                        <div class="title " title="">
-                            Itinerary Planner
-                        </div>
-                        <div class="dests">
-                            <div class="destinations ui-front">
-                                <div class="destination">
-                                    @Html.DropDownList("ProvinceId",EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.Provinces)),"Select Province",new {@class= "mydropdownlist" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dates clearfix">
-                            @*@Html.TextBox("PlanBeginTime", "",new { @class="flat", placeholder = "Begin Date Time" })
-                            @Html.TextBox("PlanEndTime", "", new { @class = "flat", placeholder = "End Date Time" })*@
-                            @Html.TextBox("BudgetInfo","", new { @class = "flat", placeholder = "Budget" })
-                            <br/><br/>
-                            @Html.TextBox("NumberOfFriends", "", new { @class = "flat", placeholder = "Number Of Friends" })
-                        </div>
-                        <div class="section-title more-options-btn expandable">Activities<span class="optional"> (optional)</span></div>
-                        <div class="step-content">
-                            <div class="style clearfix">
-                                <div class="column3"><input type="radio" id="newplan-stylePopular" class="stylePopular flat" name="style" value="1" checked /><label title="Popular" for="newplan-stylePopular">Popular</label></div>
-                                <div class="column3"><input type="radio" id="newplan-styleBalanced" class="styleBlanaced flat" name="style" value="2" /><label title="Balanced" for="newplan-styleBalanced">Balanced</label></div>
-                                <div class="column3"><input type="radio" id="newplan-styleHiddenGems" class="styleHiddenGems flat" name="style" value="3" /><label title="Hidden gems" for="newplan-styleHiddenGems">Hidden gems</label></div>
-                            </div>
-                            <div class="interests">
-                                <div class="column3"><input type="checkbox" id="newplan-interestCulture" class="interest interestCulture flat" name="categoryGroupNames" value="culture" /><label title="Culture" for="newplan-interestCulture">Culture</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-interestOutdoor" class="interest interestOutdoor flat" name="categoryGroupNames" value="outdoors" /><label title="Outdoors" for="newplan-interestOutdoor">Outdoors</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-interestUnwind" class="interest interestUnwind flat" name="categoryGroupNames" value="unwind" /><label title="Relaxing" for="newplan-interestUnwind">Relaxing</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-interestFun" class="interest interestRomantic flat" name="categoryGroupNames" value="fun" /><label title="Fun" for="newplan-interestFun">Fun</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category10" class="flat" name="categoryGroupNames" value="Beaches" /><label title="Beaches" for="newplan-category10">Beaches</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category26" class="flat" name="categoryGroupNames" value="Historic Sites" /><label title="Historic sites" for="newplan-category26">Historic sites</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category4" class="flat" name="categoryGroupNames" value="Shopping" /><label title="Shopping" for="newplan-category4">Shopping</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category19" class="flat" name="categoryGroupNames" value="Generic" /><label title="Generic" for="newplan-category19">Generic</label></div>
-                            </div>
-                        </div>
-                        <div class="section-title more-options-btn expandable">Do you want food or drink in your plan?<span class="optional"> (optional)</span><i id="arrow" class="arrow fa fa-angle-down"></i></div>
-                        <div id="fooddiv" class="step-content">
-                            <div class="interests">
-                                <div class="column3">
-                                    @Html.DropDownList("FoodCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.FoodCategories)), "Food Place", new { @class = "mydropdownlist1" })
-                                </div>
-                                <div class="column3">&nbsp;</div>
-                                <div class="column3">
-                                    @Html.DropDownList("AlcoholCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.AlcoholCategories)), "Alcohol Place", new { @class = "mydropdownlist1" })
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="plan-button cta-button large" value="Submit">See your plan</button>
-                    </div>
-                    <input type="hidden" name="requiredAttractionId" value="" />
-                    <div>
-                        <input type="hidden" name="_csrf" value="0cc231fc-9c37-453e-8c03-6422a07a69a7" />
-                    </div>
-                }
-           </div>
-            </div><div id="progress-indicator" class="progress-indicator hidden">
-                <img class="progress-img" src="~/s.inspirock.com/res2/images/misc/bulb.gif" alt="Creating your plan..." />
-                <div class="progress-txt">Creating your plan.<br />You can customize and take it with you.</div>
-            </div>
-        </div>
-
-        <footer class="page-footer">
-            <div class="footer-content">
-                <div class="row">
-                    <div class="col-3 header-logo">
-                        <a href="/Home/Index">
-                            <svg class="icon-logo">
-                                <use xlink:href="#icon-logo" />
-                            </svg>
-                            <span class="tm"> &reg;</span>
-                        </a>
-                        <div class="tagline">Inspiration to see the planet</div>
-                    </div>
-                    <div class="col-6 menu-items">
-                        <div class="row header clearfix">
-                            <div class="col-4">Browse</div>
-                            <div class="col-4">Company</div>
-                            <div class="col-4">Help</div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="row clearfix">
-                            <ul class="col-4">
-                                <li>
-                                    <a href="/recent-plans">Plans by other users</a>
-                                </li>
-                                <li>
-                                    <a href="/destinations">Destinations</a>
-                                </li>
-                            </ul>
-                            <ul class="col-4">
-                                <li>
-                                    <a href="/about-inspirock">About us</a>
-                                </li>
-                                <li>
-                                    <a href="/for-partners">Partner with us</a>
-                                </li>
-                                <li>
-                                    <a href="https://www.linkedin.com/company/inspirock" rel="nofollow noopener" target="_blank">Inspirock on LinkedIn</a>
-                                </li>
-                            </ul>
-                            <ul class="col-4">
-                                <li>
-                                    <a href="/faq">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="/feedback">Contact us</a>
-                                </li>
-                                <li>
-                                    <a href="/privacy-policy">Privacy policy</a>
-                                </li>
-                                <li>
-                                    <a href="/cookie-policy">Cookie policy</a>
-                                </li>
-                                <li>
-                                    <a href="/copyright-policy">Copyright policy</a>
-                                </li>
-                                <li>
-                                    <a href="/terms-of-use">Terms of use</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-3 social-media">
-                        <ul class="icons">
-                            <li>
-                                <a rel="nofollow noopener" href="https://www.facebook.com/Inspirock" class="fa fa-facebook" target="_blank"></a>
-                            </li>
-                            <li>
-                                <a rel="nofollow noopener" href="https://twitter.com/InspirockTravel" class="fa fa-twitter" target="_blank"></a>
-                            </li>
-                            <li>
-                                <a rel="nofollow noopener" href="https://www.instagram.com/inspirock/" class="fa fa-instagram" target="_blank"></a>
-                            </li>
-                            <li>
-                                <a rel="nofollow noopener" href="https://www.youtube.com/inspirock/" class="fa fa-youtube-play" target="_blank"></a>
-                            </li>
-                        </ul>
-                        <ul class="blog">
-                            <li>
-                                <a href="http://blog.inspirock.com/" target="_blank" rel="noopener">Visit our blog &raquo;</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="line"></div>
-                    </div>
-                    <ul class="footer-copyright clearfix">
-                        <li>
-                            &copy; 2018&nbsp;
-                            <a href="https://www.inspirock.com">Inspirock<span class="tm"> &reg;</span></a>
-                            - All rights reserved
-                        </li>
-                        <li>
-                            <a href="http://aka.ms/MicrosoftTranslatorAttribution" rel="nofollow noopener" target="_blank">
-                                <span class="sheet ms-translate"></span>
-                                <span class="translate-txt">Translations by Microsoft&reg; Translator</span>
+                <nav class="page-nav left">
+                </nav>
+                <nav class="page-nav right">
+                    <ul>
+                        <li id="myPlans" data-dropdown-url="/myPlansDropdown" data-has-plans="false">
+                            <a rel="nofollow" href="/Plan/myPlans">
+                                <span>My plans</span>
                             </a>
                         </li>
-                        <li>
-                            <span class="geo-attrib clearfix">
-                                This product includes GeoLite2 data created by MaxMind, available from
-                                <a href="http://www.maxmind.com" rel="nofollow noopener" target="_blank">http://www.maxmind.com</a>
-                            </span>
+                        <li id="userOptions" class="hidden">
+                            <a rel="nofollow" href="~/Plan/DayByDay">
+                                <span class="name">Profile</span>
+                            </a>
+                            <div class="hidden">
+                                <div id="userDropdown">
+                                    <ul>
+                                        <li class="logout-button">Log out</li>
+                                    </ul>
+                                </div>
+                                <form id="logoutForm" action="https://www.inspirock.com/logout" method="POST">
+                                    <div>
+                                        <input type="hidden" name="_csrf" value="0ff48de0-945c-4ba5-905f-a29be48a8e39" />
+                                    </div>
+                                </form>
+                            </div>
                         </li>
+                        <li id="userLogin" class="">
+                            <span>@DayScheduling.Entities.Account.AccountUser.User.UserName</span>
+                        </li>
+                        <li class="vertical-line"></li>
+                        <li id="language" data-browser-lang-code="en"
+                        <li id="currency" data-dropdown-url="/currencyOptions">
+
+                        </li>
+
                     </ul>
+                </nav>
+            </div>
+
+        </div>
+    </header>
+    <div class="page-content home-content clear" id="pageContent">
+        <div class="data-holder" style="background-size:initial" data-max-plan-length="60">
+            <div class="hero-image-wrap returning-user" style="background-image: url('../../photos/denizyıldızıarkaplan.jpg')">
+            </div>
+            <div class="hero returning-user">
+                <div class="hero-content">
+                    <div class="hero-title">
+                        <h1 class="title"></h1>
+                        <h3>Create a customized daily plan<br />for yourself.</h3>
+                    </div>
+                </div>
+                <div class="home-form-col">
+                    <div id="home-shade" style="display: none;"></div>
+                    <div class="home-form" data-coverage="Europe, Americas, Asia, South Pacific, & Africa">
+                        <div class="clearfix home-form-group">
+                            @using (Html.BeginForm("DayByDay", "Plan", FormMethod.Post, new { id = "newPlanForm", @class = "planning-form expanded", autocomplete = "off" }))
+                            {
+                                <div class="steps">
+                                    <div class="title " title="">
+                                        Itinerary Planner
+                                    </div>
+                                    <div class="dests">
+                                        <div class="destinations ui-front">
+                                            <div class="destination">
+                                                @Html.DropDownList("ProvinceId", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.Provinces)), "Select Province", new { @class = "mydropdownlist" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dates clearfix">
+                                        @*@Html.TextBox("PlanBeginTime", "",new { @class="flat", placeholder = "Begin Date Time" })
+                                            @Html.TextBox("PlanEndTime", "", new { @class = "flat", placeholder = "End Date Time" })*@
+                                        @Html.TextBox("BudgetInfo", "", new { @class = "flat", placeholder = "Budget" })
+                                        <br /><br />
+                                        @Html.TextBox("NumberOfFriends", "", new { @class = "flat", placeholder = "Number Of Friends" })
+                                    </div>
+                                    <div class="section-title more-options-btn expandable">Activities<span class="optional"> (optional)</span></div>
+                                    <div class="step-content">
+                                        <div class="style clearfix">
+                                            <div class="column3"><input type="radio" id="newplan-stylePopular" class="stylePopular flat" name="style" value="1" checked /><label title="Popular" for="newplan-stylePopular">Popular</label></div>
+                                            <div class="column3"><input type="radio" id="newplan-styleBalanced" class="styleBlanaced flat" name="style" value="2" /><label title="Balanced" for="newplan-styleBalanced">Balanced</label></div>
+                                            <div class="column3"><input type="radio" id="newplan-styleHiddenGems" class="styleHiddenGems flat" name="style" value="3" /><label title="Hidden gems" for="newplan-styleHiddenGems">Hidden gems</label></div>
+                                        </div>
+                                        <div class="interests">
+                                            <div class="column3"><input type="checkbox" id="newplan-interestCulture" class="interest interestCulture flat" name="categoryGroupNames" value="culture" /><label title="Culture" for="newplan-interestCulture">Culture</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-interestOutdoor" class="interest interestOutdoor flat" name="categoryGroupNames" value="outdoors" /><label title="Outdoors" for="newplan-interestOutdoor">Outdoors</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-interestUnwind" class="interest interestUnwind flat" name="categoryGroupNames" value="unwind" /><label title="Relaxing" for="newplan-interestUnwind">Relaxing</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-interestFun" class="interest interestRomantic flat" name="categoryGroupNames" value="fun" /><label title="Fun" for="newplan-interestFun">Fun</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-category10" class="flat" name="categoryGroupNames" value="Beaches" /><label title="Beaches" for="newplan-category10">Beaches</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-category26" class="flat" name="categoryGroupNames" value="Historic Sites" /><label title="Historic sites" for="newplan-category26">Historic sites</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-category4" class="flat" name="categoryGroupNames" value="Shopping" /><label title="Shopping" for="newplan-category4">Shopping</label></div>
+                                            <div class="column3"><input type="checkbox" id="newplan-category19" class="flat" name="categoryGroupNames" value="Generic" /><label title="Generic" for="newplan-category19">Generic</label></div>
+                                        </div>
+                                    </div>
+                                    <div class="section-title more-options-btn expandable">Do you want food or drink in your plan?<span class="optional"> (optional)</span><i id="arrow" class="arrow fa fa-angle-down"></i></div>
+                                    <div id="fooddiv" class="step-content">
+                                        <div class="interests">
+                                            <div class="column3">
+                                                @Html.DropDownList("FoodCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.FoodCategories)), "Food Place", new { @class = "mydropdownlist1" })
+                                            </div>
+                                            <div class="column3">&nbsp;</div>
+                                            <div class="column3">
+                                                @Html.DropDownList("AlcoholCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.AlcoholCategories)), "Alcohol Place", new { @class = "mydropdownlist1" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="plan-button cta-button large" value="Submit">See your plan</button>
+                                </div>
+                                    <input type="hidden" name="requiredAttractionId" value="" />
+                                    <div>
+                                        <input type="hidden" name="_csrf" value="0cc231fc-9c37-453e-8c03-6422a07a69a7" />
+                                    </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
-    <script type="text/javascript">
-
-        $('#arrow').click(function () {
-            $('#arrow').removeClass(".down")
-            $('#arrow').addClass("up")
-            //$('#arrow').toggleClass("fa-angle-up");
-            $('#fooddiv').slideToggle();
-        });
-        $('#newplan-category19').click(function () {
-            debugger;
-            if ($('#newplan-category19').prop('checked')) {
-                $('#newplan-interestCulture').attr("checked", false);
-                $('#newplan-interestOutdoor').attr("checked", false);
-                $('#newplan-interestUnwind').attr("checked", false);
-                $('#newplan-interestFun').attr("checked", false);
-                $('#newplan-category10').attr("checked", false);
-                $('#newplan-category26').attr("checked", false);
-                $('#newplan-category4').attr("checked", false);
-                $('#newplan-interestCulture').attr("disabled", true);
-                $('#newplan-interestOutdoor').attr("disabled", true);
-                $('#newplan-interestUnwind').attr("disabled", true);
-                $('#newplan-interestFun').attr("disabled", true);
-                $('#newplan-category10').attr("disabled", true);
-                $('#newplan-category26').attr("disabled", true);
-                $('#newplan-category4').attr("disabled", true);
-            } else {
-                $('#newplan-interestCulture').attr("disabled", false);
-                $('#newplan-interestOutdoor').attr("disabled", false);
-                $('#newplan-interestUnwind').attr("disabled", false);
-                $('#newplan-interestFun').attr("disabled", false);
-                $('#newplan-category10').attr("disabled", false);
-                $('#newplan-category26').attr("disabled", false);
-                $('#newplan-category4').attr("disabled", false);
-            }
-        });
-        
-        
-
-        $('#newPlanForm').validate({
-            rules: {
-                PlaceAdress: {
-                    required: true
-                }
-            },
-            messages: {
-                PlaceAdress: {
-                    required: "Please enter a adress"
-                }
-            }
-        });
+    <div id="progress-indicator" class="progress-indicator hidden">
+        <div class="progress-img"></div>
+        <div class="progress-txt">Creating your plan.<br />You can customize and take it with you.</div>
+    </div>
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org",
+        "@@type": "Organization",
+        "name": "Inspirock",
+        "url": "https://www.inspirock.com/",
+        "logo": "https://s.inspirock.com/images/inspirock-logo.png",
+        "sameAs": [
+        "https://www.facebook.com/Inspirock",
+        "https://twitter.com/InspirockTravel",
+        "https://plus.google.com/+Inspirock",
+        "https://www.linkedin.com/company/inspirock",
+        "https://www.youtube.com/inspirock/"
+        ]
+        }
     </script>
-    <script type="text/javascript">
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org",
+        "@@type": "WebSite",
+        "url": "https://www.inspirock.com/",
+        "name": "Inspirock",
+        "potentialAction": {
+        "@@type": "SearchAction",
+        "target": "https://www.inspirock.com/trip-planner?searchTerm={search_term_string}",
+        "query-input": "required name=search_term_string"
+        }
+        }
+    </script>
+</div>
+
+<footer class="page-footer">
+    <div class="footer-content">
+        <div class="row">
+            <a href="/Home/UserPage" title="Day Scheduling Day Planner">
+                <div style="text-align:center">
+                    <img src="~/img/logo.png" border=5 width=370 height=200>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 menu-items">
+
+
+        </div>
+    </div>
+    <div class="col-6 menu-items">
+    </div>
+
+    </li>
+    </ul>
+    </div>
+    </div>
+</footer>
+    </div>
+
+<script type="text/javascript">
 
             /* <![CDATA[ */
             var google_conversion_id = 1035570068;
@@ -422,11 +361,11 @@
 
 
             window.contextPath = "";
-            window.ajaxLoaderPath = "~/s.inspirock.com/res2/images/misc/bulb.gif";
+            window.ajaxLoaderPath = "https://s.inspirock.com/images/misc/ajax-loader.gif";
             window.inspirockSecureDomain = "";
-            window.userLoggedIn = false;
-            window.registeredUserLoggedIn = false;
-            window.userId = "";
+            window.userLoggedIn = true;
+            window.registeredUserLoggedIn = true;
+            window.userId = "5a311409e0744140933ac483";
             window.facebookAppId = '404106769689776';
 
                 window.fbGoal1Count = 2;
@@ -442,22 +381,18 @@
 
                 window.sojernPartnerKey = 'S5xRRbV6d6uSSCox';
 
-            window.stid = 'ea45f23e-22d4-4507-90ad-3c8474fd22c0';
-
-            function onImgError(image) {
-                var src = image.src;
-                image.onerror = ""; image.alt = "image not found"; image.src = "../../photos/no-image.jpg";
-                function report() {require(['modules/analytics'], function(a) {a.trackNonInteractionEvent('img-fail', src);});}
-                if (require) {
-                    report();
-                } else {
-                    window.addEventListener("load", function() {if (require) {report();}});
-                }
-                return true;
-            }
+            window.stid = 'efda7771-1742-472b-ab87-576f05fd9c6b';
 
             window.onunload = function() {};
 
+
+                    window.addEventListener("load", function() {
+                        var url = '//tag.crsspxl.com/he.gif?d=2437&emd5=2bb564633134b499f8f55503dc3433cd&esha1=6e67baf9930448c92b571af6a5f55923644f1246';
+                        var pixel = document.createElement('img');
+                        pixel.setAttribute('style', 'display:none;position:absolute;border:medium none');
+                        pixel.setAttribute('src', url);
+                        document.body.appendChild(pixel);
+                    });
 
                 try{(function(){ var cb = new Date().getTime(); var s = document.createElement("script"); s.defer = true; s.src = "//tag.crsspxl.com/s1.js?d=2437&cb="+cb; var s0 = document.getElementsByTagName('script')[0]; s0.parentNode.insertBefore(s, s0); })();}catch(e){}
 
@@ -469,34 +404,34 @@
                     ga("send", "event", {eventCategory: "adblock", eventAction: "enabled", eventLabel: "true", nonInteraction: 1});
                 }
             });
-    </script>
+</script>
 
-    <script src="~/js/common.js"></script>
-    <script type="text/javascript">
-        require.config({baseUrl: '~/js'});
-    </script>
+<script src="https://s.inspirock.com/3.2.11/res/js/common.js"></script>
+<script type="text/javascript">
+            require.config({baseUrl: 'https://s.inspirock.com/3.2.11/res/js'});
+</script>
 
-    <script src="~/js/newplan.js"></script>
+<script src="https://s.inspirock.com/3.2.11/res/js/home.js"></script>
 
-    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-    </script>
-    <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1035570068/?value=0&amp;guid=ON&amp;script=0" />
-        </div>
-    </noscript>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1035570068/?value=0&amp;guid=ON&amp;script=0" />
+    </div>
+</noscript>
 
-    <div id="detectAdBlock" class="ads ad adsbox doubleclick ad-placement carbon-ads"></div>
+<div id="detectAdBlock" class="ads ad adsbox doubleclick ad-placement carbon-ads"></div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
             window.IntentMediaProperties = {
                 site_name: 'INSPIROCK_WW',
-                page_id: 'hotel.newplan',
+                page_id: 'hotel.home',
                 site_country: 'US',
                 site_language: 'en',
                 site_currency: 'TRY',
-                site_reporting_value_01: 'ea45f23e-22d4-4507-90ad-3c8474fd22c0',
-                visitor_id: 'ea45f23e-22d4-4507-90ad-3c8474fd22c0'
+                site_reporting_value_01: 'efda7771-1742-472b-ab87-576f05fd9c6b',
+                visitor_id: 'efda7771-1742-472b-ab87-576f05fd9c6b'
             };
             window.IntentMediaBindings = {
                 ads_displayed: function (ad_type) {
@@ -516,13 +451,21 @@
             script.onload = function() {require(['modules/intentmedia', 'modules/events'], function(im, ev) {im.triggerRefresh(); ev.triggerEvent('intentmedia', 'im-loaded', {})})};
             document.getElementsByTagName("head")[0].appendChild(script);
             }());
-    </script>
-    <div id="google_translate_element" class="hidden"></div>
-    <script type="text/javascript">
+</script>
+<div id="google_translate_element" class="hidden"></div>
+<script type="text/javascript">
                 function googleTranslateElementInit() {
                   new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
                 }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+            (function () {
+            var params = {rl: "efda7771-1742-472b-ab87-576f05fd9c6b"};
+            var paramsArr = [];
+            var pl = document.createElement('script');
+            for(key in params) { paramsArr.push(key + '=' + encodeURIComponent(params[key])) }; pl.type = 'text/javascript'; pl.async = true;
+            pl.src = 'https://pixel.sojern.com/partner/S5xRRbV6d6uSSCox/hp?' + paramsArr.join('&'); (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(pl); })();
+</script>
 </body>
 </html>

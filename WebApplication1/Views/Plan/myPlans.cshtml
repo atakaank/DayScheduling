@@ -1,5 +1,5 @@
 ﻿@using WebApplication1.AppHtmlHelpers;
-@model DayScheduling.Entities.Plan.vmUserPage
+@model DayScheduling.Entities.Plan.vmMyPlans
 <!DOCTYPE html>
 <html lang="en" xmlns:og="http://opengraphprotocol.org/schema/">
 <head>
@@ -52,12 +52,47 @@
     <link rel="preload" href="//s.inspirock.com/fonts/Lato-900/Lato-900.woff2" as="font" type="font/woff2" crossorigin>
 
     <style>
-@@font-face {font-family: 'Lato'; font-weight: 300; font-style: normal; src: local('Lato Light'), local('Lato-300'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 400; font-style: normal; src: local('Lato Regular'), local('Lato-regular'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 400; font-style: italic; src: local('Lato Italic'), local('Lato-italic'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 700; font-style: normal; src: local('Lato Bold'), local('Lato-700'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 700; font-style: italic; src: local('Lato Bold Italic'), local('Lato-700italic'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.ttf') format('truetype');}
-@@font-face {font-family: 'Lato'; font-weight: 900; font-style: normal; src: local('Lato Black'), local('Lato-900'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.ttf') format('truetype');}
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 300;
+            font-style: normal;
+            src: local('Lato Light'), local('Lato-300'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-300/Lato-300.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-style: normal;
+            src: local('Lato Regular'), local('Lato-regular'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-regular/Lato-regular.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 400;
+            font-style: italic;
+            src: local('Lato Italic'), local('Lato-italic'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-italic/Lato-italic.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 700;
+            font-style: normal;
+            src: local('Lato Bold'), local('Lato-700'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-700/Lato-700.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 700;
+            font-style: italic;
+            src: local('Lato Bold Italic'), local('Lato-700italic'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-700italic/Lato-700italic.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: 'Lato';
+            font-weight: 900;
+            font-style: normal;
+            src: local('Lato Black'), local('Lato-900'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.woff2') format('woff2'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.woff') format('woff'), url('//s.inspirock.com/fonts/Lato-900/Lato-900.ttf') format('truetype');
+        }
     </style>
     <link rel="stylesheet" type="text/css" href='~/css/commoncss.css'>
     <link rel="stylesheet" type="text/css" href='~/css/homepage.css'>
@@ -129,13 +164,21 @@
                     </nav>
                     <nav class="page-nav right">
                         <ul>
-                            <li id="myPlans" data-dropdown-url="/myPlansDropdown" data-has-plans="false">
+                            <li>
+                                <a id="newplan" rel="nofollow" href="@Url.Action("PlanCriterias","Plan")"><span>+ New plan</span></a>
+                            </li>
+                            <li id="myPlans" data-has-plans="false">
                                 <a rel="nofollow" href="/Plan/myPlans">
                                     <span>My plans</span>
                                 </a>
                             </li>
+                            <li id="userOptions" class="hidden">
+                                <a rel="nofollow" href="~/Plan/DayByDay">
+                                    <span class="name">Profile</span>
+                                </a>
+                            </li>
                             <li id="userLogin" class="">
-                                    <span>@DayScheduling.Entities.Account.AccountUser.User.UserName</span>
+                                <span>@DayScheduling.Entities.Account.AccountUser.User.UserName</span>
                             </li>
                         </ul>
                     </nav>
@@ -144,135 +187,59 @@
             </div>
         </header>
         <div class="page-content home-content clear" id="pageContent">
-            <div class="data-holder" style="" data-max-plan-length="60">style="background-image: url('../../photos/142.jpg')"
-                <div class="hero-image-wrap returning-user" style="background-image: url('../../photos/izmir-night.jpg')">
-            </div>
-            <div class="hero returning-user">
-                <div class="hero-content">
-                    <div class="hero-title">
-                        <h1 class="title">Create a customized daily for yourself.</h1>
+            <div class="data-holder" style="" data-max-plan-length="60">
+                <div class="myplans" data-num-plans="9">
+                    <div class="myplans-title">
+                        My plans
                     </div>
-                </div>
-                <div class="home-form-col">
-                    <div id="home-shade" style="display: none;"></div>
-                    <div class="home-form" data-coverage="Europe, Americas, Asia, South Pacific, & Africa">
-                        <div class="clearfix home-form-group">
-                            @using (Html.BeginForm("DayByDay", "Plan", FormMethod.Post, new { id = "newPlanForm", @class = "planning-form expanded", autocomplete = "off" }))
-                {
-                    <div class="steps">
-                        <div class="title " title="">
-                            Itinerary Planner
-                        </div>
-                        <div class="dests">
-                            <div class="destinations ui-front">
-                                <div class="destination">
-                                    @Html.DropDownList("ProvinceId",EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.Provinces)),"Select Province",new {@class= "mydropdownlist" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dates clearfix">
-                            @*@Html.TextBox("PlanBeginTime", "",new { @class="flat", placeholder = "Begin Date Time" })
-                            @Html.TextBox("PlanEndTime", "", new { @class = "flat", placeholder = "End Date Time" })*@
-                            @Html.TextBox("BudgetInfo","", new { @class = "flat", placeholder = "Budget" })
-                            <br/><br/>
-                            @Html.TextBox("NumberOfFriends", "", new { @class = "flat", placeholder = "Number Of Friends" })
-                        </div>
-                        <div class="section-title more-options-btn expandable">Activities<span class="optional"> (optional)</span></div>
-                        <div class="step-content">
-                            <div class="style clearfix">
-                                <div class="column3"><input type="radio" id="newplan-stylePopular" class="stylePopular flat" name="style" value="1" checked /><label title="Popular" for="newplan-stylePopular">Popular</label></div>
-                                <div class="column3"><input type="radio" id="newplan-styleHiddenGems" class="styleHiddenGems flat" name="style" value="3" /><label title="Hidden gems" for="newplan-styleHiddenGems">Hidden gems</label></div>
-                            </div>
-                            <div class="interests">
-                                <div class="column3"><input type="checkbox" id="newplan-interestCulture" class="interest interestCulture flat" name="categoryGroupNames" value="culture" /><label title="Culture" for="newplan-interestCulture">Culture</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-interestOutdoor" class="interest interestOutdoor flat" name="categoryGroupNames" value="outdoors" /><label title="Outdoors" for="newplan-interestOutdoor">Outdoors</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-interestUnwind" class="interest interestUnwind flat" name="categoryGroupNames" value="unwind" /><label title="Relaxing" for="newplan-interestUnwind">Relaxing</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-interestFun" class="interest interestRomantic flat" name="categoryGroupNames" value="fun" /><label title="Fun" for="newplan-interestFun">Fun</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category10" class="flat" name="categoryGroupNames" value="Beaches" /><label title="Beaches" for="newplan-category10">Beaches</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category26" class="flat" name="categoryGroupNames" value="Historic Sites" /><label title="Historic sites" for="newplan-category26">Historic sites</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category4" class="flat" name="categoryGroupNames" value="Shopping" /><label title="Shopping" for="newplan-category4">Shopping</label></div>
-                                <div class="column3"><input type="checkbox" id="newplan-category19" class="flat" name="categoryGroupNames" value="Generic" /><label title="Generic" for="newplan-category19">Generic</label></div>
-                            </div>
-                        </div>
-                        <div class="section-title more-options-btn expandable">Do you want food or drink in your plan?<span class="optional"> (optional)</span><i id="arrow" class="arrow fa fa-angle-down"></i></div>
-                        <div id="fooddiv" class="step-content">
-                            <div class="interests">
-                                <div class="column3">
-                                    @Html.DropDownList("FoodCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.FoodCategories)), "Food Place", new { @class = "mydropdownlist1" })
-                                </div>
-                                <div class="column3">&nbsp;</div>
-                                <div class="column3">
-                                    @Html.DropDownList("AlcoholCategory", EnumHelper.GetSelectList(typeof(DayScheduling.Entities.Plan.AlcoholCategories)), "Alcohol Place", new { @class = "mydropdownlist1" })
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="plan-button cta-button large" value="Submit">See your plan</button>
-                    </div>
-                    <input type="hidden" name="requiredAttractionId" value="" />
-                    <div>
-                        <input type="hidden" name="_csrf" value="0cc231fc-9c37-453e-8c03-6422a07a69a7" />
-                    </div>
-                }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="myplans" data-num-plans="9">
-                <div class="myplans-title">
-                    My plans
-                </div>
-                <div class="blocks clearfix" data-max-blocks="3">
-                    @foreach (var item in Model.PlanBlockList)
-                                {
-                                    @Helpers.BlockPlan(item.PlanID ,item.ProvinceName,item.ProvinceID.ToString(),item.Categories,item.Popularity)
-                                }
-                                
-                            </div>
-            
-                            <div class="view-all-plans-wrap">
-                    <a class="text-link view-all-plans" href="/Plan/myPlans" rel="nofollow">View all my plans</a>
-                </div>
-            </div>
-        </div>
-        <div id="progress-indicator" class="progress-indicator hidden">
-            <div class="progress-img"></div>
-            <div class="progress-txt">Creating your plan.<br />You can customize and take it with you.</div>
-        </div>
-        <script type="application/ld+json">
-            {
-                                "@@context": "http://schema.org",
-            "@@type": "Organization",
-            "name": "Inspirock",
-            "url": "https://www.inspirock.com/",
-            "logo": "https://s.inspirock.com/images/inspirock-logo.png",
-            "sameAs": [
-            "https://www.facebook.com/Inspirock",
-            "https://twitter.com/InspirockTravel",
-            "https://plus.google.com/+Inspirock",
-            "https://www.linkedin.com/company/inspirock",
-            "https://www.youtube.com/inspirock/"
-            ]
+                    <div class="blocks clearfix" data-max-blocks="3">
+                        @foreach (var item in Model.PlanBlockList)
+                        {
+                            @Helpers.BlockPlan(item.PlanID, item.ProvinceName, item.ProvinceID.ToString(), item.Categories, item.Popularity)
                         }
-        </script>
-        <script type="application/ld+json">
-            {
-            "@@context": "http://schema.org",
-            "@@type": "WebSite",
-            "url": "https://www.inspirock.com/",
-            "name": "Inspirock",
-            "potentialAction": {
-            "@@type": "SearchAction",
-            "target": "https://www.inspirock.com/trip-planner?searchTerm={search_term_string}",
-            "query-input": "required name=search_term_string"
-            }
-            }
-        </script>
-    </div>
 
-    <footer class="page-footer">
+                    </div>
+                </div>
+            </div>
+            <div id="progress-indicator" class="progress-indicator hidden">
+                <div class="progress-img"></div>
+                <div class="progress-txt">Creating your plan.<br />You can customize and take it with you.</div>
+            </div>
+            <script type="application/ld+json">
+                {
+                "@@context": "http://schema.org",
+                "@@type": "Organization",
+                "name": "Inspirock",
+                "url": "https://www.inspirock.com/",
+                "logo": "https://s.inspirock.com/images/inspirock-logo.png",
+                "sameAs": [
+                "https://www.facebook.com/Inspirock",
+                "https://twitter.com/InspirockTravel",
+                "https://plus.google.com/+Inspirock",
+                "https://www.linkedin.com/company/inspirock",
+                "https://www.youtube.com/inspirock/"
+                ]
+                }
+            </script>
+            <script type="application/ld+json">
+                {
+                "@@context": "http://schema.org",
+                "@@type": "WebSite",
+                "url": "https://www.inspirock.com/",
+                "name": "Inspirock",
+                "potentialAction": {
+                "@@type": "SearchAction",
+                "target": "https://www.inspirock.com/trip-planner?searchTerm={search_term_string}",
+                "query-input": "required name=search_term_string"
+                }
+                }
+            </script>
+        </div>
+
+        <footer class="page-footer">
             <div class="footer-content">
                 <div class="row">
-                    <a href="/Home/MainPage" title="Day Scheduling Day Planner">
+                    <a href="/Home/UserPage" title="Day Scheduling Day Planner">
                         <div style="text-align:center">
                             <img src="~/img/logo.png" border=5 width=370 height=200>
                         </div>
@@ -283,14 +250,14 @@
 
                 </div>
             </div>
-                    <div class="col-6 menu-items">
-                    </div>
-
-                        </li>
-                    </ul>
-                </div>
+            <div class="col-6 menu-items">
             </div>
-        </footer>
+
+            </li>
+            </ul>
+    </div>
+    </div>
+    </footer>
     </div>
 
     <script type="text/javascript">
@@ -307,7 +274,7 @@
         $('.confirm.cta-button.large').click(function () {
             debugger;
             var planid = $(this).attr("data-id");
-            $.post('@Url.Action("DeletePlan", "Plan")', { PlanID: planid, userpage: true }, function (data) {
+            $.post('@Url.Action("DeletePlan", "Plan")', { PlanID: planid, userpage: false }, function (data) {
                 window.location.replace(data.TargetUrl)
             });
         });
