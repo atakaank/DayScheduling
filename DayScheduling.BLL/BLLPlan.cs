@@ -9,6 +9,7 @@ using DayScheduling.Entities.Account;
 using DayScheduling.Data;
 using System.Collections;
 using GeoWeb;
+using DayScheduling.BLL;
 
 namespace DayScheduling.BLL
 {
@@ -567,19 +568,19 @@ namespace DayScheduling.BLL
             vmplacedetail.Photo = param.PlaceID + ".jpg";
             return vmplacedetail;
         }
-        public vmPlaceDetail getPlaceDetail(pmPlaceDetail param)
-        {
-            vmPlaceDetail vmplacedetail = new vmPlaceDetail();
-            Place place = dalplace.Get(param.PlaceID);
-            vmplacedetail.Phone = place.Phone;
-            vmplacedetail.PlaceAddress = place.PlaceAddress;
-            vmplacedetail.PlaceDescription = place.PlaceDescription;
-            vmplacedetail.PlaceName = place.PlaceName;
-            vmplacedetail.PlaceRate = place.PlaceRate;
-            vmplacedetail.RecomendedDuration = place.RecommendedDuration;
-            vmplacedetail.ActivityStartTime = param.StartTime;
-            vmplacedetail.ActivityFinishTime = param.FinishTime;
-            return vmplacedetail;
-        }
+        //public vmPlaceDetail getPlaceDetail(pmPlaceDetail param)
+        //{
+        //    vmPlaceDetail vmplacedetail = new vmPlaceDetail();
+        //    Place place = dalplace.Get(param.PlaceID);
+        //    vmplacedetail.Phone = place.Phone;
+        //    vmplacedetail.PlaceAddress = place.PlaceAddress;
+        //    vmplacedetail.PlaceDescription = place.PlaceDescription;
+        //    vmplacedetail.PlaceName = place.PlaceName;
+        //    vmplacedetail.PlaceRate = place.PlaceRate;
+        //    vmplacedetail.RecomendedDuration = place.RecommendedDuration;
+        //    vmplacedetail.ActivityStartTime = param.StartTime;
+        //    vmplacedetail.ActivityFinishTime = param.FinishTime;
+        //    return vmplacedetail;
+        //}
     }
 }

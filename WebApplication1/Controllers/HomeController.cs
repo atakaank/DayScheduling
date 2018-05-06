@@ -48,10 +48,6 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        public ActionResult PlaceDetail()
-        {
-            return View();
-        }
         public ActionResult UserPage()
         {
             return View();
